@@ -74,7 +74,7 @@ namespace Engine.World
         public void Draw(GameTime gameTime)
         {
             //Render
-            this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Camera.Instance.View);
+            this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Camera.Instance.View);
 
             for (int y = 0; y < this.levelMap.Height; ++y)
             {
