@@ -9,6 +9,7 @@
 
 #region Using Statements
 using Microsoft.Xna.Framework;
+using Engine.Logic.Events;
 #endregion
 
 namespace GameStateManagement
@@ -30,7 +31,7 @@ namespace GameStateManagement
         {
             // Create our menu entries.
             MenuEntry resumeGameMenuEntry = new MenuEntry("Resume Game");
-            MenuEntry quitGameMenuEntry = new MenuEntry("Quit Game");
+            MenuEntry quitGameMenuEntry = new MenuEntry("Exit Game");
             
             // Hook up menu event handlers.
             resumeGameMenuEntry.Selected += OnCancel;
@@ -52,25 +53,8 @@ namespace GameStateManagement
         /// </summary>
         void QuitGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
-            const string message = "Are you sure you want to quit this game?";
-
-            MessageBoxScreen confirmQuitMessageBox = new MessageBoxScreen(message);
-
-            confirmQuitMessageBox.Accepted += ConfirmQuitMessageBoxAccepted;
-
-            ScreenManager.AddScreen(confirmQuitMessageBox, ControllingPlayer);
-        }
-
-
-        /// <summary>
-        /// Event handler for when the user selects ok on the "are you sure
-        /// you want to quit" message box. This uses the loading screen to
-        /// transition from the game back to the main menu screen.
-        /// </summary>
-        void ConfirmQuitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
-        {
-            LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(),
-                                                           new MainMenuScreen());
+         
+            EventManager.Instance.QueueEvent(new KillSwitchEvent());
         }
 
 
