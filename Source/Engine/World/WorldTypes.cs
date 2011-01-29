@@ -34,7 +34,7 @@ namespace Engine.World
             for (int i = 0; i < levels.Length; ++i)
             {
                 //Strip the content directory 
-                levels[0] = levels[0].Substring(levels[0].IndexOf("/") + 1);
+                levels[i] = levels[i].Substring(levels[i].IndexOf("/") + 1);
 
                 LevelMap level = UtilityGame.DeserializeFromXML<LevelMap>(levels[i]);
                 Levels.Add(level.Level, level);
