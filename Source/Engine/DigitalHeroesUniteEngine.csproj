@@ -137,6 +137,7 @@
     <Compile Include="Logic\ClassComponents\SpriteComponent.cs" />
     <Compile Include="Logic\Events\Event.cs" />
     <Compile Include="Logic\Events\EventManager.cs" />
+    <Compile Include="Logic\Input\HeroManager.cs" />
     <Compile Include="Logic\Input\InputManager.cs" />
     <Compile Include="Logic\Logger\LogManager.cs" />
     <Compile Include="Logic\LogicCore.cs" />

@@ -57,7 +57,10 @@ namespace Engine.Graphics.Cameras
         public Camera()
         {
             InputManager.Instance.OnMouseEvent += new MouseEvent(this.OnMouseEvent);
-            InputManager.Instance.OnKeyEvent += new KeyEvent(this.OnKeyEvent);
+            if (this.freeRange)
+            {
+                InputManager.Instance.OnKeyEvent += new KeyEvent(this.OnKeyEvent);
+            }
         }
         #endregion
 
@@ -181,7 +184,7 @@ namespace Engine.Graphics.Cameras
             if (dX != 0 || dY != 0)
             {
                 Walk(dX, dY);
-            }
+            } 
         }
 
         /// <summary>Handles mouse events from InputManager</summary>
