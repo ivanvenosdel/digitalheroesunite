@@ -156,23 +156,23 @@ namespace Engine.Graphics.Cameras
             int dX = 0;
             int dY = 0;
             //Translate Left
-            if (keyboardState.IsKeyDown(Keys.Right))
+            if (keyboardState.IsKeyDown(Keys.Left))
             {
                 dX = 8 * additionalSpeed;
             }
             //Translate Right
-            else if (keyboardState.IsKeyDown(Keys.Left))
+            else if (keyboardState.IsKeyDown(Keys.Right))
             {
                 dX = -8 * additionalSpeed;
             }
 
             //Translate Down
-            if (keyboardState.IsKeyDown(Keys.Down))
+            if (keyboardState.IsKeyDown(Keys.Up))
             {
                 dY = 8 * additionalSpeed;
             }
             //Translate Up
-            else if (keyboardState.IsKeyDown(Keys.Up))
+            else if (keyboardState.IsKeyDown(Keys.Down))
             {
                 dY = -8 * additionalSpeed;
             }
