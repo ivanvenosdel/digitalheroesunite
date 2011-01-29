@@ -33,7 +33,8 @@ namespace Engine.Logic.Input
         #endregion
 
         #region Fields
-        private MoveDirection moveDirection = MoveDirection.None;
+        private MoveDirection jumpDirection = MoveDirection.None;
+        private MoveDirection walkDirection = MoveDirection.None;
         #endregion
 
         #region Public Methods
@@ -55,32 +56,33 @@ namespace Engine.Logic.Input
             if (keyboardState.IsKeyDown(Keys.Right))
             {
                 //It's ok to move if we are jumping in the same direction or not at all
-                if (!GameWorld.Instance.hero.Jumping || this.moveDirection == MoveDirection.Right)
+                if (!GameWorld.Instance.hero.Jumping || this.jumpDirection == MoveDirection.Right)
                 {
                     dX = 8;
-                    this.moveDirection = MoveDirection.Right;
+                    this.walkDirection = MoveDirection.Right;
                 }
             }
             //Translate Left
             else if (keyboardState.IsKeyDown(Keys.Left))
             {
                 //It's ok to move if we are jumping in the same direction or not at all
-                if (!GameWorld.Instance.hero.Jumping || this.moveDirection == MoveDirection.Left)
+                if (!GameWorld.Instance.hero.Jumping || this.jumpDirection == MoveDirection.Left)
                 {
                     dX = -8;
-                    this.moveDirection = MoveDirection.Left;
+                    this.walkDirection = MoveDirection.Left;
                 }
             }
             else
             {
-                this.moveDirection = MoveDirection.None;
+                this.walkDirection = MoveDirection.None;
             }
             
             //Translate RightControl
-            if (keyboardState.IsKeyDown(Keys.RightControl))
+            if (keyboardState.IsKeyDown(Keys.LeftControl))
             {
                 if (!GameWorld.Instance.hero.Jumping)
                 {
+                    this.jumpDirection = this.walkDirection;
                     GameWorld.Instance.hero.BeginJump(WorldTile.TILE_SIZE * 5);
                 }
             }

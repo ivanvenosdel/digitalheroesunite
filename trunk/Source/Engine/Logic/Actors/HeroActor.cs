@@ -33,9 +33,9 @@ namespace Engine.Logic.Actors
         #endregion
 
         #region Fields
-        private float jumpPeakYPosition;
+        private float jumpYPeakHeight;
         private bool movingUp = true;
-        private float jumpYOrigin;
+        private float jumpYCurrentHeight;
         #endregion
 
         #region Private Methods
@@ -113,10 +113,11 @@ namespace Engine.Logic.Actors
             {
                 if (this.movingUp)
                 {
-                    if (this.position.Y > jumpPeakYPosition)
+                    if (this.jumpYCurrentHeight < jumpYPeakHeight)
                     {
                         //We have to go up some more.
                         this.position.Y -= 8;
+                        this.jumpYCurrentHeight += 8;
                     }
                     else
                     {
@@ -125,10 +126,11 @@ namespace Engine.Logic.Actors
                 }
                 else
                 {
-                    if (this.position.Y < jumpYOrigin)
+                    if (this.jumpYCurrentHeight >= 0)
                     {
                         //We have to go back down some more
                         this.position.Y += 8;
+                        this.jumpYCurrentHeight -= 8;
                     }
                     else
                     {
@@ -149,11 +151,11 @@ namespace Engine.Logic.Actors
             this.SetPosition(new PositionComponent(this, this.position));
         }
 
-        public void BeginJump(float distance)
+        public void BeginJump(float height)
         {
             //Set constraints
-            this.jumpYOrigin = this.position.Y;
-            this.jumpPeakYPosition = this.position.Y - distance;
+            this.jumpYCurrentHeight = 0;
+            this.jumpYPeakHeight = height;
             //Go into jump mode
             this.Jumping = true;
             this.movingUp = true;
