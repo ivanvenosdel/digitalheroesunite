@@ -35,6 +35,7 @@ namespace Engine.Graphics.Cameras
         private BoundingFrustum frustum;
 #if DEBUG
         private bool freeRange = Debug.CameraFreeRange;
+        public bool FreeRange { get { return this.freeRange; } set { this.freeRange = value; } }
 #else 
         private bool freeRange = false;
 #endif

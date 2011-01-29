@@ -13,6 +13,8 @@ namespace Engine.World
 {
     public static class WorldTypes
     {
+        public const int TILE_SIZE = 70;
+
         private static Texture2D tileTexture;
 
         public static Dictionary<int, TileType> TileTypes = new Dictionary<int, TileType>();
