@@ -56,11 +56,14 @@ namespace GameStateManagement
         /// </summary>
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
-            System.TimeSpan duration = System.TimeSpan.FromMilliseconds(500);
-            SoundManager.Instance.FadeSong(0.0f, duration );
-            
-            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen());
+            // Tell all the current screens to transition off.
+            foreach (GameScreen screen in ScreenManager.GetScreens())
+                screen.ExitScreen();
+
+            ScreenManager.AddScreen(new GameplayScreen(), PlayerIndex.One);
+           // LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
+           //                    new GameplayScreen());
+            ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
 
             SoundManager.Instance.UnloadContent();
         }
@@ -74,13 +77,13 @@ namespace GameStateManagement
         /// </summary>
         protected override void OnCancel(PlayerIndex playerIndex)
         {
-           /* const string message = "Are you sure you want to exit this sample?";
+         /*  //const string message = "Press Space to continue.";
 
-            MessageBoxScreen confirmExitMessageBox = new MessageBoxScreen(message);
+            //MessageBoxScreen confirmExitMessageBox = new MessageBoxScreen(message);
 
-            confirmExitMessageBox.Accepted += ConfirmExitMessageBoxAccepted;
+            //confirmExitMessageBox.Accepted += ConfirmExitMessageBoxAccepted;
 
-            ScreenManager.AddScreen(confirmExitMessageBox, playerIndex);
+            //ScreenManager.AddScreen(confirmExitMessageBox, playerIndex);
         }
 
 
@@ -89,9 +92,9 @@ namespace GameStateManagement
         /// you want to exit" message box.
         /// </summary>
         void ConfirmExitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
-        {*/
-            EventManager.Instance.QueueEvent(new KillSwitchEvent());
-            //ScreenManager.Game.Exit();
+        {
+            EventManager.Instance.QueueEvent(new KillSwitchEvent());*/
+            ScreenManager.Game.Exit();
         }
 
 

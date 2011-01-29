@@ -72,7 +72,6 @@ namespace GameStateManagement
             LoadingScreen loadingScreen = new LoadingScreen(screenManager,
                                                             loadingIsSlow,
                                                             screensToLoad);
-
             screenManager.AddScreen(loadingScreen, controllingPlayer);
         }
 
