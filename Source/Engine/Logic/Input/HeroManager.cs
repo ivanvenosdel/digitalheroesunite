@@ -44,6 +44,11 @@ namespace Engine.Logic.Input
         public void Initialize()
         {
             InputManager.Instance.OnKeyEvent += new KeyEvent(this.OnKeyEvent);
+
+            //Where should our hero start?
+            int x = (GameWorld.Instance.start.X * WorldTypes.TILE_SIZE) - WorldTypes.TILE_SIZE;
+            int y = (GameWorld.Instance.start.Y * WorldTypes.TILE_SIZE) - WorldTypes.TILE_SIZE;
+            GameWorld.Instance.hero.WarpTo(new Vector2(x, y));
         }
         #endregion
 

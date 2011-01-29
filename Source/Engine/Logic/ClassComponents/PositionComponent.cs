@@ -17,13 +17,7 @@ namespace Engine.Logic.ClassComponents
     public class PositionComponent : ClassComponent
     {
         #region Fields
-        private Vector2 position;
-        #endregion
-
-        #region Properties
-        /// <summary>Position</summary>
-        public Vector2 Position { get { return this.position; } set { this.position = value; }
-        }
+        public Vector2 Position;
         #endregion
 
         #region Constructors
@@ -32,7 +26,7 @@ namespace Engine.Logic.ClassComponents
         public PositionComponent(Actor owner, Vector2 pos)
             : base(owner)
         {
-            this.position = pos;
+            this.Position = pos;
         }
         #endregion
 
