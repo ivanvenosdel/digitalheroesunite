@@ -48,7 +48,7 @@ namespace Engine.Graphics
         {
             this.spriteBatch = new SpriteBatch(DeviceManager.Instance.GraphicsDevice);
 
-            UIManager.Instance.LoadContent();
+            //UIManager.Instance.LoadContent();
         }
         #endregion
 
@@ -57,14 +57,14 @@ namespace Engine.Graphics
         public override void Initialize()
         {
             Camera.Instance.Initialize();
-            UIManager.Instance.Initialize();
+            //UIManager.Instance.Initialize();
 
             base.Initialize();
         }
 
         protected override void UnloadContent()
         {
-            UIManager.Instance.UnloadContent();
+            //UIManager.Instance.UnloadContent();
 
             base.UnloadContent();
         }
@@ -73,7 +73,7 @@ namespace Engine.Graphics
         /// <param name="gameTime">The current update time</param>
         public override void Update(GameTime gameTime)
         {
-            UIManager.Instance.Update(gameTime);
+            //UIManager.Instance.Update(gameTime);
 
             //Portions that shouldn't run when the game is paused
             if (!DeviceManager.Instance.Paused)
@@ -91,7 +91,7 @@ namespace Engine.Graphics
             DeviceManager.Instance.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             GameWorld.Instance.Draw(gameTime);
-            UIManager.Instance.Draw(gameTime);
+            //UIManager.Instance.Draw(gameTime);
 
             PostDraw();
         }
