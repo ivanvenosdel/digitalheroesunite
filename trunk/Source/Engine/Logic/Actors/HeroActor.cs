@@ -19,6 +19,15 @@ namespace Engine.Logic.Actors
         }
         #endregion
 
+        #region Properties
+        private Vector2 position;
+        public Vector2 Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+        #endregion
+
         #region Public Methods
         public void Initialize(Vector2 pos, Point dim)
         {
@@ -79,6 +88,14 @@ namespace Engine.Logic.Actors
             {
                 GetSprite().Draw(gameTime, spriteBatch, GetPosition().Position);
             }
+        }
+
+        public void Walk(float dX, float dY)
+        {
+            this.position.X += dX;
+            this.position.Y += dY;
+
+            this.SetPosition(new PositionComponent(this, this.position));
         }
 
         /// <summary>
