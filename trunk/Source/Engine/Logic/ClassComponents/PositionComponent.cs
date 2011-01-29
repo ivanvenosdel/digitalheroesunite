@@ -20,6 +20,7 @@ namespace Engine.Logic.ClassComponents
         public Vector2 Position;
         #endregion
 
+
         #region Constructors
         /// <summary>The component used to position and orientate objects in our game</summary>
         /// <param name="owner">The actor the object belongs to</param>

@@ -8,10 +8,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Graphics.Cameras;
 using Engine.Graphics.UI;
+using Engine.Logic.ClassComponents;
 using Engine.Logic.Events;
 using Engine.Logic.Logger;
 using Engine.World;
 using GameStateManagement;
+
 #endregion
 
 namespace Engine.Graphics
@@ -52,7 +54,18 @@ namespace Engine.Graphics
         protected override void LoadContent()
         {
             this.spriteBatch = new SpriteBatch(DeviceManager.Instance.GraphicsDevice);
-            
+
+#if DEBUG
+            if (BoundingComponent.BoundingTexture == null)
+            {
+                //Set Data needs an array, so we do this stupid dance
+                Color[] final = new Color[1];
+                final[0] = Color.White;
+                BoundingComponent.BoundingTexture = new Texture2D(DeviceManager.Instance.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+                BoundingComponent.BoundingTexture.SetData<Color>(final);
+            }
+#endif
+
             WorldTypes.LoadContent();
         }
         #endregion

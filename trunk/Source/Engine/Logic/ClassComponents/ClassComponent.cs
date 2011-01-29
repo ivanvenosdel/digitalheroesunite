@@ -18,6 +18,7 @@ namespace Engine.Logic.ClassComponents
     {
         UNKNOWN = 0,
         BOUNDING,
+        GRAVITY,
         POSITION,
         SPRITE,
         END

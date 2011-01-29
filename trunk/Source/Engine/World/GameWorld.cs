@@ -70,15 +70,15 @@ namespace Engine.World
             {
                 for (int x = 0; x < this.width; ++x)
                 {
-                    this.layout[x + y * this.width] = new WorldTile(levelMap.Layout[x + y * this.width]);
+                    this.layout[x + y * this.width] = new WorldTile(levelMap.Layout[x + y * this.width], new Vector2(x * WorldTypes.TILE_SIZE, y * WorldTypes.TILE_SIZE));
                 }
             }
 
-
-            //TEMP
-            this.hero = ActorFactory.Instance.CreateHero(new Vector2(40, 50), new Point(60, 150));
+            //Where should our hero start?
+            int xx = (this.start.X * WorldTypes.TILE_SIZE) -WorldTypes.TILE_SIZE / 2;
+            int yy = (this.start.Y * WorldTypes.TILE_SIZE);
+            this.hero = ActorFactory.Instance.CreateHero(new Vector2(xx, yy), new Point(60, 150));
             this.spriteBatch = new SpriteBatch(DeviceManager.Instance.GraphicsDevice);
-
             enabled = true;
         }
 
@@ -88,7 +88,6 @@ namespace Engine.World
             if (!enabled || DeviceManager.Instance.Paused)
                 return;
             
-            //TEMP
             this.hero.Update(gameTime);
         }
 
@@ -101,9 +100,9 @@ namespace Engine.World
             {
                 for (int x = 0; x < this.width; ++x)
                 {
-                    Vector2 pos = new Vector2(x * WorldTypes.TILE_SIZE, y * WorldTypes.TILE_SIZE);
                     WorldTile tile = this.layout[x + y * this.width];
-                    tile.Draw(this.spriteBatch, pos);
+                    if (Camera.Instance.OnScreen(new Point((int)tile.Position.X, (int)tile.Position.Y)))
+                        tile.Draw(this.spriteBatch, tile.Position);
                 }
             }
 

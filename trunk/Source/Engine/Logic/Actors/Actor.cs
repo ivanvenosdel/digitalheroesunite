@@ -104,6 +104,15 @@ namespace Engine.Logic.Actors
             }
         }
 
+        /// <summary>Gets the Gravity Component</summary>
+        public GravityComponent GetGravity()
+        {
+            if (this.components.ContainsKey(ComponentType.GRAVITY))
+                return this.components[ComponentType.GRAVITY] as GravityComponent;
+            else
+                return null;
+        }
+
         /// <summary>Gets the Bounding Component</summary>
         public BoundingComponent GetBounding()
         {
@@ -137,6 +146,12 @@ namespace Engine.Logic.Actors
         protected BoundingComponent SetBounding(BoundingComponent component)
         {
             this.components[ComponentType.BOUNDING] = component;
+            return component;
+        }
+
+        protected GravityComponent SetGravity(GravityComponent component)
+        {
+            this.components[ComponentType.GRAVITY] = component;
             return component;
         }
 
