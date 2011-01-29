@@ -57,8 +57,9 @@ namespace Engine.Logic
             EventManager.Instance.Initialize();
             ActorFactory.Instance.Initialize();
             SoundManager.Instance.Initialize();
+            WorldTypes.Initialize();
 
-            GameWorld.Instance.Initialize();
+            GameWorld.Instance.Initialize(1);
 
 #if DEBUG
             Debug.Initialize();

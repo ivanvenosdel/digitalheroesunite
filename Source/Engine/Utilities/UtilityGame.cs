@@ -1,6 +1,11 @@
 #region Using Statements
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+
+using Microsoft.Xna.Framework;
 #endregion
 
 namespace Engine.Utilities
@@ -52,6 +57,22 @@ namespace Engine.Utilities
             }
 
             return roll;
+        }
+
+        /// <summary>
+        /// Reads in objects from xml and converts them to their class
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public static T DeserializeFromXML<T>(string location)
+        {
+            XmlSerializer deserializer = new XmlSerializer(typeof(T));
+            TextReader reader = new StreamReader(TitleContainer.OpenStream(DeviceManager.Instance.Content.RootDirectory + "/" + location));
+            T obj = (T)deserializer.Deserialize(reader);
+            reader.Close();
+
+            return obj;
         }
         #endregion
 

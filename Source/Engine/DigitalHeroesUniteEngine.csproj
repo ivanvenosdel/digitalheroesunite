@@ -146,6 +146,10 @@
     <Compile Include="Utilities\UtilityMath.cs" />
     <Compile Include="Utilities\UtilityWorld.cs" />
     <Compile Include="World\GameWorld.cs" />
+    <Compile Include="World\LevelMap.cs" />
+    <Compile Include="World\TileType.cs" />
+    <Compile Include="World\WorldTile.cs" />
+    <Compile Include="World\WorldTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

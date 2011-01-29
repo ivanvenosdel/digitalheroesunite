@@ -52,7 +52,8 @@ namespace Engine.Graphics
         protected override void LoadContent()
         {
             this.spriteBatch = new SpriteBatch(DeviceManager.Instance.GraphicsDevice);
-
+            
+            WorldTypes.LoadContent();
         }
         #endregion
 
