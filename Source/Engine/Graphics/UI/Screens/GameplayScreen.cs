@@ -183,9 +183,7 @@ namespace GameStateManagement
 
             spriteBatch.Begin();
 
-
-            spriteBatch.DrawString(gameFont, " jieslfjiwohrwel",
-                                   enemyPosition, Color.YellowGreen);
+            //overlay elements
 
             spriteBatch.End();
 
