@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Logic.Actors;
@@ -22,6 +23,8 @@ namespace Engine.World
         private static readonly GameWorld instance = new GameWorld();
 
         private bool enabled = false;
+        private ContentManager content;
+        private LevelMap levelMap;
 
         //TEMP
         private HeroActor hero;
@@ -46,8 +49,12 @@ namespace Engine.World
         #endregion
 
         #region Public Methods
-        public void Initialize()
+        public void Initialize(int level)
         {
+            this.content = new ContentManager(DeviceManager.Instance.Content.ServiceProvider);
+            
+            this.levelMap = WorldTypes.Levels[level];
+
             //TEMP
             this.hero = ActorFactory.Instance.CreateHero(new Vector2(40, 50), new Point(60, 150));
             this.spriteBatch = new SpriteBatch(DeviceManager.Instance.GraphicsDevice);
@@ -67,9 +74,21 @@ namespace Engine.World
 
         public void Draw(GameTime gameTime)
         {
-            //Render all actors
+            //Render
             this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Camera.Instance.View);
-            
+
+            for (int y = 0; y < this.levelMap.Height; ++y)
+            {
+                for (int x = 0; x < this.levelMap.Width; ++x)
+                {
+                    Vector2 pos = new Vector2(x * WorldTile.TILE_SIZE, y * WorldTile.TILE_SIZE);
+                    TileType tileType = WorldTypes.TileTypes[this.levelMap.Layout[x + y * this.levelMap.Width]];
+                    tileType.Draw(this.spriteBatch, pos);
+                }
+            }
+
+
+
             //TEMP
             if (this.hero != null)
                 this.hero.Draw(gameTime, this.spriteBatch);
