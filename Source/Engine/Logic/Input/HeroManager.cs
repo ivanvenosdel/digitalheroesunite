@@ -8,6 +8,13 @@ using Engine.World;
 
 namespace Engine.Logic.Input
 {
+    enum MoveDirection
+    {
+        Left,
+        Right,
+        None
+    }
+
     public sealed class Heromanager
     {
         #region Fields
@@ -25,6 +32,10 @@ namespace Engine.Logic.Input
         public static Heromanager Instance { get { return instance; } }
         #endregion
 
+        #region Fields
+        private MoveDirection moveDirection = MoveDirection.None;
+        #endregion
+
         #region Public Methods
         /// <summary>
         /// Initializes the Input Manager
@@ -40,21 +51,38 @@ namespace Engine.Logic.Input
         {
             int dX = 0;
 
-            //Translate Left
-            if (keyboardState.IsKeyDown(Keys.Left))
-            {
-                dX = -8;
-            }
             //Translate Right
-            else if (keyboardState.IsKeyDown(Keys.Right))
+            if (keyboardState.IsKeyDown(Keys.Right))
             {
-                dX = 8;
+                //It's ok to move if we are jumping in the same direction or not at all
+                if (!GameWorld.Instance.hero.Jumping || this.moveDirection == MoveDirection.Right)
+                {
+                    dX = 8;
+                    this.moveDirection = MoveDirection.Right;
+                }
+            }
+            //Translate Left
+            else if (keyboardState.IsKeyDown(Keys.Left))
+            {
+                //It's ok to move if we are jumping in the same direction or not at all
+                if (!GameWorld.Instance.hero.Jumping || this.moveDirection == MoveDirection.Left)
+                {
+                    dX = -8;
+                    this.moveDirection = MoveDirection.Left;
+                }
+            }
+            else
+            {
+                this.moveDirection = MoveDirection.None;
             }
             
             //Translate RightControl
             if (keyboardState.IsKeyDown(Keys.RightControl))
             {
-                GameWorld.Instance.hero.BeginJump(WorldTile.TILE_SIZE * 5);
+                if (!GameWorld.Instance.hero.Jumping)
+                {
+                    GameWorld.Instance.hero.BeginJump(WorldTile.TILE_SIZE * 5);
+                }
             }
 
             GameWorld.Instance.Hero.Walk(dX);
