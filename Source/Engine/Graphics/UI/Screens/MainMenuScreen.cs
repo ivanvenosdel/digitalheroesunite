@@ -10,6 +10,7 @@
 #region Using Statements
 using Microsoft.Xna.Framework;
 using Engine.Logic.Events;
+using Engine.Logic.Audio;
 #endregion
 
 namespace GameStateManagement
@@ -39,6 +40,9 @@ namespace GameStateManagement
             // Add entries to the menu.
             MenuEntries.Add(playGameMenuEntry);
             MenuEntries.Add(exitMenuEntry);
+
+            SoundManager.Instance.LoadSong("Music/TitleScreen");
+            SoundManager.Instance.PlaySong("Music/TitleScreen");
         }
 
 
@@ -52,8 +56,13 @@ namespace GameStateManagement
         /// </summary>
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
+            System.TimeSpan duration = System.TimeSpan.FromMilliseconds(500);
+            SoundManager.Instance.FadeSong(0.0f, duration );
+            
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
                                new GameplayScreen());
+
+            SoundManager.Instance.UnloadContent();
         }
 
 
