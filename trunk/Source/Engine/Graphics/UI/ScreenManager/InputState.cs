@@ -190,6 +190,13 @@ namespace GameStateManagement
                    IsNewButtonPress(Buttons.LeftThumbstickUp, controllingPlayer, out playerIndex);
         }
 
+        public bool IsSpace(PlayerIndex? controllingPlayer)
+        {
+            PlayerIndex playerIndex;
+
+            return IsNewKeyPress(Keys.Space, controllingPlayer, out playerIndex);
+        }
+
 
         /// <summary>
         /// Checks for a "menu down" input action.

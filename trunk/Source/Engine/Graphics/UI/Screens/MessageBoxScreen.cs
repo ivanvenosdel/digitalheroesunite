@@ -31,8 +31,8 @@ namespace GameStateManagement
 
         #region Events
 
-        public event EventHandler<PlayerIndexEventArgs> Accepted;
-        public event EventHandler<PlayerIndexEventArgs> Cancelled;
+       // public event EventHandler<PlayerIndexEventArgs> Accepted;
+       // public event EventHandler<PlayerIndexEventArgs> Cancelled;
 
         #endregion
 
@@ -54,8 +54,7 @@ namespace GameStateManagement
         /// </summary>
         public MessageBoxScreen(string message, bool includeUsageText)
         {
-            const string usageText = "\nA button, Space, Enter = ok" +
-                                     "\nB button, Esc = cancel"; 
+            const string usageText = "";
             
             if (includeUsageText)
                 this.message = message + usageText;
@@ -93,9 +92,10 @@ namespace GameStateManagement
         /// </summary>
         public override void HandleInput(InputState input)
         {
-            PlayerIndex playerIndex;
+            //Popup screen.
+            if (input.IsSpace(ControllingPlayer)) { ExitScreen(); }
 
-            // We pass in our ControllingPlayer, which may either be null (to
+    /*      // We pass in our ControllingPlayer, which may either be null (to
             // accept input from any player) or a specific index. If we pass a null
             // controlling player, the InputState helper returns to us which player
             // actually provided the input. We pass that through to our Accepted and
@@ -115,7 +115,7 @@ namespace GameStateManagement
                     Cancelled(this, new PlayerIndexEventArgs(playerIndex));
 
                 ExitScreen();
-            }
+            }*/
         }
 
 

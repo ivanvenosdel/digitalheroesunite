@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Engine.Logic.Events;
 #endregion
 
 namespace GameStateManagement
@@ -49,7 +50,10 @@ namespace GameStateManagement
         {
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
+
+            
         }
+        
 
 
         /// <summary>
@@ -61,6 +65,11 @@ namespace GameStateManagement
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             gameFont = content.Load<SpriteFont>(@"UI\Fonts\gamefont");
+            const string message = "Press Space to continue.";
+            //overlay elements
+
+            MessageBoxScreen dialogBox = new MessageBoxScreen(message);
+            ScreenManager.AddScreen(dialogBox, PlayerIndex.One);
 
             // A real game would probably have more content than this sample, so
             // it would take longer to load. We simulate that by delaying for a
@@ -177,13 +186,17 @@ namespace GameStateManagement
             // This game has a blue background. Why? Because!
             //ScreenManager.GraphicsDevice.Clear(ClearOptions.Target,
             //                                   Color.CornflowerBlue, 0, 0);
+            
+
+          
+            
 
             // Our player and enemy are both actually just text strings.
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
 
             spriteBatch.Begin();
 
-            //overlay elements
+         
 
             spriteBatch.End();
 
