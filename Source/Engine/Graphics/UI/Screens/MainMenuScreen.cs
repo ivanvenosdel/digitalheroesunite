@@ -57,13 +57,7 @@ namespace GameStateManagement
         }
 
 
-        /// <summary>
-        /// Event handler for when the Options menu entry is selected.
-        /// </summary>
-        void OptionsMenuEntrySelected(object sender, PlayerIndexEventArgs e)
-        {
-            ScreenManager.AddScreen(new OptionsMenuScreen(), e.PlayerIndex);
-        }
+        
 
 
         /// <summary>
@@ -71,7 +65,7 @@ namespace GameStateManagement
         /// </summary>
         protected override void OnCancel(PlayerIndex playerIndex)
         {
-            const string message = "Are you sure you want to exit this sample?";
+           /* const string message = "Are you sure you want to exit this sample?";
 
             MessageBoxScreen confirmExitMessageBox = new MessageBoxScreen(message);
 
@@ -86,7 +80,7 @@ namespace GameStateManagement
         /// you want to exit" message box.
         /// </summary>
         void ConfirmExitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
-        {
+        {*/
             EventManager.Instance.QueueEvent(new KillSwitchEvent());
             //ScreenManager.Game.Exit();
         }
