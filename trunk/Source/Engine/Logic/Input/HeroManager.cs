@@ -39,7 +39,6 @@ namespace Engine.Logic.Input
         private void OnKeyEvent(KeyboardState keyboardState)
         {
             int dX = 0;
-            int dY = 0;
 
             //Translate Left
             if (keyboardState.IsKeyDown(Keys.Left))
@@ -51,8 +50,14 @@ namespace Engine.Logic.Input
             {
                 dX = 8;
             }
+            
+            //Translate RightControl
+            if (keyboardState.IsKeyDown(Keys.RightControl))
+            {
+                GameWorld.Instance.hero.BeginJump(WorldTile.TILE_SIZE * 5);
+            }
 
-            GameWorld.Instance.Hero.Walk(dX, dY);
+            GameWorld.Instance.Hero.Walk(dX);
         }
         #endregion
     }
