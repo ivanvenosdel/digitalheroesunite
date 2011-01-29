@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Engine.Graphics.Animations;
 using Engine.Logic.ClassComponents;
 using System.Timers;
+using Engine.Logic.Input;
 #endregion
 
 namespace Engine.Logic.Actors
@@ -27,13 +28,14 @@ namespace Engine.Logic.Actors
             get { return position; }
             set { position = value; }
         }
+
+        public bool Jumping { get; set; }
         #endregion
 
         #region Fields
         private float jumpPeakYPosition;
         private bool movingUp = true;
         private float jumpYOrigin;
-        private bool jumping = false;
         #endregion
 
         #region Private Methods
@@ -107,7 +109,7 @@ namespace Engine.Logic.Actors
 
         public override void Update(GameTime gameTime)
         {
-            if (this.jumping)
+            if (this.Jumping)
             {
                 if (this.movingUp)
                 {
@@ -131,7 +133,7 @@ namespace Engine.Logic.Actors
                     else
                     {
                         //Were done! Stop jumping
-                        this.jumping = false;
+                        this.Jumping = false;
                         this.movingUp = true;
                     }
                 }
@@ -149,15 +151,12 @@ namespace Engine.Logic.Actors
 
         public void BeginJump(float distance)
         {
-            if (!jumping)
-            {
-                //Set constraints
-                this.jumpYOrigin = this.position.Y;
-                this.jumpPeakYPosition = this.position.Y - distance;
-                //Go into jump mode
-                this.jumping = true;
-                this.movingUp = true;
-            }
+            //Set constraints
+            this.jumpYOrigin = this.position.Y;
+            this.jumpPeakYPosition = this.position.Y - distance;
+            //Go into jump mode
+            this.Jumping = true;
+            this.movingUp = true;
         }
 
         /// <summary>
