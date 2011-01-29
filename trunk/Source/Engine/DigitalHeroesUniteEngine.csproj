@@ -117,6 +117,7 @@
     <Compile Include="Graphics\UI\ScreenManager\InputState.cs" />
     <Compile Include="Graphics\UI\ScreenManager\ScreenManager.cs" />
     <Compile Include="Graphics\UI\Screens\BackgroundScreen.cs" />
+    <Compile Include="Graphics\UI\Screens\CinematicScreen.cs" />
     <Compile Include="Graphics\UI\Screens\GameplayScreen.cs" />
     <Compile Include="Graphics\UI\Screens\LoadingScreen.cs" />
     <Compile Include="Graphics\UI\Screens\MainMenuScreen.cs" />

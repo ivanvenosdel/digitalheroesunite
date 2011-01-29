@@ -30,7 +30,7 @@ namespace GameStateManagement
             : base("Main Menu")
         {
             // Create our menu entries.
-            MenuEntry playGameMenuEntry = new MenuEntry("Play Game");
+            MenuEntry playGameMenuEntry = new MenuEntry("Start");
             MenuEntry exitMenuEntry = new MenuEntry("Exit");
 
             // Hook up menu event handlers.
@@ -60,10 +60,10 @@ namespace GameStateManagement
             foreach (GameScreen screen in ScreenManager.GetScreens())
                 screen.ExitScreen();
 
-            ScreenManager.AddScreen(new GameplayScreen(), PlayerIndex.One);
+            ScreenManager.AddScreen(new CinematicScreen(), PlayerIndex.One);
            // LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
            //                    new GameplayScreen());
-            ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
+            //ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
 
             SoundManager.Instance.UnloadContent();
         }
