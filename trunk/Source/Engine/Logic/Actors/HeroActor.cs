@@ -22,13 +22,6 @@ namespace Engine.Logic.Actors
         #endregion
 
         #region Properties
-        private Vector2 position;
-        public Vector2 Position
-        {
-            get { return position; }
-            set { position = value; }
-        }
-
         public bool Jumping { get; set; }
         #endregion
 
@@ -36,13 +29,6 @@ namespace Engine.Logic.Actors
         private float jumpYPeakHeight;
         private bool movingUp = true;
         private float jumpYCurrentHeight;
-        #endregion
-
-        #region Private Methods
-        private void ContinueJumpHandler(object sender, EventArgs e)
-        {
-           
-        }
         #endregion
 
         #region Public Methods
@@ -107,6 +93,11 @@ namespace Engine.Logic.Actors
             }
         }
 
+        public void WarpTo(Vector2 start)
+        {
+            this.GetPosition().Position = start;
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (this.Jumping)
@@ -116,7 +107,7 @@ namespace Engine.Logic.Actors
                     if (this.jumpYCurrentHeight < jumpYPeakHeight)
                     {
                         //We have to go up some more.
-                        this.position.Y -= 8;
+                        this.GetPosition().Position.Y -= 8;
                         this.jumpYCurrentHeight += 8;
                     }
                     else
@@ -129,7 +120,7 @@ namespace Engine.Logic.Actors
                     if (this.jumpYCurrentHeight >= 0)
                     {
                         //We have to go back down some more
-                        this.position.Y += 8;
+                        this.GetPosition().Position.Y += 8;
                         this.jumpYCurrentHeight -= 8;
                     }
                     else
@@ -139,16 +130,13 @@ namespace Engine.Logic.Actors
                         this.movingUp = true;
                     }
                 }
-                this.SetPosition(new PositionComponent(this, this.position));
             }
             base.Update(gameTime);
         }
 
         public void Walk(float dX)
         {
-            this.position.X += dX;
-
-            this.SetPosition(new PositionComponent(this, this.position));
+            this.GetPosition().Position.X += dX;
         }
 
         public void BeginJump(float height)
