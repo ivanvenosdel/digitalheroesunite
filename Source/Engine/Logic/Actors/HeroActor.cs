@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Graphics.Animations;
 using Engine.Logic.ClassComponents;
+using System.Timers;
 #endregion
 
 namespace Engine.Logic.Actors
@@ -25,6 +26,20 @@ namespace Engine.Logic.Actors
         {
             get { return position; }
             set { position = value; }
+        }
+        #endregion
+
+        #region Fields
+        private float jumpPeakYPosition;
+        private bool movingUp = true;
+        private float jumpYOrigin;
+        private bool jumping = false;
+        #endregion
+
+        #region Private Methods
+        private void ContinueJumpHandler(object sender, EventArgs e)
+        {
+           
         }
         #endregion
 
@@ -90,12 +105,59 @@ namespace Engine.Logic.Actors
             }
         }
 
-        public void Walk(float dX, float dY)
+        public override void Update(GameTime gameTime)
+        {
+            if (this.jumping)
+            {
+                if (this.movingUp)
+                {
+                    if (this.position.Y > jumpPeakYPosition)
+                    {
+                        //We have to go up some more.
+                        this.position.Y -= 8;
+                    }
+                    else
+                    {
+                        this.movingUp = false;
+                    }
+                }
+                else
+                {
+                    if (this.position.Y < jumpYOrigin)
+                    {
+                        //We have to go back down some more
+                        this.position.Y += 8;
+                    }
+                    else
+                    {
+                        //Were done! Stop jumping
+                        this.jumping = false;
+                        this.movingUp = true;
+                    }
+                }
+                this.SetPosition(new PositionComponent(this, this.position));
+            }
+            base.Update(gameTime);
+        }
+
+        public void Walk(float dX)
         {
             this.position.X += dX;
-            this.position.Y += dY;
 
             this.SetPosition(new PositionComponent(this, this.position));
+        }
+
+        public void BeginJump(float distance)
+        {
+            if (!jumping)
+            {
+                //Set constraints
+                this.jumpYOrigin = this.position.Y;
+                this.jumpPeakYPosition = this.position.Y - distance;
+                //Go into jump mode
+                this.jumping = true;
+                this.movingUp = true;
+            }
         }
 
         /// <summary>
