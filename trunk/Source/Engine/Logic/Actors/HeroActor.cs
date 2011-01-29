@@ -100,6 +100,7 @@ namespace Engine.Logic.Actors
 
         public override void Update(GameTime gameTime)
         {
+            float positionAdjust = 0;
             if (this.Jumping)
             {
                 if (this.movingUp)
@@ -107,7 +108,7 @@ namespace Engine.Logic.Actors
                     if (this.jumpYCurrentHeight < jumpYPeakHeight)
                     {
                         //We have to go up some more.
-                        this.GetPosition().Position.Y -= 8;
+                        positionAdjust -= 8;
                         this.jumpYCurrentHeight += 8;
                     }
                     else
@@ -117,10 +118,10 @@ namespace Engine.Logic.Actors
                 }
                 else
                 {
-                    if (this.jumpYCurrentHeight >= 0)
+                    if (this.jumpYCurrentHeight > 0)
                     {
                         //We have to go back down some more
-                        this.GetPosition().Position.Y += 8;
+                        positionAdjust += 8;
                         this.jumpYCurrentHeight -= 8;
                     }
                     else
@@ -130,7 +131,9 @@ namespace Engine.Logic.Actors
                         this.movingUp = true;
                     }
                 }
+                this.GetPosition().Position.Y += positionAdjust;
             }
+
             base.Update(gameTime);
         }
 
