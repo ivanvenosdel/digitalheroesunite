@@ -60,6 +60,7 @@ namespace Engine.Logic
             WorldTypes.Initialize();
 
             GameWorld.Instance.Initialize(1);
+            Heromanager.Instance.Initialize();
 
 #if DEBUG
             Debug.Initialize();

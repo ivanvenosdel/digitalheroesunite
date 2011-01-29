@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Engine.World;
 #endregion
 
 namespace Engine.Logic.Input
@@ -17,14 +18,41 @@ namespace Engine.Logic.Input
         /// <summary>Constructor</summary>
         private Heromanager() 
         {
+        }
+        #endregion
+
+        #region Properties
+        public static Heromanager Instance { get { return instance; } }
+        #endregion
+
+        #region Public Methods
+        /// <summary>
+        /// Initializes the Input Manager
+        /// </summary>
+        public void Initialize()
+        {
             InputManager.Instance.OnKeyEvent += new KeyEvent(this.OnKeyEvent);
         }
         #endregion
 
         #region Event Methods
-        private void OnKeyEvent(KeyboardState state)
+        private void OnKeyEvent(KeyboardState keyboardState)
         {
-            
+            int dX = 0;
+            int dY = 0;
+
+            //Translate Left
+            if (keyboardState.IsKeyDown(Keys.Left))
+            {
+                dX = -8;
+            }
+            //Translate Right
+            else if (keyboardState.IsKeyDown(Keys.Right))
+            {
+                dX = 8;
+            }
+
+            GameWorld.Instance.Hero.Walk(dX, dY);
         }
         #endregion
     }
