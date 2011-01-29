@@ -31,15 +31,19 @@ namespace GameStateManagement
         {
             // Create our menu entries.
             MenuEntry playGameMenuEntry = new MenuEntry("Start");
+            MenuEntry creditsMenuEntry = new MenuEntry("Credits");
             MenuEntry exitMenuEntry = new MenuEntry("Exit");
+
 
             // Hook up menu event handlers.
             playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
+            creditsMenuEntry.Selected += CreditsGameMenuEntrySelected;
 
             // Add entries to the menu.
             MenuEntries.Add(playGameMenuEntry);
             MenuEntries.Add(exitMenuEntry);
+            MenuEntries.Add(creditsMenuEntry);
 
             SoundManager.Instance.LoadSong("Music/TitleScreen");
             SoundManager.Instance.PlaySong("Music/TitleScreen");
@@ -69,7 +73,13 @@ namespace GameStateManagement
         }
 
 
-        
+        /// <summary>
+        /// Event Handler for when the credits option is selected
+        /// </summary>
+        void CreditsGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
+       {
+        ScreenManager.AddScreen (new CreditsScreen(), PlayerIndex.One);
+       }
 
 
         /// <summary>
@@ -77,23 +87,6 @@ namespace GameStateManagement
         /// </summary>
         protected override void OnCancel(PlayerIndex playerIndex)
         {
-         /*  //const string message = "Press Space to continue.";
-
-            //MessageBoxScreen confirmExitMessageBox = new MessageBoxScreen(message);
-
-            //confirmExitMessageBox.Accepted += ConfirmExitMessageBoxAccepted;
-
-            //ScreenManager.AddScreen(confirmExitMessageBox, playerIndex);
-        }
-
-
-        /// <summary>
-        /// Event handler for when the user selects ok on the "are you sure
-        /// you want to exit" message box.
-        /// </summary>
-        void ConfirmExitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
-        {
-            EventManager.Instance.QueueEvent(new KillSwitchEvent());*/
             ScreenManager.Game.Exit();
         }
 
