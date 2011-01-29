@@ -9,6 +9,7 @@
 
 #region Using Statements
 using Microsoft.Xna.Framework;
+using Engine.Logic.Events;
 #endregion
 
 namespace GameStateManagement
@@ -89,7 +90,8 @@ namespace GameStateManagement
         /// </summary>
         void ConfirmExitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
         {
-            ScreenManager.Game.Exit();
+            EventManager.Instance.QueueEvent(new KillSwitchEvent());
+            //ScreenManager.Game.Exit();
         }
 
 

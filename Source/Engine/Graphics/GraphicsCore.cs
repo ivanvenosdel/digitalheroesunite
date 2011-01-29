@@ -11,6 +11,7 @@ using Engine.Graphics.UI;
 using Engine.Logic.Events;
 using Engine.Logic.Logger;
 using Engine.World;
+using GameStateManagement;
 #endregion
 
 namespace Engine.Graphics
@@ -24,6 +25,8 @@ namespace Engine.Graphics
     {
         #region Fields
         private SpriteBatch spriteBatch;
+        private Game game;
+        private ScreenManager screenManager;
         #endregion
 
         #region Properties
@@ -35,6 +38,8 @@ namespace Engine.Graphics
         public GraphicsCore(Game game)
             : base(game)
         {
+            this.game = game;
+
             //Events
             EventManager.Instance.AddListener(new EventListener(HandleEvents), EventType.ACTOR_ADD);
             EventManager.Instance.AddListener(new EventListener(HandleEvents), EventType.ACTOR_REMOVE);
@@ -48,7 +53,6 @@ namespace Engine.Graphics
         {
             this.spriteBatch = new SpriteBatch(DeviceManager.Instance.GraphicsDevice);
 
-            //UIManager.Instance.LoadContent();
         }
         #endregion
 
@@ -57,15 +61,20 @@ namespace Engine.Graphics
         public override void Initialize()
         {
             Camera.Instance.Initialize();
-            //UIManager.Instance.Initialize();
+
+            screenManager = new ScreenManager(this.game);
+            screenManager.DrawOrder = 2;
+
+            this.game.Components.Add(screenManager);
+            // Activate the first screens.
+            screenManager.AddScreen(new BackgroundScreen(), null);
+            screenManager.AddScreen(new MainMenuScreen(), null);
 
             base.Initialize();
         }
 
         protected override void UnloadContent()
         {
-            //UIManager.Instance.UnloadContent();
-
             base.UnloadContent();
         }
 
@@ -73,8 +82,6 @@ namespace Engine.Graphics
         /// <param name="gameTime">The current update time</param>
         public override void Update(GameTime gameTime)
         {
-            //UIManager.Instance.Update(gameTime);
-
             //Portions that shouldn't run when the game is paused
             if (!DeviceManager.Instance.Paused)
             {
@@ -91,7 +98,6 @@ namespace Engine.Graphics
             DeviceManager.Instance.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             GameWorld.Instance.Draw(gameTime);
-            //UIManager.Instance.Draw(gameTime);
 
             PostDraw();
         }
