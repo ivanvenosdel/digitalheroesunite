@@ -26,8 +26,8 @@ namespace Engine
         public Base()
         {
             DeviceManager deviceManager = new DeviceManager(this);
-            DeviceManager.Instance.PreferredBackBufferWidth = 1024;
-            DeviceManager.Instance.PreferredBackBufferHeight = 768;
+            DeviceManager.Instance.PreferredBackBufferWidth = 800;
+            DeviceManager.Instance.PreferredBackBufferHeight = 600;
             DeviceManager.Instance.IsFullScreen = false;
 
             this.IsMouseVisible = true;

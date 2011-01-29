@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Logic.Actors;
+using Engine.Graphics.Cameras;
+using Engine.World;
 #endregion
 
 namespace Engine.Logic.ClassComponents
@@ -18,7 +20,7 @@ namespace Engine.Logic.ClassComponents
     {
         #region Fields
 #if DEBUG
-        Texture2D boundingTexture;
+        public static Texture2D BoundingTexture = null;
 #endif
         private Point boxDimension;
         private BoundingBox box;
@@ -40,13 +42,6 @@ namespace Engine.Logic.ClassComponents
         {
             this.boxDimension = boxDim;
 
-#if DEBUG
-            //Set Data needs an array, so we do this stupid dance
-            Color[] final = new Color[1];
-            final[0] = Color.White;
-            boundingTexture = new Texture2D(DeviceManager.Instance.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
-            boundingTexture.SetData<Color>(final);
-#endif
             Update(null);
         }
         #endregion
@@ -61,13 +56,24 @@ namespace Engine.Logic.ClassComponents
             pos.X -= this.boxDimension.X / 2.0f;
             pos.Y -= this.boxDimension.Y;
             this.box = new BoundingBox(new Vector3(pos.X, pos.Y, 0), new Vector3(pos.X + this.boxDimension.X, pos.Y + this.boxDimension.Y, 0));
+
+            CheckCollisions();
         }
 
         public void CheckCollisions()
         {
-           //foreach (Actor actor in ...)
-           //if (this.Owner.GetBounding().DoesCollid(actor))
-           //   ...
+            if (Camera.Instance.OnScreen(new Point((int)Owner.GetPosition().Position.X, (int)Owner.GetPosition().Position.Y)))
+            {
+                ////Make sure the player isnt' falling through a tile
+                //int leftX = Owner.GetPosition().Position.X / WorldTypes
+                //for (int y = 0; y < GameWorld.Instance.height; ++y)
+                //{
+                //    for (int x = 0; x < GameWorld.Instance.width; ++x)
+                //    {
+                //        //GameWorld.Instance.layout[x + y * GameWorld.Instance.width];
+                //    }
+                //}
+            }
         }
 
         public bool DoesCollid(Vector2 worldPos)
@@ -106,13 +112,13 @@ namespace Engine.Logic.ClassComponents
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             //top
-            spriteBatch.Draw(this.boundingTexture, new Rectangle((int)this.box.Min.X, (int)this.box.Min.Y, this.boxDimension.X, 1), Color.Yellow);
+            spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.box.Min.X, (int)this.box.Min.Y, this.boxDimension.X, 1), Color.Yellow);
             //Right
-            spriteBatch.Draw(this.boundingTexture, new Rectangle((int)this.box.Max.X, (int)this.box.Min.Y, 1, this.boxDimension.Y), Color.Yellow);
+            spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.box.Max.X, (int)this.box.Min.Y, 1, this.boxDimension.Y), Color.Yellow);
             //Bottom
-            spriteBatch.Draw(this.boundingTexture, new Rectangle((int)this.box.Min.X, (int)this.box.Max.Y, this.boxDimension.X, 1), Color.Yellow);
+            spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.box.Min.X, (int)this.box.Max.Y, this.boxDimension.X, 1), Color.Yellow);
             //Left
-            spriteBatch.Draw(this.boundingTexture, new Rectangle((int)this.box.Min.X, (int)this.box.Min.Y, 1, this.boxDimension.Y), Color.Yellow);
+            spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.box.Min.X, (int)this.box.Min.Y, 1, this.boxDimension.Y), Color.Yellow);
         }
 #endif
         #endregion

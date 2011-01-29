@@ -134,6 +134,7 @@
     <Compile Include="Logic\Audio\SoundManager.cs" />
     <Compile Include="Logic\ClassComponents\BoundingComponent.cs" />
     <Compile Include="Logic\ClassComponents\ClassComponent.cs" />
+    <Compile Include="Logic\ClassComponents\GravityComponent.cs" />
     <Compile Include="Logic\ClassComponents\PositionComponent.cs" />
     <Compile Include="Logic\ClassComponents\SpriteComponent.cs" />
     <Compile Include="Logic\Events\Event.cs" />

@@ -58,10 +58,7 @@ namespace Engine.Graphics.Cameras
         public Camera()
         {
             InputManager.Instance.OnMouseEvent += new MouseEvent(this.OnMouseEvent);
-            if (this.freeRange)
-            {
-                InputManager.Instance.OnKeyEvent += new KeyEvent(this.OnKeyEvent);
-            }
+            InputManager.Instance.OnKeyEvent += new KeyEvent(this.OnKeyEvent);
         }
         #endregion
 
@@ -149,43 +146,46 @@ namespace Engine.Graphics.Cameras
         /// <param name="keyboardState">Keyboard State</param>
         public void OnKeyEvent(KeyboardState keyboardState)
         {
-            //Increase Speed
-            int additionalSpeed = 1;
-            if (keyboardState.IsKeyDown(Keys.LeftShift) ||
-                keyboardState.IsKeyDown(Keys.RightShift))
+            if (this.freeRange)
             {
-                additionalSpeed = 4;
-            }
+                //Increase Speed
+                int additionalSpeed = 1;
+                if (keyboardState.IsKeyDown(Keys.LeftShift) ||
+                    keyboardState.IsKeyDown(Keys.RightShift))
+                {
+                    additionalSpeed = 4;
+                }
 
-            int dX = 0;
-            int dY = 0;
-            //Translate Left
-            if (keyboardState.IsKeyDown(Keys.Left))
-            {
-                dX = 8 * additionalSpeed;
-            }
-            //Translate Right
-            else if (keyboardState.IsKeyDown(Keys.Right))
-            {
-                dX = -8 * additionalSpeed;
-            }
+                int dX = 0;
+                int dY = 0;
+                //Translate Left
+                if (keyboardState.IsKeyDown(Keys.J))
+                {
+                    dX = -8 * additionalSpeed;
+                }
+                //Translate Right
+                else if (keyboardState.IsKeyDown(Keys.L))
+                {
+                    dX = 8 * additionalSpeed;
+                }
 
-            //Translate Down
-            if (keyboardState.IsKeyDown(Keys.Up))
-            {
-                dY = 8 * additionalSpeed;
-            }
-            //Translate Up
-            else if (keyboardState.IsKeyDown(Keys.Down))
-            {
-                dY = -8 * additionalSpeed;
-            }
+                //Translate Down
+                if (keyboardState.IsKeyDown(Keys.I))
+                {
+                    dY = -8 * additionalSpeed;
+                }
+                //Translate Up
+                else if (keyboardState.IsKeyDown(Keys.K))
+                {
+                    dY = 8 * additionalSpeed;
+                }
 
-            //Only move if needed
-            if (dX != 0 || dY != 0)
-            {
-                Walk(dX, dY);
-            } 
+                //Only move if needed
+                if (dX != 0 || dY != 0)
+                {
+                    Walk(dX, dY);
+                }
+            }
         }
 
         /// <summary>Handles mouse events from InputManager</summary>

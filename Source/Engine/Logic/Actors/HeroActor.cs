@@ -34,9 +34,9 @@ namespace Engine.Logic.Actors
         #region Public Methods
         public void Initialize(Vector2 pos, Point dim)
         {
-//TEMP
             SetPosition(new PositionComponent(this, pos));
             SetBounding(new BoundingComponent(this, dim));
+            SetGravity(new GravityComponent(this));
 
             //Order of animations must match the order of the animation package
             string filepath = @"Actors\Tangy\";
