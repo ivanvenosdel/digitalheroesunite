@@ -81,6 +81,7 @@ namespace Engine
             else if (lastKey == Keys.F1)
             {
                 Debug.CameraFreeRange = !Debug.CameraFreeRange;
+                Camera.Instance.FreeRange = Debug.CameraFreeRange;
                 lastKey = Keys.None;
             }
 

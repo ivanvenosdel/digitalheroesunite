@@ -24,7 +24,13 @@ namespace Engine.World
 
         private bool enabled = false;
         private ContentManager content;
-        private LevelMap levelMap;
+
+        public int level;
+        public int width;
+        public int height;
+        public WorldTile[] layout;
+        public Point start;
+        public Point end;
 
         public HeroActor hero;
         private SpriteBatch spriteBatch;
@@ -52,7 +58,22 @@ namespace Engine.World
         {
             this.content = new ContentManager(DeviceManager.Instance.Content.ServiceProvider);
             
-            this.levelMap = WorldTypes.Levels[level];
+            //Load Level
+            LevelMap levelMap = WorldTypes.Levels[level];
+            this.width = levelMap.Width;
+            this.height = levelMap.Height;
+            this.start = levelMap.Start;
+            this.end = levelMap.End;
+            this.level = levelMap.Level;
+            this.layout = new WorldTile[this.width * this.height];
+            for (int y = 0; y < this.height; ++y)
+            {
+                for (int x = 0; x < this.width; ++x)
+                {
+                    this.layout[x + y * this.width] = new WorldTile(levelMap.Layout[x + y * this.width]);
+                }
+            }
+
 
             //TEMP
             this.hero = ActorFactory.Instance.CreateHero(new Vector2(40, 50), new Point(60, 150));
@@ -76,13 +97,13 @@ namespace Engine.World
             //Render
             this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Camera.Instance.View);
 
-            for (int y = 0; y < this.levelMap.Height; ++y)
+            for (int y = 0; y < this.height; ++y)
             {
-                for (int x = 0; x < this.levelMap.Width; ++x)
+                for (int x = 0; x < this.width; ++x)
                 {
-                    Vector2 pos = new Vector2(x * WorldTile.TILE_SIZE, y * WorldTile.TILE_SIZE);
-                    TileType tileType = WorldTypes.TileTypes[this.levelMap.Layout[x + y * this.levelMap.Width]];
-                    tileType.Draw(this.spriteBatch, pos);
+                    Vector2 pos = new Vector2(x * WorldTypes.TILE_SIZE, y * WorldTypes.TILE_SIZE);
+                    WorldTile tile = this.layout[x + y * this.width];
+                    tile.Draw(this.spriteBatch, pos);
                 }
             }
 
