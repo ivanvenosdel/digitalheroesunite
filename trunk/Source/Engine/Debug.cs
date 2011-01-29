@@ -58,17 +58,17 @@ namespace Engine
         /// <param name="keyboardState">The current keyboard state</param>
         public static void OnKeyEvent(KeyboardState keyboardState)
         {
-            // Allows the game to exit
-            if (keyboardState.IsKeyDown(Keys.Escape))
-            {
-                lastKey = Keys.Escape;
-            }
-            else if (lastKey == Keys.Escape)
-            {
-                EventManager.Instance.QueueEvent(new KillSwitchEvent());
+            //// Allows the game to exit
+            //if (keyboardState.IsKeyDown(Keys.Escape))
+            //{
+            //    lastKey = Keys.Escape;
+            //}
+            //else if (lastKey == Keys.Escape)
+            //{
+            //    EventManager.Instance.QueueEvent(new KillSwitchEvent());
 
-                lastKey = Keys.None;
-            }
+            //    lastKey = Keys.None;
+            //}
 
             ////////////////////////////////////////////////////////////
             //                   TOGGLES

@@ -3,3 +3,8 @@ Content\Actors\Tangy\idle.xnb
 Content\Actors\Tangy\walk_down.xnb
 Content\Actors\Tangy\walk_left.xnb
 Content\Actors\Tangy\walk_up.xnb
+Content\UI\background.xnb
+Content\UI\blank.xnb
+Content\UI\gradient.xnb
+Content\UI\Fonts\gamefont.xnb
+Content\UI\Fonts\menufont.xnb
