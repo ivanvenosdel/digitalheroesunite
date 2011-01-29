@@ -32,7 +32,7 @@ namespace Engine
         /// <summary>
         /// Graphics Core
         /// </summary>
-        public static bool CameraFreeRange = true;
+        public static bool CameraFreeRange = false;
 
         /// <summary>
         /// Logic Core

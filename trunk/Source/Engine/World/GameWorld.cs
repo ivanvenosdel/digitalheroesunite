@@ -26,8 +26,7 @@ namespace Engine.World
         private ContentManager content;
         private LevelMap levelMap;
 
-        //TEMP
-        private HeroActor hero;
+        public HeroActor hero;
         private SpriteBatch spriteBatch;
         #endregion
 
