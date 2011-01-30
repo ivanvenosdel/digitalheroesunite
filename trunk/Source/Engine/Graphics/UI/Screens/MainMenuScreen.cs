@@ -72,24 +72,26 @@ namespace GameStateManagement
                 case 1:
                     //Load lvl 2
                     world.Initialize(level + 1, this.LevelEndHandler);
-                    CinematicScreen cinematic2 = new CinematicScreen("Midtro1");
+                    CinematicScreen cinematic2 = new CinematicScreen("TitleScreen1");
                     ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
                     break;
                 case 2:
                     //Load lvl 3
                     world.Initialize(level + 1, this.LevelEndHandler);
-                    CinematicScreen cinematic3 = new CinematicScreen("Midtro2");
+                    CinematicScreen cinematic3 = new CinematicScreen("TitleScreen2");
                     ScreenManager.AddScreen(cinematic3, PlayerIndex.One);
                     break;
                 case 3:
                     //Load lvl 4
                     world.Initialize(level + 1, this.LevelEndHandler);
-                    CinematicScreen cinematic4 = new CinematicScreen("Prebosstro");
+                    CinematicScreen cinematic4 = new CinematicScreen("TitleScreen3");
                     ScreenManager.AddScreen(cinematic4, PlayerIndex.One);
                     break;
                 case 4:
                     //Show end credits
-                    CinematicScreen cinematicOut = new CinematicScreen("Outro");
+                    CreditsScreen credits = new CreditsScreen();
+                    ScreenManager.AddScreen(credits, PlayerIndex.One);
+                    CinematicScreen cinematicOut = new CinematicScreen("TitleScreen5");
                     ScreenManager.AddScreen(cinematicOut, PlayerIndex.One);
                     break;
                 default:
@@ -114,7 +116,7 @@ namespace GameStateManagement
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
             
             ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
-            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 4, this.LevelEndHandler, "Platformer");
+            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 1, this.LevelEndHandler, "Platformer");
             CinematicScreen cinematic2 = new CinematicScreen("Intro2");
             CinematicScreen cinematic1 = new CinematicScreen("Intro1", "VirusTheme");
 
