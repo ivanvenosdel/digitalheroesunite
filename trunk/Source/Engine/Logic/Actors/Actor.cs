@@ -25,6 +25,7 @@ namespace Engine.Logic.Actors
         HERO,
         VORTEX,
         /// <summary>End</summary>
+        CAMERACONTROL,
         END
     };
     #endregion

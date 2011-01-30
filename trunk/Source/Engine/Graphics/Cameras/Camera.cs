@@ -24,6 +24,7 @@ namespace Engine.Graphics.Cameras
 
         public const int BUFFER_SPACE = 100;
         public const int CLIP_BUFFER = 150;
+        public const int RATE = 2;
 
         private float zoom;
         private Matrix view;
@@ -33,6 +34,7 @@ namespace Engine.Graphics.Cameras
         private float goToWeight;
         private Matrix zoomMatrix;
         private BoundingFrustum frustum;
+        private Vector2 direction = Vector2.Zero;
 #if DEBUG
         private bool freeRange = Debug.CameraFreeRange;
         public bool FreeRange { get { return this.freeRange; } set { this.freeRange = value; } }
@@ -52,6 +54,7 @@ namespace Engine.Graphics.Cameras
         public Matrix View { get { return this.view; } }
         /// <summary>Projection Matrix</summary>
         public Matrix Projection { get { return this.projection; } }
+        public Vector2 Direction { get { return this.direction; } set { this.direction = value; } }
         #endregion
 
         #region Constructors
@@ -96,17 +99,17 @@ namespace Engine.Graphics.Cameras
                 this.position.Y = MathHelper.SmoothStep(this.position.Y, this.goToPosition.Y, this.goToWeight);
 
                 this.goToWeight = MathHelper.Clamp(this.goToWeight + precision, 0, 1);
-                CreateView();
 
                 if (this.goToWeight == 1)
                     this.goToPosition = Vector2.Zero;
             }
             else if (!freeRange)
             {
-                //TODO: Normal camera functionality
-
-                CreateView();
+                //this.position.X = this.Direction.X * RATE;
+                //this.position.Y = this.Direction.Y * RATE;
+                this.position += this.Direction * RATE;
             }
+            CreateView();
         }
 
         /// <summary>Is the point on screen</summary>

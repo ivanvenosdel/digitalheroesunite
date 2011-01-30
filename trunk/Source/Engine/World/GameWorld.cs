@@ -36,6 +36,7 @@ namespace Engine.World
 
         public VortexActor vortex;
         public HeroActor hero;
+        public List<CameraControlActor> cameraControlActors;
         private SpriteBatch spriteBatch;
         #endregion
 
@@ -103,6 +104,13 @@ namespace Engine.World
             Vector2 startPoint = UtilityWorld.GridToWorld(this.start);
             this.hero = ActorFactory.Instance.CreateHero(startPoint, new Point(36, 110));
 
+            this.cameraControlActors = new List<CameraControlActor>();
+            foreach (TileExtra extra in WorldTypes.LevelTileExtras[this.level].Values)
+            {
+                CameraControlActor actor = ActorFactory.Instance.CreateCameraControl(extra.Position, extra.CameraDirection);
+                cameraControlActors.Add(actor);
+            }
+
             //Where should our Vortex start?
             Vector2 endPoint = UtilityWorld.GridToWorld(this.end);
             this.vortex = ActorFactory.Instance.CreateVortex(endPoint);
@@ -111,6 +119,8 @@ namespace Engine.World
             Camera.Instance.Jump((int)startPoint.X, startPoint.Y - 175);
 
             enabled = true;
+
+            Camera.Instance.Direction = Vector2.Zero;
         }
 
         public void Update(GameTime gameTime)
@@ -125,7 +135,11 @@ namespace Engine.World
                 //We have reached the end of all things
                 this.LevelEndHandler(this, this.level);
             }
-            
+
+            foreach (CameraControlActor cameraControl in this.cameraControlActors)
+            {
+                cameraControl.Update(gameTime);
+            }
             this.hero.Update(gameTime);
             this.vortex.Update(gameTime);
         }
@@ -173,6 +187,11 @@ namespace Engine.World
                     }
                 }
 
+                foreach (CameraControlActor cameraControl in this.cameraControlActors)
+                {
+                    cameraControl.Draw(gameTime, this.spriteBatch);
+                }
+
                 //Draw the Vortex
                 if (this.vortex != null)
                     this.vortex.Draw(gameTime, this.spriteBatch);
@@ -180,7 +199,6 @@ namespace Engine.World
                 //Draw the Hero
                 if (this.hero != null)
                     this.hero.Draw(gameTime, this.spriteBatch);
-
 
                 this.spriteBatch.End();
             }

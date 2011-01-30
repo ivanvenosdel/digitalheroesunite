@@ -139,6 +139,7 @@ namespace Engine.Logic.Actors
                 this.GetPosition().Position.Y += positionAdjust;
             }
 
+            Vector2 tempPosition = this.GetPosition().Position;
             base.Update(gameTime);
         }
 
@@ -154,6 +155,7 @@ namespace Engine.Logic.Actors
             this.jumpYPeakHeight = height;
             //Go into jump mode
             this.Jumping = true;
+
             if (GetSprite().CurrentAnimation == AnimPackageHero.RUN_LEFT)
                 PlayAnimation(AnimPackageHero.JUMP_LEFT, true);
             else

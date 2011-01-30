@@ -184,6 +184,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="World\tileExtras.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>tileExtras</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Actors\Hero\HeroJump.png">
       <Name>HeroJump</Name>
       <Importer>TextureImporter</Importer>
