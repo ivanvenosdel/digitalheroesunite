@@ -14,4 +14,8 @@ namespace Engine.Graphics.Animations
         public const int STAND = 4;
         public const int WHIP = 5;
     }
+    public class AnimPackageVortex
+    {
+        public const int SWIRL = 0;
+    }
 }

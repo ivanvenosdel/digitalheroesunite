@@ -233,7 +233,7 @@ namespace Engine.Logic.ClassComponents
 
 #if DEBUG
             //If there is a bounding component and debug draw is on, draw the bounding box
-            if (Debug.DrawBounding)
+            if (Debug.DrawBounding &&  this.Owner.GetBounding() != null)
                 this.Owner.GetBounding().Draw(gameTime, spriteBatch);
 #endif
         }

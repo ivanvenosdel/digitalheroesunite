@@ -49,5 +49,47 @@
       <Y>0</Y>
     </TextureCoordinate>
   </TileType>
+  <TileType>
+    <ID>7</ID>
+    <TextureCoordinate>
+      <X>6</X>
+      <Y>0</Y>
+    </TextureCoordinate>
+  </TileType>
+  <TileType>
+    <ID>8</ID>
+    <TextureCoordinate>
+      <X>7</X>
+      <Y>0</Y>
+    </TextureCoordinate>
+  </TileType>
+  <TileType>
+    <ID>9</ID>
+    <TextureCoordinate>
+      <X>8</X>
+      <Y>0</Y>
+    </TextureCoordinate>
+  </TileType>
+  <TileType>
+    <ID>10</ID>
+    <TextureCoordinate>
+      <X>9</X>
+      <Y>0</Y>
+    </TextureCoordinate>
+  </TileType>
+  <TileType>
+    <ID>11</ID>
+    <TextureCoordinate>
+      <X>10</X>
+      <Y>0</Y>
+    </TextureCoordinate>
+  </TileType>
+  <TileType>
+    <ID>12</ID>
+    <TextureCoordinate>
+      <X>11</X>
+      <Y>0</Y>
+    </TextureCoordinate>
+  </TileType>
 
 </ArrayOfTileType>

@@ -233,6 +233,27 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="World\Backgrounds\Level3\ActionBackground.png">
+      <Name>ActionBackground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="World\Backgrounds\Level2\RunJumpBackground.png">
+      <Name>RunJumpBackground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="World\Backgrounds\Level1\RunJumpBackground.png">
+      <Name>RunJumpBackground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Audio\Music\Platformer.mp3">
       <Name>Platformer</Name>
       <Importer>Mp3Importer</Importer>
@@ -242,6 +263,13 @@
   <ItemGroup>
     <Compile Include="UI\Intro\Intro3.png">
       <Name>Intro3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actors\Portal\Vortex.png">
+      <Name>Vortex</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

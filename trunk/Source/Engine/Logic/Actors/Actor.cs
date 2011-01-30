@@ -23,6 +23,7 @@ namespace Engine.Logic.Actors
         UNKNOWN = 0,
         /// <summary>Hero</summary>
         HERO,
+        VORTEX,
         /// <summary>End</summary>
         END
     };
