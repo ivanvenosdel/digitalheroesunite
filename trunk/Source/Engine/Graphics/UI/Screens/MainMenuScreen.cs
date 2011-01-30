@@ -102,8 +102,6 @@ namespace GameStateManagement
             ScreenManager.AddScreen(cinematic3, PlayerIndex.One);
             ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
             ScreenManager.AddScreen(cinematic1, PlayerIndex.One);
-            
-            
         }
 
         #endregion
