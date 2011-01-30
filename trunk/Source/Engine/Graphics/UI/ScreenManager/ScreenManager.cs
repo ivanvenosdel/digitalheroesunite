@@ -36,6 +36,7 @@ namespace GameStateManagement
 
         SpriteBatch spriteBatch;
         SpriteFont font;
+        SpriteFont font2;
         Texture2D blankTexture;
 
         bool isInitialized;
@@ -64,6 +65,16 @@ namespace GameStateManagement
         public SpriteFont Font
         {
             get { return font; }
+        }
+
+
+        /// <summary>
+        /// A default font shared by all the screens. This saves
+        /// each screen having to bother loading their own local copy.
+        /// </summary>
+        public SpriteFont Font2
+        {
+            get { return font2; }
         }
 
 
@@ -116,6 +127,7 @@ namespace GameStateManagement
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = content.Load<SpriteFont>(@"UI\Fonts\menufont");
+            font2 = content.Load<SpriteFont>(@"UI\Fonts\menufont2");
             blankTexture = content.Load<Texture2D>(@"UI\blank");
 
             // Tell each of the screens to load their content.

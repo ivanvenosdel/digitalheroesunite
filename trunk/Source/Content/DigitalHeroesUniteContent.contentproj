@@ -111,6 +111,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\Fonts\menufont2.spritefont">
+      <Name>menufont2</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="World\tiles.xml">
       <Name>tilesXML</Name>
       <Importer>XmlImporter</Importer>
