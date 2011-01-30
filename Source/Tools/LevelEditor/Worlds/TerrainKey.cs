@@ -22,7 +22,7 @@ namespace MonsterEscape.Worlds
     /// </summary>
     public static class TerrainKey
     {
-        public const int TILE_SIZE = 70;
+        public const int TILE_SIZE = 40;
         public const int HALF_TILE_SIZE = TILE_SIZE / 2;
 
         public const int SPIRE_OFFSET = 7;

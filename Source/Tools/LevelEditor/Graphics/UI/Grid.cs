@@ -29,7 +29,7 @@ namespace MonsterEscape.Graphics.UI
         #region Public Methods
         public void Draw()
         {
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.Default, RasterizerState.CullCounterClockwise, null, Camera.Instance.View);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullCounterClockwise, null, Camera.Instance.View);
             //Tiles
             for (int x = 0; x < CurrentLevel.Instance.Width; ++x)
             {

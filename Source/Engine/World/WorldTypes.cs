@@ -13,7 +13,7 @@ namespace Engine.World
 {
     public static class WorldTypes
     {
-        public const int TILE_SIZE = 70;
+        public const int TILE_SIZE = 40;
 
         private static Texture2D tileTexture;
 
