@@ -57,9 +57,17 @@ namespace GameStateManagement
         #region Event Methods
         private void LevelEndHandler(GameWorld world, int level)
         {
-            level++;
-            //TODO: Destroy World
-
+            switch (level)
+            {
+                case 1:
+                    //Load lvl 2
+                    world.Initialize(level + 1, this.LevelEndHandler);
+                    break;
+                case 2:
+                    break;
+                default:
+                    break;
+            }
         }
         #endregion
 
