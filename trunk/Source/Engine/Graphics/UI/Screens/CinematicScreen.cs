@@ -27,10 +27,10 @@ namespace GameStateManagement
         #region Fields
 
         ContentManager content;
-        List<Texture2D> cinematicTextures = new List<Texture2D>();
-        Texture2D cinematic1, cinematic2;
-        private int level;
-        private Engine.World.GameWorld.OnLevelEnd levelEndHandler;
+        Texture2D cinematic1;
+        string cineTexture;
+        int level;
+        Engine.World.GameWorld.OnLevelEnd levelEndHandler;
 
         #endregion
 
@@ -41,12 +41,21 @@ namespace GameStateManagement
         /// Constructor
         /// </summary>
 
-        public CinematicScreen(int level, Engine.World.GameWorld.OnLevelEnd levelEndHandler)
+        public CinematicScreen(string cineTexture)
             : base()
         {
-            this.level = level;
+            this.cineTexture = cineTexture;
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            this.levelEndHandler = null;
+        }
+
+        public CinematicScreen(string cineTexture, int level, Engine.World.GameWorld.OnLevelEnd levelEndHandler)
+        {
+            this.cineTexture = cineTexture;
+            TransitionOnTime = TimeSpan.FromSeconds(0.5);
+            TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            this.level = level;
             this.levelEndHandler = levelEndHandler;
         }
 
@@ -58,13 +67,8 @@ namespace GameStateManagement
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            cinematic1 = content.Load<Texture2D>(@"UI\cinematic1");
-            cinematic2 = content.Load<Texture2D>(@"UI\cinematic2");
-            cinematicTextures.Add(cinematic1);
-            cinematicTextures.Add(cinematic2);
-
-            GameplayScreen gameplayScreen = new GameplayScreen();
-            ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
+            string texturePath = String.Format(@"UI\{0}", this.cineTexture);
+            cinematic1 = content.Load<Texture2D>(texturePath);
         }
 
         /// <summary>
@@ -83,15 +87,16 @@ namespace GameStateManagement
        /// </summary>
        /// <param name="input"></param>
         public override void HandleInput(InputState input)
-            {
-
+        {
             if (input.IsSpace(PlayerIndex.One))
             {
+                if(this.levelEndHandler != null)
+                {
+                    GameWorld.Instance.Initialize(this.level, this.levelEndHandler);
+                }
                 ExitScreen();
-                GameWorld.Instance.Initialize(1, this.levelEndHandler);
-                ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
             }
-             }
+        }
         #endregion
 
         #region Update and Draw
@@ -120,7 +125,7 @@ namespace GameStateManagement
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(cinematicTextures[0], fullscreen,
+            spriteBatch.Draw(cinematic1, fullscreen,
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
 
             spriteBatch.End();
