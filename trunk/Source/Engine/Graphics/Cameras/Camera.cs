@@ -210,9 +210,9 @@ namespace Engine.Graphics.Cameras
 
                 if (this.zoom != lastZoomLevel)
                 {
-                    Viewport vp = DeviceManager.Instance.GraphicsDevice.Viewport;
-                    this.zoomMatrix = Matrix.CreateScale(new Vector3(this.zoom, this.zoom, 0));
-                    CreateView();
+                    //Viewport vp = DeviceManager.Instance.GraphicsDevice.Viewport;
+                    //this.zoomMatrix = Matrix.CreateScale(new Vector3(this.zoom, this.zoom, 0));
+                    //CreateView();
                 }
             }
         }

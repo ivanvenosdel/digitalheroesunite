@@ -64,7 +64,9 @@ namespace GameStateManagement
         #region Event Methods
         private void LevelEndHandler(GameWorld world, int level)
         {
-            world.Destroy();
+            if (world != null)
+                world.Destroy();
+
             DeviceManager.Instance.Paused = true;
             switch (level)
             {
@@ -132,7 +134,7 @@ namespace GameStateManagement
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
             
             ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
-            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 1, this.LevelEndHandler, "Platformer");
+            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 4, this.LevelEndHandler, "Platformer");
             CinematicScreen cinematic2 = new CinematicScreen("Intro2");
             CinematicScreen cinematic1 = new CinematicScreen("Intro1", "VirusTheme");
 

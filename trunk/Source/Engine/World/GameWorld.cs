@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Logic.Actors;
 using Engine.Logic.Audio;
+using Engine.Logic.Input;
 using Engine.Graphics.Cameras;
 using Engine.Utilities;
 #endregion
@@ -109,6 +110,7 @@ namespace Engine.World
             {
                 this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\Boss\BossBackground");
                 this.boss = ActorFactory.Instance.CreateBoss(new Vector2(840, -40));
+                CodeListener.Instance.Initialize(this.LevelEndHandler);
             }
 
             //Where should our hero start?
@@ -187,10 +189,12 @@ namespace Engine.World
                     return;
                 }
             }
-            else if (this.level != 4 && (this.end.X <= heroTile.X && (this.end.Y <= heroTile.Y + delta && this.end.Y >= heroTile.Y - delta)))
+            else if (this.end.X <= heroTile.X && (this.end.Y <= heroTile.Y + delta && this.end.Y >= heroTile.Y - delta))
             {
-                //We have reached the end of all things
-                this.LevelEndHandler(this, this.level);
+                if (this.level == 4)
+                    CodeListener.Instance.Reset();
+                else
+                    this.LevelEndHandler(this, this.level);
                 return;
             }
 
@@ -273,6 +277,11 @@ namespace Engine.World
                 //Draw the Hero
                 if (this.hero != null)
                     this.hero.Draw(gameTime, this.spriteBatch);
+
+                if (this.level == 4)
+                {
+                    CodeListener.Instance.Draw(gameTime, this.spriteBatch);
+                }
 
                 this.spriteBatch.End();
             }

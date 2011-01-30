@@ -88,7 +88,11 @@ namespace Engine.Logic.ClassComponents
                 //We don't want gravity to effect all other actors
                 Fixture fixture = FixtureFactory.CreateRectangle(DeviceManager.Instance.Physics.WorldSimulation, dim.X, dim.Y, 10.0f, pos);
                 fixture.Body.BodyType = BodyType.Static;
-                fixture.CollisionCategories = CollisionCategory.Cat3;
+                fixture.CollisionCategories = CollisionCategory.Cat2;
+                unchecked
+                {
+                    fixture.CollisionGroup = (short)(CollisionCategory.All & ~CollisionCategory.Cat2);
+                }
                 this.fixture = fixture;
             }
             //Update(null);
