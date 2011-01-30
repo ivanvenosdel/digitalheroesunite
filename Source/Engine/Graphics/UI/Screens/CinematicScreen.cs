@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 #endregion
 
 namespace GameStateManagement
@@ -26,7 +27,8 @@ namespace GameStateManagement
         #region Fields
 
         ContentManager content;
-        Texture2D cinematicTexture[2];
+        List<Texture2D> cinematicTextures = new List<Texture2D>();
+        Texture2D cinematic1, cinematic2;
 
         #endregion
 
@@ -41,6 +43,7 @@ namespace GameStateManagement
         {
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            
         }
 
         /// <summary>
@@ -51,8 +54,10 @@ namespace GameStateManagement
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            cinematicTexture[0] = content.Load<Texture2D>(@"UI\cinematic1");
-            cinematicTexture[1] = content.Load<Texture2D>(@"UI\cinematic2");
+            cinematic1 = content.Load<Texture2D>(@"UI\cinematic1");
+            cinematic2 = content.Load<Texture2D>(@"UI\cinematic2");
+            cinematicTextures.Add(cinematic1);
+            cinematicTextures.Add(cinematic2);
 
             GameplayScreen gameplayScreen = new GameplayScreen();
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
@@ -110,7 +115,7 @@ namespace GameStateManagement
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(cinematicTexture[i], fullscreen,
+            spriteBatch.Draw(cinematicTextures[0], fullscreen,
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
 
             spriteBatch.End();
