@@ -53,13 +53,13 @@ namespace Engine.World
             if (Debug.DrawBounding)
             {
                 //top
-                spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.Bounding.Min.X, (int)this.Bounding.Min.Y, WorldTypes.TILE_SIZE, 1), Color.Yellow);
+                spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.Bounding.Min.X, (int)this.Bounding.Min.Y, WorldTypes.TILE_SIZE, 1), Color.Orange);
                 //Right
                 spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.Bounding.Max.X, (int)this.Bounding.Min.Y, 1, WorldTypes.TILE_SIZE), Color.Yellow);
                 //Bottom
-                spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.Bounding.Min.X, (int)this.Bounding.Max.Y, WorldTypes.TILE_SIZE, 1), Color.Yellow);
+                spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.Bounding.Min.X, (int)this.Bounding.Max.Y, WorldTypes.TILE_SIZE, 1), Color.Red);
                 //Left
-                spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.Bounding.Min.X, (int)this.Bounding.Min.Y, 1, WorldTypes.TILE_SIZE), Color.Yellow);
+                spriteBatch.Draw(BoundingComponent.BoundingTexture, new Rectangle((int)this.Bounding.Min.X, (int)this.Bounding.Min.Y, 1, WorldTypes.TILE_SIZE), Color.Green);
             }
 #endif
         }
