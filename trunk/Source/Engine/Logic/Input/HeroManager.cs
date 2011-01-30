@@ -19,6 +19,10 @@ namespace Engine.Logic.Input
     {
         #region Fields
         private static readonly Heromanager instance = new Heromanager();
+
+        private const float WALK_RATE = 6.0f;
+        private const float SLOW_FALL_RATE = WALK_RATE / 1.5f;
+        public const float JUMP_RATE = 15.0f; 
         #endregion
 
         #region Constructors
@@ -52,27 +56,23 @@ namespace Engine.Logic.Input
         {
             if (GameWorld.Instance.Hero != null)
             {
-                int dX = 0;
+                float dX = 0;
 
                 //Translate Right
                 if (keyboardState.IsKeyDown(Keys.Right))
                 {
-                    //It's ok to move if we are jumping in the same direction or not at all
-                    if (!GameWorld.Instance.hero.Jumping || this.jumpDirection == MoveDirection.Right)
-                    {
-                        dX = 8;
-                        this.walkDirection = MoveDirection.Right;
-                    }
+                    if (GameWorld.Instance.hero.Jumping)
+                        dX = SLOW_FALL_RATE;
+                    else
+                        dX = WALK_RATE;
                 }
                 //Translate Left
                 else if (keyboardState.IsKeyDown(Keys.Left))
                 {
-                    //It's ok to move if we are jumping in the same direction or not at all
-                    if (!GameWorld.Instance.hero.Jumping || this.jumpDirection == MoveDirection.Left)
-                    {
-                        dX = -8;
-                        this.walkDirection = MoveDirection.Left;
-                    }
+                    if (GameWorld.Instance.hero.Jumping)
+                        dX = -SLOW_FALL_RATE;
+                    else
+                        dX = -WALK_RATE;
                 }
                 else
                 {

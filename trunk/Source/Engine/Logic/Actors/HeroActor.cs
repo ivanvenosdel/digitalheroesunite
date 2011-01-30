@@ -103,34 +103,34 @@ namespace Engine.Logic.Actors
             float positionAdjust = 0;
             if (this.Jumping)
             {
-                if (this.movingUp)
-                {
+                //if (this.movingUp)
+                //{
                     if (this.jumpYCurrentHeight < jumpYPeakHeight)
                     {
                         //We have to go up some more.
-                        positionAdjust -= 8;
-                        this.jumpYCurrentHeight += 8;
+                        positionAdjust -= Heromanager.JUMP_RATE;
+                        this.jumpYCurrentHeight += Heromanager.JUMP_RATE;
                     }
-                    else
-                    {
-                        this.movingUp = false;
-                    }
-                }
-                else
-                {
-                    if (this.jumpYCurrentHeight > 0)
-                    {
-                        //We have to go back down some more
-                        positionAdjust += 8;
-                        this.jumpYCurrentHeight -= 8;
-                    }
-                    else
-                    {
-                        //Were done! Stop jumping
-                        this.Jumping = false;
-                        this.movingUp = true;
-                    }
-                }
+                    //else
+                    //{
+                    //    this.movingUp = false;
+                    //}
+                //}
+                //else
+                //{
+                //    if (this.jumpYCurrentHeight > 0)
+                //    {
+                //        //We have to go back down some more
+                //        positionAdjust += 8;
+                //        this.jumpYCurrentHeight -= 8;
+                //    }
+                //    else
+                //    {
+                //        //Were done! Stop jumping
+                //        this.Jumping = false;
+                //        this.movingUp = true;
+                //    }
+                //}
                 this.GetPosition().Position.Y += positionAdjust;
             }
 
