@@ -1,80 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LevelMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Level>1</Level>
-  <Width>8</Width>
-  <Height>8</Height>
+  <Width>63</Width>
+  <Height>1</Height>
   <Start>
-    <X>1</X>
-    <Y>3</Y>
+    <X>13</X>
+    <Y>0</Y>
   </Start>
   <End>
-    <X>6</X>
-    <Y>1</Y>
+    <X>47</X>
+    <Y>0</Y>
   </End>
   <Layout>
-    <int>2</int>
     <int>1</int>
     <int>1</int>
-    <int>2</int>
     <int>1</int>
     <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
     <int>1</int>
     <int>1</int>
-    <int>2</int>
     <int>1</int>
     <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>2</int>
-    <int>2</int>
-    <int>2</int>
-    <int>2</int>
-    <int>2</int>
     <int>1</int>
     <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>1</int>
-    <int>2</int>
-    <int>2</int>
     <int>1</int>
     <int>1</int>
-    <int>2</int>
     <int>1</int>
-    <int>2</int>
     <int>1</int>
-    <int>2</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
+    <int>1</int>
     <int>1</int>
   </Layout>
 </LevelMap>

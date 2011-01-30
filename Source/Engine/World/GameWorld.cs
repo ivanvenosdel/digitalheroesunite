@@ -63,6 +63,7 @@ namespace Engine.World
         public void Initialize(int level, OnLevelEnd levelEndHandler)
         {
             this.content = new ContentManager(DeviceManager.Instance.Content.ServiceProvider);
+            this.spriteBatch = new SpriteBatch(DeviceManager.Instance.GraphicsDevice);
             this.LevelEndHandler = levelEndHandler;
             
             //Load Level
@@ -85,7 +86,10 @@ namespace Engine.World
             int xx = (this.start.X * WorldTypes.TILE_SIZE) -WorldTypes.TILE_SIZE / 2;
             int yy = (this.start.Y * WorldTypes.TILE_SIZE);
             this.hero = ActorFactory.Instance.CreateHero(new Vector2(xx, yy), new Point(60, 150));
-            this.spriteBatch = new SpriteBatch(DeviceManager.Instance.GraphicsDevice);
+
+            //Update camera to center hero
+            Camera.Instance.Jump(xx, yy-175);
+
             enabled = true;
         }
 

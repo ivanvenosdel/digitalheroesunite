@@ -212,6 +212,17 @@ namespace Engine.Graphics.Cameras
                 }
             }
         }
+
+
+        /// <summary>Jumps to X/Y</summary>
+        public void Jump(int X, int Y)
+        {
+            this.position.X = X;
+            this.position.Y = Y;
+            this.goToPosition = Vector2.Zero;
+
+            CreateView();
+        }
         #endregion
 
         #region Private Methods
@@ -240,16 +251,6 @@ namespace Engine.Graphics.Cameras
         {
             this.position.X += dX;
             this.position.Y += dY;
-
-            CreateView();
-        }
-
-        /// <summary>Jumps to X/Y</summary>
-        private void Jump(int X, int Y)
-        {
-            this.position.X = X;
-            this.position.Y = Y;
-            this.goToPosition = Vector2.Zero;
 
             CreateView();
         }
