@@ -29,7 +29,7 @@ namespace GameStateManagement
         /// Constructor fills in the menu contents.
         /// </summary>
         public MainMenuScreen()
-            : base("Main Menu")
+            : base("")
         {
             string start = "Start";
             string exit = "Exit";
