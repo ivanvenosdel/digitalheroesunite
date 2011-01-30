@@ -89,8 +89,10 @@ namespace GameStateManagement
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
             SoundManager.Instance.StopSong();
             ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
-            CinematicScreen cinematic2 = new CinematicScreen("cinematic2", 1, this.LevelEndHandler);
-            CinematicScreen cinematic1 = new CinematicScreen("cinematic1");
+            //CinematicScreen cinematic3 = new CinematicScreen("Intro3", 1, this.LevelEndHandler);
+            CinematicScreen cinematic2 = new CinematicScreen("Intro2", 1, this.LevelEndHandler);
+            CinematicScreen cinematic1 = new CinematicScreen("Intro1");
+
 
             ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
             ScreenManager.AddScreen(cinematic1, PlayerIndex.One);
