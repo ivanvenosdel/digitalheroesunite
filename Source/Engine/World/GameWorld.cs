@@ -187,7 +187,7 @@ namespace Engine.World
                     return;
                 }
             }
-            else if (this.end.X <= heroTile.X && (this.end.Y <= heroTile.Y + delta && this.end.Y >= heroTile.Y - delta))
+            else if (this.level != 4 && (this.end.X <= heroTile.X && (this.end.Y <= heroTile.Y + delta && this.end.Y >= heroTile.Y - delta)))
             {
                 //We have reached the end of all things
                 this.LevelEndHandler(this, this.level);
