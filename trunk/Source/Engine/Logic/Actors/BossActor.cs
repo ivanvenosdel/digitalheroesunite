@@ -36,7 +36,7 @@ namespace Engine.Logic.Actors
             string filepath = @"Actors\Boss\";
             string[] animations = { filepath + "BigBoss" };
 
-            Point[] frameSizes = { new Point(160, 144) };
+            Point[] frameSizes = { new Point(260, 312) };
 
             Vector2[] origins = { new Vector2((frameSizes[0].X - 1) / 2, frameSizes[0].Y - 1) }
                 ;

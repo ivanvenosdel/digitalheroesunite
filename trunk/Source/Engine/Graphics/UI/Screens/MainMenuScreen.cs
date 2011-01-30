@@ -67,32 +67,19 @@ namespace GameStateManagement
 
             switch (level)
             {
-                case 0:
-                    //They lost the first level (what a loser)
-                    world.Initialize(level + 1, this.LevelEndHandler);
-                    break;
                 case 1:
                     //Load lvl 2
                     world.Initialize(level + 1, this.LevelEndHandler);
-                    //CinematicScreen cinematic2 = new CinematicScreen("TitleScreen1", level + 1, this.LevelEndHandler);
-                    //ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
                     break;
                 case 2:
                     //Load lvl 3
                     world.Initialize(level + 1, this.LevelEndHandler);
-                    //CinematicScreen cinematic3 = new CinematicScreen("TitleScreen2", level + 1, this.LevelEndHandler);
-                    //ScreenManager.AddScreen(cinematic3, PlayerIndex.One);
                     break;
                 case 3:
                     //Load lvl 4
                     world.Initialize(level + 1, this.LevelEndHandler);
-                    //CinematicScreen cinematic4 = new CinematicScreen("TitleScreen3", level + 1, this.LevelEndHandler);
-                    //ScreenManager.AddScreen(cinematic4, PlayerIndex.One);
                     break;
                 case 4:
-                    world.Initialize(level + 1, this.LevelEndHandler);
-                    break;
-                case 5:
                     //Show end credits
                     CreditsScreen credits = new CreditsScreen();
                     ScreenManager.AddScreen(credits, PlayerIndex.One);
@@ -120,8 +107,8 @@ namespace GameStateManagement
             GameplayScreen gameplayScreen = new GameplayScreen();
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
             
-            ScreenManager.AddScreen(new MessageBoxScreen("Run the virus is infecting the level!"), PlayerIndex.One);
-            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 1, this.LevelEndHandler, "Platformer");
+            ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
+            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 4, this.LevelEndHandler, "Platformer");
             CinematicScreen cinematic2 = new CinematicScreen("Intro2");
             CinematicScreen cinematic1 = new CinematicScreen("Intro1", "VirusTheme");
 
