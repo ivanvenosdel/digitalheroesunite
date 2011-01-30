@@ -80,7 +80,7 @@ namespace Engine.Logic.Input
                 }
 
                 //Translate RightControl
-                if (keyboardState.IsKeyDown(Keys.LeftControl))
+                if (keyboardState.IsKeyDown(Keys.Z))
                 {
                     if (!GameWorld.Instance.hero.Jumping)
                     {
@@ -88,6 +88,17 @@ namespace Engine.Logic.Input
                         GameWorld.Instance.hero.BeginJump(WorldTile.TILE_SIZE * 5);
                     }
                 }
+
+                //Translate Whip Attack
+                /*
+                if (keyboardState.IsKeyDown(Keys.X)
+                {
+                    if(GameWorld.Instance.hero.whipAttack)
+                    {
+                        this.whipAttackDirection = this.walkDirection;
+                        GameWorld.Instance.hero.BeginAttack(WordTile.TILE_SIZE * 2);
+                }
+                 */
 
                 GameWorld.Instance.Hero.Walk(dX);
             }
