@@ -62,7 +62,7 @@ namespace Engine.Logic.ClassComponents
             Vector2 dim = UtilityGame.GameToPhysics(new Vector2(boxDim.X, boxDim.Y));
 
             Vector2 p = this.Owner.GetPosition().HackPos;
-            p.Y -= 200;
+            p.Y -= 100;
             Vector2 pos = UtilityGame.GameToPhysics(p);
 
 

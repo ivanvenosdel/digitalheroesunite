@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Graphics.Animations;
 using Engine.Logic.ClassComponents;
+using Engine.Logic.Audio;
 using System.Timers;
 using Engine.Logic.Input;
 using Engine.Utilities;
@@ -164,6 +165,8 @@ namespace Engine.Logic.Actors
                     this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(this.GetBounding().Fixture.Body.LinearVelocity.X, 10.5f);
                 else if (vel.Y < -10.5f)
                     this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(this.GetBounding().Fixture.Body.LinearVelocity.X, -10.5f);
+
+                SoundManager.Instance.PlaySound("Sound/Jump");
 
                 //Set constraints
                 this.jumpYCurrentHeight = 0;

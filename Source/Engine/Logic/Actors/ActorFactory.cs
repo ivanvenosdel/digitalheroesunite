@@ -67,6 +67,15 @@ namespace Engine.Logic.Actors
                     case ActorType.VORTEX:
                         actor = new VortexActor(id);
                         break;
+                    case ActorType.JUMPGUY:
+                        actor = new JumpGuyActor(id);
+                        break;
+                    case ActorType.BOSS:
+                        actor = new BossActor(id);
+                        break;
+                    case ActorType.ACTIONMAN:
+                        actor = new ActionManActor(id);
+                        break;
                     case ActorType.UNKNOWN:
                     default:
                         LogManager.Instance.Alert("Unknown Actor Type", "Engine.Logic.Actors.ActorFactory.Create", 0);
@@ -129,6 +138,41 @@ namespace Engine.Logic.Actors
             return actor;
         }
 
+        public BossActor CreateBoss(Vector2 position)
+        {
+            ActorType type = ActorType.BOSS;
+            Guid actorID = System.Guid.NewGuid();
+
+            //Create the Actor
+            BossActor actor = (BossActor)this.Construct(actorID, type);
+            actor.Initialize(position);
+
+            return actor;
+        }
+
+        public ActionManActor CreateActionMan(Vector2 position)
+        {
+            ActorType type = ActorType.ACTIONMAN;
+            Guid actorID = System.Guid.NewGuid();
+
+            //Create the Actor
+            ActionManActor actor = (ActionManActor)this.Construct(actorID, type);
+            actor.Initialize(position);
+
+            return actor;
+        }
+
+        public JumpGuyActor CreateJumpGuy(Vector2 position)
+        {
+            ActorType type = ActorType.JUMPGUY;
+            Guid actorID = System.Guid.NewGuid();
+
+            //Create the Actor
+            JumpGuyActor actor = (JumpGuyActor)this.Construct(actorID, type);
+            actor.Initialize(position);
+
+            return actor;
+        }
         /// <summary>
         /// Creates a fresh camera control actor
         /// </summary>
