@@ -680,15 +680,15 @@ namespace MonsterEscape.Graphics.UI
                             LevelMap level = WinphoneUtilities.OpenDeserializeFromXML<LevelMap>(openFileDialog.FileName);
                             CurrentLevel.Instance.Initialize(level);
 
-                            this.puzzlePieceTypeList.Clear();
-                            this.puzzlePieceRotationList.Clear();
-                            PuzzlePiece[] pieces = level.PuzzlePieces;
-                            for (int i = 0; i < pieces.Length; ++i)
-                            {
-                                PuzzlePiece piece = pieces[i];
-                                this.puzzlePieceTypeList.Add(piece.Type);
-                                this.puzzlePieceRotationList.Add(piece.Rotation);
-                            }
+                            //this.puzzlePieceTypeList.Clear();
+                            //this.puzzlePieceRotationList.Clear();
+                            //PuzzlePiece[] pieces = level.PuzzlePieces;
+                            //for (int i = 0; i < pieces.Length; ++i)
+                            //{
+                            //    PuzzlePiece piece = pieces[i];
+                            //    this.puzzlePieceTypeList.Add(piece.Type);
+                            //    this.puzzlePieceRotationList.Add(piece.Rotation);
+                            //}
                         }
                     }
 

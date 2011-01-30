@@ -154,18 +154,18 @@ namespace MonsterEscape.Worlds
         {
             this.name = level.Name;
             this.parTime = level.ParTime;
-            this.world = level.World;
+            //this.world = level.World;
             this.level = level.Level;
             this.width = level.Width;
             this.height = level.Height;
-            this.eggPoint = level.Egg;
+            //this.eggPoint = level.Egg;
             this.end = level.End;
 
             this.map = new TileType[this.width][];
             for (int i = 0; i < this.width; ++i)
                 this.map[i] = new TileType[this.height];
 
-            World currentWorld = TerrainKey.WorldTypes[this.world];
+           // World currentWorld = TerrainKey.WorldTypes[this.world];
             for (int y = 0; y < this.height; ++y)
             {
                 for (int x = 0; x < this.width; ++x)
@@ -534,7 +534,7 @@ namespace MonsterEscape.Worlds
 
         public void SetTile(Point tile, int typeID)
         {
-            World currentWorld = TerrainKey.WorldTypes[this.world];
+            //World currentWorld = TerrainKey.WorldTypes[this.world];
             this.map[tile.X][tile.Y] = new TileType(typeID, -1);//currentWorld.GetRandomSpire());
         }
 
