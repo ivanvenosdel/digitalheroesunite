@@ -21,8 +21,11 @@ namespace Engine.Logic.Actors
     {
         /// <summary>Unknown Type</summary>
         UNKNOWN = 0,
+        ACTIONMAN,
+        BOSS,
         /// <summary>Hero</summary>
         HERO,
+        JUMPGUY,
         VORTEX,
         /// <summary>End</summary>
         CAMERACONTROL,

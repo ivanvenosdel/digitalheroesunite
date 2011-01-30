@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Logic.Actors;
+using Engine.Logic.Audio;
 using Engine.Graphics.Cameras;
 using Engine.Utilities;
 #endregion
@@ -34,6 +35,9 @@ namespace Engine.World
         public Point start;
         public Point end;
 
+        public ActionManActor actionMan;
+        public JumpGuyActor jumpGuy;
+        public BossActor boss;
         public VortexActor vortex;
         public HeroActor hero;
         public List<CameraControlActor> cameraControlActors;
@@ -86,10 +90,11 @@ namespace Engine.World
                 }
             }
 
-            //Load Background
+            //Load Background and special actors
             if (this.level == 1)
             {
                 this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\Level1\RunJumpBackground");
+                this.jumpGuy = ActorFactory.Instance.CreateJumpGuy(new Vector2(2000, 0));
             }
             else if (this.level == 2)
             {
@@ -98,15 +103,17 @@ namespace Engine.World
             else if (this.level == 3)
             {
                 this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\level3\ActionBackground");
+                this.actionMan = ActorFactory.Instance.CreateActionMan(new Vector2(2570, 360));
             }
             else if(this.level == 4)
             {
                 this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\Boss\BossBackground");
+                this.boss = ActorFactory.Instance.CreateBoss(new Vector2(840, -40));
             }
 
             //Where should our hero start?
             Vector2 startPoint = UtilityWorld.GridToWorld(this.start);
-            this.hero = ActorFactory.Instance.CreateHero(startPoint, new Point(36, 110));
+            this.hero = ActorFactory.Instance.CreateHero(startPoint, new Point(32, 90));
 
             this.cameraControlActors = new List<CameraControlActor>();
             foreach (TileExtra extra in WorldTypes.LevelTileExtras[this.level].Values)
@@ -149,6 +156,13 @@ namespace Engine.World
                 }
             }
 
+            if (this.jumpGuy != null)
+                ActorFactory.Instance.RemoveActor(this.jumpGuy.ActorID);
+            if (this.actionMan != null)
+                ActorFactory.Instance.RemoveActor(this.actionMan.ActorID);
+            if (this.boss != null)
+                ActorFactory.Instance.RemoveActor(this.boss.ActorID);
+
             enabled = false;
         }
 
@@ -158,7 +172,6 @@ namespace Engine.World
             if (!enabled || DeviceManager.Instance.Paused)
                 return;
 
-
             int delta = 2;
             Vector2 scaledPos = UtilityGame.PhysicsToGame(this.hero.GetPosition().Position);
             Point heroTile = UtilityWorld.WorldToGrid(scaledPos);
@@ -167,6 +180,8 @@ namespace Engine.World
             {
                 if (!Camera.Instance.FreeRange)
                 {
+                    SoundManager.Instance.PlaySound("Sound/PlayerDeath");
+
                     //You lose!
                     this.LevelEndHandler(this, this.level - 1);
                     return;
@@ -185,6 +200,13 @@ namespace Engine.World
             }
             this.hero.Update(gameTime);
             this.vortex.Update(gameTime);
+
+            if (this.actionMan != null)
+                this.actionMan.Update(gameTime);
+            if (this.jumpGuy != null)
+                this.jumpGuy.Update(gameTime);
+            if (this.boss != null)
+                this.boss.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime)
@@ -208,7 +230,6 @@ namespace Engine.World
                     this.spriteBatch.Draw(this.background, new Vector2(800, -475), Color.White);
                     this.spriteBatch.Draw(this.background, new Vector2(1600, -475), Color.White);
                 }
-
                 else if (level == 2)
                 {
                     this.spriteBatch.Draw(this.background, new Vector2(0, -315), Color.White);
@@ -235,6 +256,15 @@ namespace Engine.World
                 {
                     cameraControl.Draw(gameTime, this.spriteBatch);
                 }
+
+                if (this.jumpGuy != null)
+                    this.jumpGuy.Draw(gameTime, this.spriteBatch);
+
+                if (this.actionMan != null)
+                    this.actionMan.Draw(gameTime, this.spriteBatch);
+
+                if (this.boss != null)
+                    this.boss.Draw(gameTime, this.spriteBatch);
 
                 //Draw the Vortex
                 if (this.vortex != null)

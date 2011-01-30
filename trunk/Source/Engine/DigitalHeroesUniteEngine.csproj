@@ -111,6 +111,8 @@
     <Compile Include="DeviceManager.cs" />
     <Compile Include="Graphics\Animations\AnimationPackages.cs" />
     <Compile Include="Graphics\Cameras\Camera.cs" />
+    <Compile Include="Logic\Actors\ActionManActor.cs" />
+    <Compile Include="Logic\Actors\BossActor.cs" />
     <Compile Include="Logic\Actors\CameraControlActor.cs" />
     <Compile Include="Graphics\GraphicsCore.cs" />
     <Compile Include="Graphics\UI\FramesPerSecond.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Graphics\UI\Screens\PlayerIndexEventArgs.cs" />
     <Compile Include="Logic\Actors\Actor.cs" />
     <Compile Include="Logic\Actors\ActorFactory.cs" />
+    <Compile Include="Logic\Actors\JumpGuyActor.cs" />
     <Compile Include="Logic\Actors\VortexActor.cs" />
     <Compile Include="Logic\Actors\HeroActor.cs" />
     <Compile Include="Logic\Audio\MusicFadeEffect.cs" />
