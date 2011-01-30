@@ -72,10 +72,25 @@ namespace GameStateManagement
                 case 1:
                     //Load lvl 2
                     world.Initialize(level + 1, this.LevelEndHandler);
+                    CinematicScreen cinematic2 = new CinematicScreen("Midtro1");
+                    ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
                     break;
                 case 2:
                     //Load lvl 3
                     world.Initialize(level + 1, this.LevelEndHandler);
+                    CinematicScreen cinematic3 = new CinematicScreen("Midtro2");
+                    ScreenManager.AddScreen(cinematic3, PlayerIndex.One);
+                    break;
+                case 3:
+                    //Load lvl 4
+                    world.Initialize(level + 1, this.LevelEndHandler);
+                    CinematicScreen cinematic4 = new CinematicScreen("Prebosstro");
+                    ScreenManager.AddScreen(cinematic4, PlayerIndex.One);
+                    break;
+                case 4:
+                    //Show end credits
+                    CinematicScreen cinematicOut = new CinematicScreen("Outro");
+                    ScreenManager.AddScreen(cinematicOut, PlayerIndex.One);
                     break;
                 default:
                     break;
