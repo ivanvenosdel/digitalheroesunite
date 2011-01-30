@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Audio\Sound\" />
+    <Folder Include="UI\Intro\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\Fonts\debugfont.spritefont">
@@ -186,6 +187,20 @@
   <ItemGroup>
     <Compile Include="UI\cinematic1.png">
       <Name>cinematic1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Title\TitleScreen.png">
+      <Name>TitleScreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\cinematic2.png">
+      <Name>cinematic2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
