@@ -16,6 +16,8 @@ using Microsoft.Xna.Framework.Input;
 using Engine.World;
 using System.Collections.Generic;
 using Engine.Logic.Audio;
+using Engine;
+using Engine.Graphics.UI;
 #endregion
 
 namespace GameStateManagement
@@ -26,7 +28,7 @@ namespace GameStateManagement
     class CinematicScreen : GameScreen
     {
         #region Fields
-        public const int TRANSITION = 3000;
+        public const int TRANSITION = 3500;
         ContentManager content;
         Texture2D Intro1;
         string cineTexture;
@@ -99,9 +101,9 @@ namespace GameStateManagement
             string texturePath = String.Format(@"UI\Intro\{0}", this.cineTexture);
             Intro1 = content.Load<Texture2D>(texturePath);
 
-            if (!String.IsNullOrEmpty(songname))
+            string songpath = String.Format("Music/{0}", songname);
+            if (!String.IsNullOrEmpty(songname) && SoundManager.Instance.CurrentSong != songpath)
             {
-                string songpath = String.Format("Music/{0}", songname);
                 SoundManager.Instance.LoadSong(songpath);
             }
         }
@@ -170,6 +172,17 @@ namespace GameStateManagement
                         SoundManager.Instance.UnloadContent();*/
                     }
 
+                    int count = 0;
+                    foreach (GameScreen cscreen in this.ScreenManager.GetScreens())
+                    {
+                        if (cscreen is CinematicScreen)
+                            count++;
+                        else
+                            continue;
+                            
+                    }
+                    if (count == 1)
+                        DeviceManager.Instance.Paused = false;
                     ExitScreen();
                 }
             }
