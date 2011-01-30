@@ -101,6 +101,11 @@ namespace Engine.Graphics
             {
                 Camera.Instance.Update(gameTime);
             }
+
+#if DEBUG
+            if (Debug.RenderFPS)
+                FramesPerSecond.Update(gameTime);
+#endif
         }
 
         /// <summary>Draws game objects to the screen</summary>
@@ -112,7 +117,16 @@ namespace Engine.Graphics
             DeviceManager.Instance.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             GameWorld.Instance.Draw(gameTime);
-
+#if DEBUG
+            if (Debug.RenderFPS)
+            {
+                this.spriteBatch.Begin();
+                this.spriteBatch.DrawString(this.screenManager.Font, string.Format("FPS: {0}", FramesPerSecond.FPS), new Vector2(5, 5), Color.White);
+                if (GameWorld.Instance.Enabled && GameWorld.Instance.Hero.GetBounding() != null)
+                 this.spriteBatch.DrawString(this.screenManager.Font, string.Format("LV: {0}", GameWorld.Instance.Hero.GetBounding().Fixture.Body.LinearVelocity.ToString()), new Vector2(5, 35), Color.White);
+                this.spriteBatch.End();
+            }
+#endif
             PostDraw();
         }
 

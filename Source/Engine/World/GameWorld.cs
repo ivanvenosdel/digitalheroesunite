@@ -148,6 +148,8 @@ namespace Engine.World
                         DeviceManager.Instance.Physics.WorldSimulation.RemoveBody(tile.fixture.Body);
                 }
             }
+
+            enabled = false;
         }
 
         public void Update(GameTime gameTime)
@@ -167,12 +169,14 @@ namespace Engine.World
                 {
                     //You lose!
                     this.LevelEndHandler(this, this.level - 1);
+                    return;
                 }
             }
             else if (this.end.X <= heroTile.X && (this.end.Y <= heroTile.Y + delta && this.end.Y >= heroTile.Y - delta))
             {
                 //We have reached the end of all things
                 this.LevelEndHandler(this, this.level);
+                return;
             }
 
             foreach (CameraControlActor cameraControl in this.cameraControlActors)

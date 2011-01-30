@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Engine.Logic.Input;
+using Engine.World;
 #endregion
 
 namespace Engine.Graphics.Cameras
@@ -103,7 +104,7 @@ namespace Engine.Graphics.Cameras
                 if (this.goToWeight == 1)
                     this.goToPosition = Vector2.Zero;
             }
-            else if (!freeRange)
+            else if (!freeRange && GameWorld.Instance.Enabled)
             {
                 //this.position.X = this.Direction.X * RATE;
                 //this.position.Y = this.Direction.Y * RATE;

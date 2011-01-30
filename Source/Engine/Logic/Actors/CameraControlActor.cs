@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Engine.Logic.Input;
 using Engine.Logic.Actors;
 using Engine.Logic.ClassComponents;
+using Engine.Utilities;
 #endregion
 
 namespace Engine.Graphics.Cameras
@@ -47,7 +48,8 @@ namespace Engine.Graphics.Cameras
 
         public override void Update(GameTime gameTime)
         {
-            Point point = new Point(Convert.ToInt32(this.GetPosition().Position.X), Convert.ToInt32(this.GetPosition().Position.Y));
+            Vector2 scaledPoint = UtilityGame.PhysicsToGame(this.GetPosition().Position);
+            Point point = new Point(Convert.ToInt32(scaledPoint.X), Convert.ToInt32(scaledPoint.Y));
             if (Camera.Instance.OnScreen(point))
             {
                 Camera.Instance.Direction = Direction;
