@@ -224,7 +224,9 @@ namespace GameStateManagement
                     }
                     if (count == 1)
                         DeviceManager.Instance.Paused = false;
-                    ExitScreen();
+
+                    if (this.cineTexture != "PizzaForce")
+                        ExitScreen();
                 }
             }
         }

@@ -204,11 +204,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\Intro\background.png">
-      <Name>background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="UI\blank.png">
       <Name>blank</Name>
       <Importer>TextureImporter</Importer>
@@ -495,6 +490,20 @@
   <ItemGroup>
     <Compile Include="UI\Intro\RPGBackground18.png">
       <Name>RPGBackground18</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Intro\PizzaForce.png">
+      <Name>PizzaForce</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Intro\credits.png">
+      <Name>credits</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
