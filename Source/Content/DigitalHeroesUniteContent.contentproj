@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Audio\Sound\" />
+    <Folder Include="World\Audio\Sound\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\Fonts\debugfont.spritefont">
@@ -147,7 +147,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Audio\Music\TitleScreen.mp3">
+    <Compile Include="World\Audio\Music\TitleScreen.mp3">
       <Name>TitleScreen</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
@@ -234,7 +234,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Audio\Music\VirusTheme.mp3">
+    <Compile Include="World\Audio\Music\VirusTheme.mp3">
       <Name>VirusTheme</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
@@ -262,7 +262,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Audio\Music\Platformer.mp3">
+    <Compile Include="World\Audio\Music\Platformer.mp3">
       <Name>Platformer</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
