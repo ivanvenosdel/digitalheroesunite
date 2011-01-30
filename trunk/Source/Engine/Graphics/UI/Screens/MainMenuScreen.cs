@@ -113,10 +113,13 @@ namespace GameStateManagement
                     break;
                 case 4:
                     //Show end credits
-                    CreditsScreen credits = new CreditsScreen();
-                    ScreenManager.AddScreen(credits, PlayerIndex.One);
+                    CinematicScreen cinematic = new CinematicScreen("PizzaForce");
+                    ScreenManager.AddScreen(cinematic, PlayerIndex.One);
+                    CinematicScreen cinematicCc = new CinematicScreen("credits");
+                    ScreenManager.AddScreen(cinematicCc, PlayerIndex.One);
                     CinematicScreen cinematicOut = new CinematicScreen("TitleScreen5");
                     ScreenManager.AddScreen(cinematicOut, PlayerIndex.One);
+  
                     break;
                 default:
                     break;

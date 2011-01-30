@@ -180,14 +180,18 @@ namespace Engine.World
             Point heroPos = new Point((int)scaledPos.X, (int)scaledPos.Y);
             if (!Camera.Instance.OnScreen(heroPos))
             {
+#if DEBUG
                 if (!Camera.Instance.FreeRange)
                 {
+#endif
                     SoundManager.Instance.PlaySound("Sound/PlayerDeath");
 
                     //You lose!
                     this.LevelEndHandler(this, this.level - 1);
                     return;
+#if DEBUG
                 }
+#endif
             }
             else if (this.end.X <= heroTile.X && (this.end.Y <= heroTile.Y + delta && this.end.Y >= heroTile.Y - delta))
             {

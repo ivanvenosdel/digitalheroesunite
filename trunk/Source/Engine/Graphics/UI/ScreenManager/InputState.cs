@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 //using Microsoft.Xna.Framework.Input.Touch;
 using System.Collections.Generic;
-using Engine.Graphics.UI.ScreenManager;
+using Engine.Graphics.UI;
 #endregion
 
 namespace GameStateManagement
@@ -196,53 +196,6 @@ namespace GameStateManagement
             PlayerIndex playerIndex;
 
             return IsNewKeyPress(Keys.Space, controllingPlayer, out playerIndex);
-        }
-
-        public bool IsUp(PlayerIndex? controllingPlayer)
-        {
-            PlayerIndexIndex playerIndex;
-
-            return IsNewKeyPress(Keys.Up, controllingPlayer, out playerIndex);
-        }
-
-        public bool IsDown(PlayerIndex? controllingPlayer)
-        {
-            PlayerIndexIndex playerIndex;
-
-            return IsNewKeyPress(Keys.Down, controllingPlayer, out playerIndex);
-        }
-
-        public bool IsLeft(PlayerIndex? controllingPlayer)
-        {
-            PlayerIndexIndex playerIndex;
-
-            return IsNewKeyPress(Keys.Left, controllingPlayer, out playerIndex);
-        }
-
-        public bool IsRight(PlayerIndex? controllingPlayer)
-        {
-            PlayerIndexIndex playerIndex;
-
-            return IsNewKeyPress(Keys.Right, controllingPlayer, out playerIndex);
-        }
-
-        public bool IsA(PlayerIndex? controllingPlayer)
-        {
-            PlayerIndexIndex playerIndex;
-
-            return IsNewKeyPress(Keys.A, controllingPlayer, out playerIndex);
-        }
-
-        public bool IsB(PlayerIndex? controllingPlayer)
-        {
-            PlayerIndexIndex playerIndex;
-
-            return IsNewKeyPress(Keys.B, controllingPlayer, out playerIndex);
-        }
-
-        private bool IsNewKeyPress(Keys keys, PlayerIndex? controllingPlayer, out PlayerIndexIndex playerIndex)
-        {
-            throw new System.NotImplementedException();
         }
 
 
