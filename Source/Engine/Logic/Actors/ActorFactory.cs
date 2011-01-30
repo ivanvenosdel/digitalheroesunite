@@ -60,6 +60,9 @@ namespace Engine.Logic.Actors
                     case ActorType.HERO:
                         actor = new HeroActor(id);
                         break;
+                    case ActorType.VORTEX:
+                        actor = new VortexActor(id);
+                        break;
 
                     case ActorType.UNKNOWN:
                     default:
@@ -120,6 +123,18 @@ namespace Engine.Logic.Actors
             HeroActor actor = (HeroActor)this.Construct(actorID, type);
             actor.Initialize(position, boundingDimension);
             
+            return actor;
+        }
+
+        public VortexActor CreateVortex(Vector2 position)
+        {
+            ActorType type = ActorType.VORTEX;
+            Guid actorID = System.Guid.NewGuid();
+
+            //Create the Vortex
+            VortexActor actor = (VortexActor)this.Construct(actorID, type);
+            actor.Initialize(position);
+
             return actor;
         }
 

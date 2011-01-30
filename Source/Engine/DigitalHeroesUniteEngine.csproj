@@ -130,6 +130,7 @@
     <Compile Include="Graphics\UI\Screens\PlayerIndexEventArgs.cs" />
     <Compile Include="Logic\Actors\Actor.cs" />
     <Compile Include="Logic\Actors\ActorFactory.cs" />
+    <Compile Include="Logic\Actors\VortexActor.cs" />
     <Compile Include="Logic\Actors\HeroActor.cs" />
     <Compile Include="Logic\Audio\MusicFadeEffect.cs" />
     <Compile Include="Logic\Audio\SoundManager.cs" />
