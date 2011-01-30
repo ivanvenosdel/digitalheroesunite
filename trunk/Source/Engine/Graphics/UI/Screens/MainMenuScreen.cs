@@ -33,11 +33,12 @@ namespace GameStateManagement
         {
             string start = "Start";
             string exit = "Exit";
-           
+            
             MenuEntry playGameMenuEntry = new MenuEntry(start);
             MenuEntry exitMenuEntry = new MenuEntry(exit);
 
-            exitMenuEntry.Position = new Vector2(400, 500);
+            Start = new Vector2(0, 400);
+           
             // Hook up menu event handlers.
             playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
@@ -65,7 +66,6 @@ namespace GameStateManagement
 
         #region Handle Input
 
-
         /// <summary>
         /// Event handler for when the Play Game menu entry is selected.
         /// </summary>
@@ -77,7 +77,7 @@ namespace GameStateManagement
 
             GameplayScreen gameplayScreen = new GameplayScreen();
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
-
+            SoundManager.Instance.StopSong();
             ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
             CinematicScreen cinematic2 = new CinematicScreen("cinematic2", 1, this.LevelEndHandler);
             CinematicScreen cinematic1 = new CinematicScreen("cinematic1");
@@ -87,19 +87,6 @@ namespace GameStateManagement
 
             SoundManager.Instance.UnloadContent();
         }
-
-
-
-
-        /// <summary>
-        /// When the user cancels the main menu, ask if they want to exit the sample.
-        /// </summary>
-        protected override void OnCancel(PlayerIndex playerIndex)
-        {
-         
-            ScreenManager.Game.Exit();
-        }
-
 
         #endregion
         

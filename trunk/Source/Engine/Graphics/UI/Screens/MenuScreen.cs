@@ -29,11 +29,13 @@ namespace GameStateManagement
         List<MenuEntry> menuEntries = new List<MenuEntry>();
         int selectedEntry = 0;
         string menuTitle;
+        Vector2 start;
 
         #endregion
 
         #region Properties
 
+        public Vector2 Start { get { return this.start; } set { this.start = value; } }
 
         /// <summary>
         /// Gets the list of menu entries, so derived classes can add
@@ -56,7 +58,7 @@ namespace GameStateManagement
         public MenuScreen(string menuTitle)
         {
             this.menuTitle = menuTitle;
-
+            this.Start = new Vector2(0, 175);
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
         }
@@ -153,7 +155,7 @@ namespace GameStateManagement
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
 
             // start at Y = 175; each X value is generated per entry
-            Vector2 position = new Vector2(0f, 175f);
+            Vector2 position = new Vector2(start.X, start.Y);
 
             // update each menu entry's location in turn
             for (int i = 0; i < menuEntries.Count; i++)
