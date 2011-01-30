@@ -57,9 +57,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="World\Audio\Sound\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="UI\Fonts\debugfont.spritefont">
       <Name>debugfont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -147,13 +144,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="World\Audio\Music\TitleScreen.mp3">
-      <Name>TitleScreen</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="World\Levels\Level2.xml">
       <Name>Level2</Name>
       <Importer>XmlImporter</Importer>
@@ -234,13 +224,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="World\Audio\Music\VirusTheme.mp3">
-      <Name>VirusTheme</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="World\Backgrounds\Level3\ActionBackground.png">
       <Name>ActionBackground</Name>
       <Importer>TextureImporter</Importer>
@@ -262,13 +245,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="World\Audio\Music\Platformer.mp3">
-      <Name>Platformer</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="UI\Intro\Intro3.png">
       <Name>Intro3</Name>
       <Importer>TextureImporter</Importer>
@@ -280,6 +256,31 @@
       <Name>Vortex</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Audio\Sound\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Audio\Music\Castle.mp3">
+      <Name>Castle</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Audio\Music\Platformer.mp3">
+      <Name>Platformer</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Audio\Music\TitleScreen.mp3">
+      <Name>TitleScreen</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Audio\Music\VirusTheme.mp3">
+      <Name>VirusTheme</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
