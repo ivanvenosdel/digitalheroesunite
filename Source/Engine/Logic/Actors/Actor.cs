@@ -39,6 +39,7 @@ namespace Engine.Logic.Actors
         private Guid actorID;
         private ActorType actorType;
         private Dictionary<ComponentType, ClassComponent> components;
+
         #endregion
 
         #region Properties

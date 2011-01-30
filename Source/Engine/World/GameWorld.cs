@@ -85,7 +85,7 @@ namespace Engine.World
 
             //Where should our hero start?
             Vector2 startPoint = UtilityWorld.GridToWorld(this.start);
-            this.hero = ActorFactory.Instance.CreateHero(startPoint, new Point(60, 150));
+            this.hero = ActorFactory.Instance.CreateHero(startPoint, new Point(36, 110));
 
             //Update camera to center hero
             Camera.Instance.Jump((int)startPoint.X, startPoint.Y - 175);

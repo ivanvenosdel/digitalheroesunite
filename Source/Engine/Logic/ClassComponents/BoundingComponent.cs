@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Logic.Actors;
+using Engine.Graphics.Animations;
 using Engine.Graphics.Cameras;
 using Engine.World;
 using Engine.Utilities;
@@ -85,18 +86,24 @@ namespace Engine.Logic.ClassComponents
                        {
                            float actorX = Owner.GetPosition().Position.X;
                            float actorY = Owner.GetPosition().Position.Y;
-                           //Push the monster out of the tile
-                           if (tile.Position.X < actorX)
-                               Owner.GetPosition().Position.X += GravityComponent.GRAVITY;
-                           else if (tile.Position.X > actorX)
-                               Owner.GetPosition().Position.X -= GravityComponent.GRAVITY;
+                           ////Push the monster out of the tile
+                           // if (tile.Position.X < actorX)
+                           //     Owner.GetPosition().Position.X += GravityComponent.GRAVITY;
+                           // else if (tile.Position.X > actorX)
+                           //     Owner.GetPosition().Position.X -= GravityComponent.GRAVITY;
+
                            if (tile.Position.Y < actorY)
                                Owner.GetPosition().Position.Y -= GravityComponent.GRAVITY;
                            else if (tile.Position.Y > actorY)
                                Owner.GetPosition().Position.Y += GravityComponent.GRAVITY;
 
                            if (Owner is HeroActor)
+                           {
+                               if (Owner.GetSprite() != null && ((HeroActor)Owner).Jumping)
+                                   ((HeroActor)Owner).PlayAnimation(AnimPackageHero.STAND, true);
+
                                ((HeroActor)Owner).Jumping = false;
+                           }
                        }
                     }
                 }
