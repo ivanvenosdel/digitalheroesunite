@@ -13,6 +13,7 @@ using Engine.Logic.Events;
 using Engine.Logic.Audio;
 using Engine.World;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 #endregion
 
 namespace GameStateManagement
@@ -23,7 +24,6 @@ namespace GameStateManagement
     class MainMenuScreen : MenuScreen
     {
         #region Initialization
-
 
         /// <summary>
         /// Constructor fills in the menu contents.
@@ -59,7 +59,6 @@ namespace GameStateManagement
             level++;
             //TODO: Destroy World
 
-            this.ScreenManager.AddScreen(new CinematicScreen(level, LevelEndHandler), PlayerIndex.One);
         }
         #endregion
 
@@ -76,10 +75,15 @@ namespace GameStateManagement
             foreach (GameScreen screen in ScreenManager.GetScreens())
                 screen.ExitScreen();
 
-            ScreenManager.AddScreen(new CinematicScreen(1, this.LevelEndHandler), PlayerIndex.One);
-           // LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-           //                    new GameplayScreen());
-            //ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
+            GameplayScreen gameplayScreen = new GameplayScreen();
+            ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
+
+            ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
+            CinematicScreen cinematic2 = new CinematicScreen("cinematic2", 1, this.LevelEndHandler);
+            CinematicScreen cinematic1 = new CinematicScreen("cinematic1");
+
+            ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
+            ScreenManager.AddScreen(cinematic1, PlayerIndex.One);
 
             SoundManager.Instance.UnloadContent();
         }
@@ -98,5 +102,6 @@ namespace GameStateManagement
 
 
         #endregion
+        
     }
 }
