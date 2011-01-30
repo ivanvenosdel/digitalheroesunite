@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Engine.World;
 using System.Collections.Generic;
 #endregion
 
@@ -21,7 +22,6 @@ namespace GameStateManagement
     /// <summary>
     /// First scene for the introduction.
     /// </summary>
-    
     class CinematicScreen : GameScreen
     {
         #region Fields
@@ -29,6 +29,8 @@ namespace GameStateManagement
         ContentManager content;
         List<Texture2D> cinematicTextures = new List<Texture2D>();
         Texture2D cinematic1, cinematic2;
+        private int level;
+        private Engine.World.GameWorld.OnLevelEnd levelEndHandler;
 
         #endregion
 
@@ -39,11 +41,13 @@ namespace GameStateManagement
         /// Constructor
         /// </summary>
 
-        public CinematicScreen()
+        public CinematicScreen(int level, Engine.World.GameWorld.OnLevelEnd levelEndHandler)
+            : base()
         {
+            this.level = level;
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
-            
+            this.levelEndHandler = levelEndHandler;
         }
 
         /// <summary>
@@ -74,7 +78,7 @@ namespace GameStateManagement
         #endregion
 
         #region Handle Input
-       /// <summary>
+        /// <summary>
        /// End Cutscene
        /// </summary>
        /// <param name="input"></param>
@@ -84,6 +88,7 @@ namespace GameStateManagement
             if (input.IsSpace(PlayerIndex.One))
             {
                 ExitScreen();
+                GameWorld.Instance.Initialize(1, this.levelEndHandler);
                 ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
             }
              }

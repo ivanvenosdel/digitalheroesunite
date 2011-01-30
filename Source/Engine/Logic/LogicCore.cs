@@ -59,7 +59,6 @@ namespace Engine.Logic
             SoundManager.Instance.Initialize();
             WorldTypes.Initialize();
 
-            GameWorld.Instance.Initialize(1);
             Heromanager.Instance.Initialize();
 
 #if DEBUG
