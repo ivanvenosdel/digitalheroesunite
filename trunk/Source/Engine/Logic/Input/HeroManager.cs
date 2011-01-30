@@ -22,9 +22,9 @@ namespace Engine.Logic.Input
         #region Fields
         private static readonly Heromanager instance = new Heromanager();
 
-        private const float WALK_RATE = 0.8f;//6.0f;
+        private const float WALK_RATE = 0.8f;
         private const float SLOW_FALL_RATE = WALK_RATE / 5f;
-        public const float JUMP_RATE = 15.0f; 
+        public const float JUMP_RATE = 20.0f; 
         #endregion
 
         #region Constructors
@@ -57,7 +57,7 @@ namespace Engine.Logic.Input
         Keys lastKey;
         private void OnKeyEvent(KeyboardState keyboardState)
         {
-            if (GameWorld.Instance.Hero != null)
+            if (GameWorld.Instance.Hero != null && GameWorld.Instance.Enabled)
             {
                 float dX = 0;
 

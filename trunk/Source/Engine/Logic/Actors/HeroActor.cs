@@ -109,9 +109,17 @@ namespace Engine.Logic.Actors
             //float positionAdjust = 0;
             if (this.Jumping)
             {
+                //Prevent the player form getting stuck in the ground
+                if (jumpYCurrentHeight != GetPosition().Position.Y)
+                    jumpYCurrentHeight = GetPosition().Position.Y;
+                else
+                {
+                    this.Jumping = false;
+                    return;
+                }
                 //Additional drop
 
-                Vector2 impulse = new Vector2(0, 0.1f);
+                Vector2 impulse = new Vector2(0, 0.4f);
                 this.GetBounding().Fixture.Body.ApplyLinearImpulse(ref impulse);
             }
             //{
@@ -152,10 +160,10 @@ namespace Engine.Logic.Actors
                     this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(4.0f, this.GetBounding().Fixture.Body.LinearVelocity.Y);
                 else if (vel.X < -4.0f)
                     this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(-4.0f, this.GetBounding().Fixture.Body.LinearVelocity.Y);
-                if (vel.Y > 8.5f)
-                    this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(this.GetBounding().Fixture.Body.LinearVelocity.X, 8.5f);
-                else if (vel.Y < -8.5f)
-                    this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(this.GetBounding().Fixture.Body.LinearVelocity.X, -8.5f);
+                if (vel.Y > 10.5f)
+                    this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(this.GetBounding().Fixture.Body.LinearVelocity.X, 10.5f);
+                else if (vel.Y < -10.5f)
+                    this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(this.GetBounding().Fixture.Body.LinearVelocity.X, -10.5f);
 
                 //Set constraints
                 this.jumpYCurrentHeight = 0;

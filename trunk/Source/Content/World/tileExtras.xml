@@ -50,7 +50,7 @@
         <TileID>1</TileID>
         <CameraDirection>
           <X>0</X>
-          <Y>-0.8</Y>
+          <Y>-0.65</Y>
         </CameraDirection>
         <Position>
           <X>1500</X>
@@ -65,7 +65,7 @@
         </CameraDirection>
         <Position>
           <X>1500</X>
-          <Y>-200</Y>
+          <Y>-100</Y>
         </Position>
       </TileExtra>
     </TileExtras>
