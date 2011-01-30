@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 //using Microsoft.Xna.Framework.Input.Touch;
+using Engine;
 using Microsoft.Xna.Framework.Input;
 #endregion
 
@@ -125,7 +126,7 @@ namespace GameStateManagement
         /// </summary>
         protected virtual void OnCancel(PlayerIndex playerIndex)
         {
-            ExitScreen();
+            this.ScreenManager.RemoveScreen(this);
         }
 
 
@@ -135,6 +136,7 @@ namespace GameStateManagement
         protected void OnCancel(object sender, PlayerIndexEventArgs e)
         {
             OnCancel(e.PlayerIndex);
+            DeviceManager.Instance.Paused = false;
         }
 
 
@@ -186,6 +188,7 @@ namespace GameStateManagement
                                                        bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
+            DeviceManager.Instance.Paused = true;
 
             // Update each nested MenuEntry object.
             for (int i = 0; i < menuEntries.Count; i++)
