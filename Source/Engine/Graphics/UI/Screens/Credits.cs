@@ -12,6 +12,7 @@ namespace GameStateManagement
     /// </summary>
     class CreditsScreen : MenuScreen
     {
+
         /// <summary>
         /// Constructor fills in the menu contents.
         /// </summary>
