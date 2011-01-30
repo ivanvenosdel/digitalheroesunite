@@ -22,8 +22,8 @@ namespace Engine.Logic.Input
         #region Fields
         private static readonly Heromanager instance = new Heromanager();
 
-        private const float WALK_RATE = 6.0f;
-        private const float SLOW_FALL_RATE = WALK_RATE / 1.5f;
+        private const float WALK_RATE = 0.8f;//6.0f;
+        private const float SLOW_FALL_RATE = WALK_RATE / 5f;
         public const float JUMP_RATE = 15.0f; 
         #endregion
 
@@ -54,6 +54,7 @@ namespace Engine.Logic.Input
         #endregion
 
         #region Event Methods
+        Keys lastKey;
         private void OnKeyEvent(KeyboardState keyboardState)
         {
             if (GameWorld.Instance.Hero != null)
@@ -92,19 +93,26 @@ namespace Engine.Logic.Input
                 }
                 else
                 {
-                    if (GameWorld.Instance.hero.GetSprite().CurrentAnimation != AnimPackageHero.STAND)
+                    if (!GameWorld.Instance.hero.Jumping &&
+                        GameWorld.Instance.hero.GetSprite().CurrentAnimation != AnimPackageHero.STAND)
                         GameWorld.Instance.hero.PlayAnimation(AnimPackageHero.STAND, true);
                     this.walkDirection = MoveDirection.None;
                 }
 
-                //Translate RightControl
-                if (keyboardState.IsKeyDown(Keys.Z))
+                //Jumping
+                if (keyboardState.IsKeyDown(Keys.Z) && lastKey != Keys.Z)
                 {
                     if (!GameWorld.Instance.hero.Jumping)
                     {
                         this.jumpDirection = this.walkDirection;
+
                         GameWorld.Instance.hero.BeginJump(WorldTile.TILE_SIZE * 5);
                     }
+                    lastKey = Keys.Z;
+                }
+                else if (lastKey == Keys.Z)
+                {
+                    lastKey = Keys.None;
                 }
 
                 //Translate Whip Attack
@@ -118,7 +126,8 @@ namespace Engine.Logic.Input
                 }
                  */
 
-                GameWorld.Instance.Hero.Walk(dX);
+                if (dX != 0)
+                    GameWorld.Instance.Hero.Walk(dX);
             }
         }
         #endregion

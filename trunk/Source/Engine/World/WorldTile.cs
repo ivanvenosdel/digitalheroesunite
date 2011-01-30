@@ -6,8 +6,15 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using FarseerPhysics;
+using FarseerPhysics.Collision;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Joints;
+using FarseerPhysics.Factories;
+
 using Engine.Logic.Actors;
 using Engine.Logic.ClassComponents;
+using Engine.Utilities;
 
 namespace Engine.World
 {
@@ -20,6 +27,7 @@ namespace Engine.World
         public Vector2 Position { get; set; }
         public Point TextureCoordinate { get; set; }
         public BoundingBox Bounding;
+        public Fixture fixture;
         #endregion
 
         public WorldTile(int id, Vector2 position)
@@ -27,8 +35,21 @@ namespace Engine.World
             this.ID = id;
             this.Position = position;
 
-            Vector2 pos = new Vector2(Position.X, Position.Y);
-            this.Bounding = new BoundingBox(new Vector3(pos.X, pos.Y, 0), new Vector3(pos.X + WorldTypes.TILE_SIZE, pos.Y + WorldTypes.TILE_SIZE, 0));
+            this.Bounding = new BoundingBox(new Vector3(position.X, position.Y, 0), new Vector3(position.X + WorldTypes.TILE_SIZE, position.Y + WorldTypes.TILE_SIZE, 0));
+
+            if (this.ID == 0)
+                return;
+
+            Vector2 dim = UtilityGame.GameToPhysics(new Vector2(WorldTypes.TILE_SIZE, WorldTypes.TILE_SIZE));
+            Vector2 pos = UtilityGame.GameToPhysics(new Vector2(this.Position.X + WorldTypes.TILE_SIZE/2, this.Position.Y + WorldTypes.TILE_SIZE/2));
+            Fixture fixture = FixtureFactory.CreateRectangle(DeviceManager.Instance.Physics.WorldSimulation, dim.X, dim.Y, 3, pos);
+            fixture.Body.BodyType = BodyType.Static;
+            fixture.CollisionCategories = CollisionCategory.Cat1;
+            unchecked
+            {
+                fixture.CollisionGroup = (short)(CollisionCategory.All & ~CollisionCategory.Cat1);
+            }
+            this.fixture = fixture;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)

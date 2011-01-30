@@ -41,8 +41,12 @@ namespace Engine
             this.Components.Add(DeviceManager.Instance.Logic);
             DeviceManager.Instance.Logic.UpdateOrder = 0;
 
+            this.Components.Add(DeviceManager.Instance.Physics);
+            DeviceManager.Instance.Physics.UpdateOrder = 1;
+            DeviceManager.Instance.Physics.DrawOrder = 1;
+
             this.Components.Add(DeviceManager.Instance.Graphics);
-            DeviceManager.Instance.Graphics.UpdateOrder = 1;
+            DeviceManager.Instance.Graphics.UpdateOrder = 2;
             DeviceManager.Instance.Graphics.DrawOrder = 0;
 
             base.Initialize();

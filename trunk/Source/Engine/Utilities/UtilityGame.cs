@@ -25,6 +25,21 @@ namespace Engine.Utilities
 
         #region Public Methods
         /// <summary>
+        /// Converts the position from game world to the physics world
+        /// </summary>
+        /// <param name="position">Position in game world</param>
+        /// <returns>Converted position in physics world coordinates</returns>
+        public static Vector2 GameToPhysics(Vector2 position)
+        {
+            return position / DeviceManager.PixelsAMeter;
+        }
+
+        public static Vector2 PhysicsToGame(Vector2 position)
+        {
+            return position * DeviceManager.PixelsAMeter;
+        }
+
+        /// <summary>
         /// Simulates a random die roll such as 1d6 or 2d8
         /// </summary>
         /// <param name="count">The number of dice</param>

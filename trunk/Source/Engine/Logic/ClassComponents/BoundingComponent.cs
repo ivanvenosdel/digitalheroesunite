@@ -1,8 +1,17 @@
 #region Using Statements
 using System;
+using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+using FarseerPhysics;
+using FarseerPhysics.Common;
+using FarseerPhysics.Collision;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
+using FarseerPhysics.Dynamics.Joints;
+using FarseerPhysics.Factories;
 
 using Engine.Logic.Actors;
 using Engine.Graphics.Animations;
@@ -26,11 +35,17 @@ namespace Engine.Logic.ClassComponents
 #endif
         private Point boxDimension;
         private BoundingBox box;
+        private Fixture fixture;
+        private List<Joint> joints = new List<Joint>();
         #endregion
 
         #region Properties
         /// <summary>The bounding box</summary>
         public BoundingBox Box { get { return this.box; } set { this.box = value; } }
+
+        /// <summary>The Fixture</summary>
+        public Fixture Fixture { get { return this.fixture; } set { this.fixture = value; } }
+
         #endregion
 
         #region Constructors
@@ -44,7 +59,39 @@ namespace Engine.Logic.ClassComponents
         {
             this.boxDimension = boxDim;
 
-            Update(null);
+            Vector2 dim = UtilityGame.GameToPhysics(new Vector2(boxDim.X, boxDim.Y));
+
+            Vector2 p = this.Owner.GetPosition().HackPos;
+            p.Y -= 200;
+            Vector2 pos = UtilityGame.GameToPhysics(p);
+
+
+            if (this.Owner is HeroActor)
+            {
+                Fixture fixture = FixtureFactory.CreateRectangle(DeviceManager.Instance.Physics.WorldSimulation, dim.X, dim.Y, 10.0f, pos);
+                fixture.Body.BodyType = BodyType.Dynamic;
+                fixture.CollisionCategories = CollisionCategory.Cat2;
+                fixture.Friction = 10;
+
+                unchecked
+                {
+                    fixture.CollisionGroup = (short)(CollisionCategory.All & ~CollisionCategory.Cat2);
+                }
+                fixture.OnCollision += Collide;
+                this.fixture = fixture;
+
+                FixedAngleJoint fixedAngleJoint = JointFactory.CreateFixedAngleJoint(DeviceManager.Instance.Physics.WorldSimulation, this.fixture.Body);
+                this.joints.Add(fixedAngleJoint);
+            }
+            else
+            {
+                //We don't want gravity to effect all other actors
+                Fixture fixture = FixtureFactory.CreateRectangle(DeviceManager.Instance.Physics.WorldSimulation, dim.X, dim.Y, 10.0f, pos);
+                fixture.Body.BodyType = BodyType.Static;
+                fixture.CollisionCategories = CollisionCategory.Cat3;
+                this.fixture = fixture;
+            }
+            //Update(null);
         }
         #endregion
 
@@ -54,12 +101,12 @@ namespace Engine.Logic.ClassComponents
             Vector2 offset = Vector2.Zero;
             if (this.Owner.GetSprite() != null)
                 offset = this.Owner.GetSprite().Offset;
-            Vector2 pos = this.Owner.GetPosition().Position + offset;
+            Vector2 pos = UtilityGame.PhysicsToGame(this.Owner.GetPosition().Position) + offset;
             pos.X -= this.boxDimension.X / 2.0f;
             pos.Y -= this.boxDimension.Y;
             this.box = new BoundingBox(new Vector3(pos.X, pos.Y, 0), new Vector3(pos.X + this.boxDimension.X, pos.Y + this.boxDimension.Y, 0));
 
-            CheckCollisions();
+           // CheckCollisions();
         }
 
         public void CheckCollisions()
@@ -93,9 +140,9 @@ namespace Engine.Logic.ClassComponents
                            //     Owner.GetPosition().Position.X -= GravityComponent.GRAVITY;
 
                            if (tile.Position.Y < actorY)
-                               Owner.GetPosition().Position.Y -= GravityComponent.GRAVITY;
+                               Owner.GetPosition().Position = new Vector2(Owner.GetPosition().Position.X, Owner.GetPosition().Position.Y - GravityComponent.GRAVITY);
                            else if (tile.Position.Y > actorY)
-                               Owner.GetPosition().Position.Y += GravityComponent.GRAVITY;
+                               Owner.GetPosition().Position = new Vector2(Owner.GetPosition().Position.X, Owner.GetPosition().Position.Y + GravityComponent.GRAVITY);
 
                            if (Owner is HeroActor)
                            {
@@ -108,6 +155,21 @@ namespace Engine.Logic.ClassComponents
                     }
                 }
             }
+        }
+
+        public bool Collide(Fixture f1, Fixture f2, Contact contact)
+        {
+            if (Owner is HeroActor)
+            {
+                if (Owner.GetSprite() != null && ((HeroActor)Owner).Jumping)
+                {
+                    ((HeroActor)Owner).PlayAnimation(AnimPackageHero.STAND, true);
+
+                    ((HeroActor)Owner).Jumping = false;
+                }
+            }
+
+            return true;
         }
 
         public bool DoesCollid(BoundingBox box)

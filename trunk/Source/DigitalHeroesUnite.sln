@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalHeroesUniteContent",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelEditorContent", "Tools\LevelEditorContent\LevelEditorContent.contentproj", "{C680B459-D12C-4947-97CC-A7B6C723DED8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farseer", "Tools\Farseer\Farseer.csproj", "{9F20C1D3-AACC-4D98-8B88-28F154045DDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farseer.DebugView", "Tools\Farseer.DebugView\Farseer.DebugView.csproj", "{F1FD036E-3FE2-42AA-917D-C5F6AB8595CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +34,18 @@ Global
 		{C680B459-D12C-4947-97CC-A7B6C723DED8}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{C680B459-D12C-4947-97CC-A7B6C723DED8}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{C680B459-D12C-4947-97CC-A7B6C723DED8}.Release|x86.ActiveCfg = Debug|Any CPU
+		{9F20C1D3-AACC-4D98-8B88-28F154045DDD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9F20C1D3-AACC-4D98-8B88-28F154045DDD}.Debug|x86.ActiveCfg = Debug|x86
+		{9F20C1D3-AACC-4D98-8B88-28F154045DDD}.Debug|x86.Build.0 = Debug|x86
+		{9F20C1D3-AACC-4D98-8B88-28F154045DDD}.Release|Any CPU.ActiveCfg = Release|x86
+		{9F20C1D3-AACC-4D98-8B88-28F154045DDD}.Release|x86.ActiveCfg = Release|x86
+		{9F20C1D3-AACC-4D98-8B88-28F154045DDD}.Release|x86.Build.0 = Release|x86
+		{F1FD036E-3FE2-42AA-917D-C5F6AB8595CE}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F1FD036E-3FE2-42AA-917D-C5F6AB8595CE}.Debug|x86.ActiveCfg = Debug|x86
+		{F1FD036E-3FE2-42AA-917D-C5F6AB8595CE}.Debug|x86.Build.0 = Debug|x86
+		{F1FD036E-3FE2-42AA-917D-C5F6AB8595CE}.Release|Any CPU.ActiveCfg = Release|x86
+		{F1FD036E-3FE2-42AA-917D-C5F6AB8595CE}.Release|x86.ActiveCfg = Release|x86
+		{F1FD036E-3FE2-42AA-917D-C5F6AB8595CE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

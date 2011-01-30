@@ -8,6 +8,7 @@ using Engine.Graphics.Animations;
 using Engine.Logic.ClassComponents;
 using System.Timers;
 using Engine.Logic.Input;
+using Engine.Utilities;
 #endregion
 
 namespace Engine.Logic.Actors
@@ -94,7 +95,7 @@ namespace Engine.Logic.Actors
         {
             if (GetSprite() != null)
             {
-                GetSprite().Draw(gameTime, spriteBatch, GetPosition().Position);
+                GetSprite().Draw(gameTime, spriteBatch, UtilityGame.PhysicsToGame(GetBounding().Fixture.Body.Position) + new Vector2(0, 55));
             }
         }
 
@@ -105,61 +106,66 @@ namespace Engine.Logic.Actors
 
         public override void Update(GameTime gameTime)
         {
-            float positionAdjust = 0;
+            //float positionAdjust = 0;
             if (this.Jumping)
             {
-                //if (this.movingUp)
-                //{
-                    if (this.jumpYCurrentHeight < jumpYPeakHeight)
-                    {
-                        //We have to go up some more.
-                        positionAdjust -= Heromanager.JUMP_RATE;
-                        this.jumpYCurrentHeight += Heromanager.JUMP_RATE;
-                    }
-                    //else
-                    //{
-                    //    this.movingUp = false;
-                    //}
-                //}
-                //else
-                //{
-                //    if (this.jumpYCurrentHeight > 0)
-                //    {
-                //        //We have to go back down some more
-                //        positionAdjust += 8;
-                //        this.jumpYCurrentHeight -= 8;
-                //    }
-                //    else
-                //    {
-                //        //Were done! Stop jumping
-                //        this.Jumping = false;
-                //        this.movingUp = true;
-                //    }
-                //}
-                this.GetPosition().Position.Y += positionAdjust;
-            }
+                //Additional drop
 
-            Vector2 tempPosition = this.GetPosition().Position;
+                Vector2 impulse = new Vector2(0, 0.1f);
+                this.GetBounding().Fixture.Body.ApplyLinearImpulse(ref impulse);
+            }
+            //{
+            //        if (this.jumpYCurrentHeight < jumpYPeakHeight)
+            //        {
+            //            //We have to go up some more.
+            //            positionAdjust -= Heromanager.JUMP_RATE;
+            //            this.jumpYCurrentHeight += Heromanager.JUMP_RATE;
+            //            Vector2 impulse = new Vector2(0, positionAdjust);
+            //            this.GetBounding().Fixture.Body.ApplyLinearImpulse(ref impulse);
+            //        }
+
+
             base.Update(gameTime);
         }
 
         public void Walk(float dX)
         {
-            this.GetPosition().Position.X += dX;
+            Vector2 impulse = new Vector2(dX, 0);
+            this.GetBounding().Fixture.Body.ApplyLinearImpulse(ref impulse);
+
+            Vector2 vel = this.GetBounding().Fixture.Body.LinearVelocity;
+            if (vel.X > 4.0f)
+                this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(4.0f, this.GetBounding().Fixture.Body.LinearVelocity.Y);
+            else if (vel.X < -4.0f)
+                this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(-4.0f, this.GetBounding().Fixture.Body.LinearVelocity.Y);
+
+            //this.GetPosition().Position = new Vector2(this.GetPosition().Position.X + dX, this.GetPosition().Position.Y);
         }
 
         public void BeginJump(float height)
         {
-            //Set constraints
-            this.jumpYCurrentHeight = 0;
-            this.jumpYPeakHeight = height;
-            //Go into jump mode
-            this.Jumping = true;
+                Vector2 impulse = new Vector2(0, -Heromanager.JUMP_RATE);
+                this.GetBounding().Fixture.Body.ApplyLinearImpulse(ref impulse);
 
-            if (GetSprite().CurrentAnimation == AnimPackageHero.RUN_LEFT)
-                PlayAnimation(AnimPackageHero.JUMP_LEFT, true);
-            else
-                PlayAnimation(AnimPackageHero.JUMP_RIGHT, true);
+                Vector2 vel = this.GetBounding().Fixture.Body.LinearVelocity;
+                if (vel.X > 4.0f)
+                    this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(4.0f, this.GetBounding().Fixture.Body.LinearVelocity.Y);
+                else if (vel.X < -4.0f)
+                    this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(-4.0f, this.GetBounding().Fixture.Body.LinearVelocity.Y);
+                if (vel.Y > 8.5f)
+                    this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(this.GetBounding().Fixture.Body.LinearVelocity.X, 8.5f);
+                else if (vel.Y < -8.5f)
+                    this.GetBounding().Fixture.Body.LinearVelocity = new Vector2(this.GetBounding().Fixture.Body.LinearVelocity.X, -8.5f);
+
+                //Set constraints
+                this.jumpYCurrentHeight = 0;
+                this.jumpYPeakHeight = height;
+                //Go into jump mode
+                this.Jumping = true;
+                if (GetSprite().CurrentAnimation == AnimPackageHero.RUN_LEFT)
+                    PlayAnimation(AnimPackageHero.JUMP_LEFT, true);
+                else
+                    PlayAnimation(AnimPackageHero.JUMP_RIGHT, true);
         }
 
         /// <summary>

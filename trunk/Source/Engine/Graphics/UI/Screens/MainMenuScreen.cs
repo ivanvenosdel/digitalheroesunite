@@ -63,6 +63,8 @@ namespace GameStateManagement
         #region Event Methods
         private void LevelEndHandler(GameWorld world, int level)
         {
+            world.Destroy();
+
             switch (level)
             {
                 case 0:
