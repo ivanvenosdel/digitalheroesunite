@@ -21,4 +21,33 @@
       <Y>0</Y>
     </TextureCoordinate>
   </TileType>
+  <TileType>
+    <ID>3</ID>
+    <TextureCoordinate>
+      <X>2</X>
+      <Y>0</Y>
+    </TextureCoordinate>
+   </TileType>
+    <TileType>
+      <ID>4</ID>
+      <TextureCoordinate>
+        <X>3</X>
+        <Y>0</Y>
+      </TextureCoordinate>
+    </TileType>
+  <TileType>
+    <ID>5</ID>
+    <TextureCoordinate>
+      <X>4</X>
+      <Y>0</Y>
+    </TextureCoordinate>
+  </TileType>
+  <TileType>
+    <ID>6</ID>
+    <TextureCoordinate>
+      <X>5</X>
+      <Y>0</Y>
+    </TextureCoordinate>
+  </TileType>
+
 </ArrayOfTileType>
