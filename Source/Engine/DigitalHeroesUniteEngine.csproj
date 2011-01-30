@@ -111,6 +111,7 @@
     <Compile Include="DeviceManager.cs" />
     <Compile Include="Graphics\Animations\AnimationPackages.cs" />
     <Compile Include="Graphics\Cameras\Camera.cs" />
+    <Compile Include="Logic\Actors\CameraControlActor.cs" />
     <Compile Include="Graphics\GraphicsCore.cs" />
     <Compile Include="Graphics\UI\FramesPerSecond.cs" />
     <Compile Include="Graphics\UI\ScreenManager\GameScreen.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Utilities\UtilityGame.cs" />
     <Compile Include="Utilities\UtilityMath.cs" />
     <Compile Include="Utilities\UtilityWorld.cs" />
+    <Compile Include="World\TileExtras.cs" />
     <Compile Include="World\GameWorld.cs" />
     <Compile Include="World\LevelMap.cs" />
     <Compile Include="World\TileType.cs" />

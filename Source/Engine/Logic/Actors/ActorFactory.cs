@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Engine.Logic.Events;
 using Engine.Logic.Logger;
 using Engine.Logic.ClassComponents;
+using Engine.Graphics.Cameras;
 #endregion
 
 namespace Engine.Logic.Actors
@@ -60,10 +61,12 @@ namespace Engine.Logic.Actors
                     case ActorType.HERO:
                         actor = new HeroActor(id);
                         break;
+                    case ActorType.CAMERACONTROL:
+                        actor = new CameraControlActor(id);
+                        break;
                     case ActorType.VORTEX:
                         actor = new VortexActor(id);
                         break;
-
                     case ActorType.UNKNOWN:
                     default:
                         LogManager.Instance.Alert("Unknown Actor Type", "Engine.Logic.Actors.ActorFactory.Create", 0);
@@ -123,6 +126,22 @@ namespace Engine.Logic.Actors
             HeroActor actor = (HeroActor)this.Construct(actorID, type);
             actor.Initialize(position, boundingDimension);
             
+            return actor;
+        }
+
+        /// <summary>
+        /// Creates a fresh camera control actor
+        /// </summary>
+        /// <returns>The created actor</returns>
+        public CameraControlActor CreateCameraControl(Vector2 position, Vector2 direction)
+        {
+            ActorType type = ActorType.CAMERACONTROL;
+            Guid actorID = System.Guid.NewGuid();
+
+            //Create the Actor
+            CameraControlActor actor = (CameraControlActor)this.Construct(actorID, type);
+            actor.Initialize(position, direction);
+
             return actor;
         }
 

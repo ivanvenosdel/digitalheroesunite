@@ -18,17 +18,29 @@ namespace Engine.World
         private static Texture2D tileTexture;
 
         public static Dictionary<int, TileType> TileTypes = new Dictionary<int, TileType>();
+        public static Dictionary<int, Dictionary<int, TileExtra>> LevelTileExtras = new Dictionary<int, Dictionary<int, TileExtra>>();
         public static Dictionary<int, LevelMap> Levels = new Dictionary<int, LevelMap>();
 
         public static Texture2D TileTexture { get { return tileTexture; } set { tileTexture = value; } }
 
         public static void Initialize()
         {
-            TileType[] tile = UtilityGame.DeserializeFromXML<TileType[]>("World/tiles.xml");
-            for (int i = 0; i < tile.Length; ++i)
-	        {
-                TileTypes.Add(tile[i].ID, tile[i]);
-	        }
+            TileType[] tiles = UtilityGame.DeserializeFromXML<TileType[]>("World/tiles.xml");
+            foreach (TileType tile in tiles)
+            {
+                TileTypes.Add(tile.ID, tile);
+            }
+
+            LevelTileExtras[] allLevelTileExtras = UtilityGame.DeserializeFromXML<LevelTileExtras[]>("World/tileExtras.xml");
+            foreach (LevelTileExtras levelExtras in allLevelTileExtras)
+            {
+                Dictionary<int, TileExtra> tileExtras = new Dictionary<int, TileExtra>();
+                foreach (TileExtra extra in levelExtras.TileExtras)
+                {
+                    tileExtras.Add(extra.TileID, extra);
+                }
+                LevelTileExtras.Add(levelExtras.LevelID, tileExtras);
+            }
 
             string[] levels = Directory.GetFiles("Content/World/Levels");
             for (int i = 0; i < levels.Length; ++i)
