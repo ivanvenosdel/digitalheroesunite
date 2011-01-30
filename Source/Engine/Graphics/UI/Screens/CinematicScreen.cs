@@ -36,6 +36,7 @@ namespace GameStateManagement
         int timeCount = 0;
         Engine.World.GameWorld.OnLevelEnd levelEndHandler;
         private string songname;
+        private string soundName;
         #endregion
 
 
@@ -53,6 +54,20 @@ namespace GameStateManagement
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
             this.levelEndHandler = null;
         }
+
+        public CinematicScreen(string cineTexture, bool noFade)
+            : base()
+        {
+            this.cineTexture = cineTexture;
+            TransitionOnTime = TimeSpan.FromSeconds(0.5);
+            TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            this.levelEndHandler = null;
+            if (noFade)
+            {
+                this.TransitionOffTime = new TimeSpan(20);
+                this.TransitionOnTime = new TimeSpan(20);
+            }
+        }
   
         public CinematicScreen(string cineTexture, string songname)
             : base()
@@ -64,6 +79,21 @@ namespace GameStateManagement
             this.songname = songname;
 
             }
+
+        public CinematicScreen(string cineTexture, string soundname, bool noFade)
+            : base()
+        {
+            this.cineTexture = cineTexture;
+            TransitionOnTime = TimeSpan.FromSeconds(0.5);
+            TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            this.levelEndHandler = null;
+            this.soundName = soundname;
+            if (noFade)
+            {
+                this.TransitionOffTime = new TimeSpan(20);
+                this.TransitionOnTime = new TimeSpan(20);
+            }
+        }
 
         public CinematicScreen(string cineTexture, int level, Engine.World.GameWorld.OnLevelEnd levelEndHandler)
         {
@@ -101,10 +131,13 @@ namespace GameStateManagement
             string texturePath = String.Format(@"UI\Intro\{0}", this.cineTexture);
             Intro1 = content.Load<Texture2D>(texturePath);
 
-            string songpath = String.Format("Music/{0}", songname);
-            if (!String.IsNullOrEmpty(songname) && SoundManager.Instance.CurrentSong != songpath)
+            if (!String.IsNullOrEmpty(songname))
             {
-                SoundManager.Instance.LoadSong(songpath);
+                string songpath = String.Format("Music/{0}", songname);
+                if (SoundManager.Instance.CurrentSong != songpath)
+                {
+                    SoundManager.Instance.LoadSong(songpath);
+                }
             }
         }
        
@@ -155,9 +188,17 @@ namespace GameStateManagement
             base.Update(gameTime, otherScreenHasFocus, false);
 
             string songpath = String.Format("Music/{0}", songname);
-            if (!otherScreenHasFocus && !String.IsNullOrEmpty(songname) && SoundManager.Instance.CurrentSong != songpath)
+            string soundPath = String.Format("Sound/{0}", soundName);
+            if (!otherScreenHasFocus)
             {
-                SoundManager.Instance.PlaySong(songpath);
+                if (!String.IsNullOrEmpty(songname) && SoundManager.Instance.CurrentSong != songpath)
+                {
+                    SoundManager.Instance.PlaySong(songpath);
+                }
+                else if (!String.IsNullOrEmpty(soundName))
+                {
+                    SoundManager.Instance.PlaySound(soundPath);      
+                }
             }
 
             if (IsActive)

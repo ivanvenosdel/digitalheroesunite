@@ -80,12 +80,28 @@ namespace GameStateManagement
                     world.Initialize(level + 1, this.LevelEndHandler);
                     CinematicScreen cinematic3 = new CinematicScreen("TitleScreen2", "Castle");
                     ScreenManager.AddScreen(cinematic3, PlayerIndex.One);
+
+                    //RPG Screen
+                    for (int i = 18; i > 8; i--)
+                    {
+                        string cineName = string.Format("RPGBackground{0}", i);
+                        CinematicScreen rpgCine = new CinematicScreen(cineName, true);
+                        ScreenManager.AddScreen(rpgCine, PlayerIndex.One);
+                    }
+                    ScreenManager.AddScreen(new CinematicScreen("RPGBackground8", "DoubleRainbow", true), PlayerIndex.One);
+                    for (int i = 7; i > 1; i--)
+                    {
+                        string cineName = string.Format("RPGBackground{0}", i);
+                        CinematicScreen rpgCine = new CinematicScreen(cineName, true);
+                        ScreenManager.AddScreen(rpgCine, PlayerIndex.One);
+                    }
                     break;
                 case 3:
                     //Load lvl 4
                     world.Initialize(level + 1, this.LevelEndHandler);
                     CinematicScreen cinematic4 = new CinematicScreen("TitleScreen3");
                     ScreenManager.AddScreen(cinematic4, PlayerIndex.One);
+                    
                     break;
                 case 4:
                     //Show end credits
