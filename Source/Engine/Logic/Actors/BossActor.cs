@@ -38,8 +38,7 @@ namespace Engine.Logic.Actors
 
             Point[] frameSizes = { new Point(260, 312) };
 
-            Vector2[] origins = { new Vector2((frameSizes[0].X - 1) / 2, frameSizes[0].Y - 1) }
-                ;
+            Vector2[] origins = { new Vector2((frameSizes[0].X ) / 2 - 80, frameSizes[0].Y - 470) };
             AnimStyle[] styles = { AnimStyle.FORWARD };
 
             int[] frames = { 3 };
