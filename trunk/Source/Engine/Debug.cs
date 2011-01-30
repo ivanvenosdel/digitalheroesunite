@@ -97,47 +97,37 @@ namespace Engine
             }
 
             ////////////////////////////////////////////////////////////
-            //                   Graphics Core
-            ////////////////////////////////////////////////////////////
-            if (keyboardState.IsKeyDown(Keys.Space))
-            {
-                lastKey = Keys.Space;
-            }
-            else if (lastKey == Keys.Space)
-            {
-                Camera.Instance.Reset();
-                lastKey = Keys.None;
-            }
-
-            ////////////////////////////////////////////////////////////
             //                        World
             ////////////////////////////////////////////////////////////
-            if (keyboardState.IsKeyDown(Keys.OemComma))
+            if (GameWorld.Instance.Enabled)
             {
-                lastKey = Keys.OemComma;
-            }
-            else if (lastKey == Keys.OemComma && keyboardState.IsKeyUp(Keys.OemComma))
-            {
-                SpriteComponent sprite = GameWorld.Instance.Hero.GetSprite();
-                int nextAnim = sprite.CurrentAnimation - 1;
-                if (nextAnim < 0)
-                    nextAnim = sprite.AnimationCount - 1;
-                sprite.PlayAnimation(nextAnim, true);
-                lastKey = Keys.None;
-            }
+                if (keyboardState.IsKeyDown(Keys.OemComma))
+                {
+                    lastKey = Keys.OemComma;
+                }
+                else if (lastKey == Keys.OemComma && keyboardState.IsKeyUp(Keys.OemComma))
+                {
+                    SpriteComponent sprite = GameWorld.Instance.Hero.GetSprite();
+                    int nextAnim = sprite.CurrentAnimation - 1;
+                    if (nextAnim < 0)
+                        nextAnim = sprite.AnimationCount - 1;
+                    sprite.PlayAnimation(nextAnim, true);
+                    lastKey = Keys.None;
+                }
 
-            if (keyboardState.IsKeyDown(Keys.OemPeriod))
-            {
-                lastKey = Keys.OemPeriod;
-            }
-            else if (lastKey == Keys.OemPeriod && keyboardState.IsKeyUp(Keys.OemPeriod))
-            {
-                SpriteComponent sprite = GameWorld.Instance.Hero.GetSprite();
-                int nextAnim = sprite.CurrentAnimation + 1;
-                if (nextAnim > sprite.AnimationCount - 1)
-                    nextAnim = 0;
-                sprite.PlayAnimation(nextAnim, true);
-                lastKey = Keys.None;
+                if (keyboardState.IsKeyDown(Keys.OemPeriod))
+                {
+                    lastKey = Keys.OemPeriod;
+                }
+                else if (lastKey == Keys.OemPeriod && keyboardState.IsKeyUp(Keys.OemPeriod))
+                {
+                    SpriteComponent sprite = GameWorld.Instance.Hero.GetSprite();
+                    int nextAnim = sprite.CurrentAnimation + 1;
+                    if (nextAnim > sprite.AnimationCount - 1)
+                        nextAnim = 0;
+                    sprite.PlayAnimation(nextAnim, true);
+                    lastKey = Keys.None;
+                }
             }
         }
         #endregion
