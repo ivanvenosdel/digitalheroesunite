@@ -62,6 +62,7 @@ namespace Engine.Logic
 
             Heromanager.Instance.Initialize();
 
+            //GameWorld.Instance.Initialize(1, null);
 #if DEBUG
             Debug.Initialize();
 #endif

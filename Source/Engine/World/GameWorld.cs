@@ -127,19 +127,49 @@ namespace Engine.World
             Camera.Instance.Direction = Vector2.Zero;
         }
 
+        public void Destroy()
+        {
+            for (int i=0; i< this.cameraControlActors.Count; ++i)
+            {
+                ActorFactory.Instance.RemoveActor(this.cameraControlActors[i].ActorID);
+            }
+            this.cameraControlActors.Clear();
+
+            DeviceManager.Instance.Physics.WorldSimulation.RemoveBody(this.hero.GetBounding().Fixture.Body);
+            ActorFactory.Instance.RemoveActor(this.hero.ActorID);
+            ActorFactory.Instance.RemoveActor(this.vortex.ActorID);
+
+            for (int y = 0; y < this.height; ++y)
+            {
+                for (int x = 0; x < this.width; ++x)
+                {
+                    WorldTile tile = this.layout[x + y * this.width];
+                    if (tile.ID != 0)
+                        DeviceManager.Instance.Physics.WorldSimulation.RemoveBody(tile.fixture.Body);
+                }
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
             //Update all actors if enabled and if game isn't paused
             if (!enabled || DeviceManager.Instance.Paused)
                 return;
 
-            Point heroTile = UtilityWorld.WorldToGrid(this.hero.GetPosition().Position);
-            if (!Camera.Instance.OnScreen(new Point((int)this.hero.GetPosition().Position.X, (int)this.hero.GetPosition().Position.Y)))
+
+            int delta = 2;
+            Vector2 scaledPos = UtilityGame.PhysicsToGame(this.hero.GetPosition().Position);
+            Point heroTile = UtilityWorld.WorldToGrid(scaledPos);
+            Point heroPos = new Point((int)scaledPos.X, (int)scaledPos.Y);
+            if (!Camera.Instance.OnScreen(heroPos))
             {
-                //You lose!
-                this.LevelEndHandler(this, this.level - 1);
+                if (!Camera.Instance.FreeRange)
+                {
+                    //You lose!
+                    this.LevelEndHandler(this, this.level - 1);
+                }
             }
-            else if (this.end.X == heroTile.X && this.end.Y == heroTile.Y)
+            else if (this.end.X <= heroTile.X && (this.end.Y <= heroTile.Y + delta && this.end.Y >= heroTile.Y - delta))
             {
                 //We have reached the end of all things
                 this.LevelEndHandler(this, this.level);
@@ -182,6 +212,7 @@ namespace Engine.World
                     this.spriteBatch.Draw(this.background, new Vector2(1600, -315), Color.White);
                     this.spriteBatch.Draw(this.background, new Vector2(2400, -315), Color.White);
                     this.spriteBatch.Draw(this.background, new Vector2(3200, -315), Color.White);
+                    this.spriteBatch.Draw(this.background, new Vector2(4000, -315), Color.White);
                 }
 
 

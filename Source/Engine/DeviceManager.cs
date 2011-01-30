@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Graphics;
 using Engine.Logic;
+using Engine.Physics;
 #endregion
 
 namespace Engine
@@ -26,8 +27,11 @@ namespace Engine
         private ContentManager content;
         private bool paused;
 
+        public static float PixelsAMeter = 100.0f;
+
         private LogicCore logic;
         private GraphicsCore graphics;
+        private PhysicsCore physics;
         #endregion
 
         #region Properties
@@ -39,6 +43,8 @@ namespace Engine
         public bool Paused { get { return this.paused; } set { this.paused = value; } }
         /// <summary>Logic Core</summary>
         public LogicCore Logic { get { return this.logic; } }
+        /// <summary>Physics Core</summary>
+        public PhysicsCore Physics { get { return this.physics; } }
         /// <summary>Graphics Core</summary>
         public GraphicsCore Graphics { get { return this.graphics; } }
         #endregion
@@ -63,6 +69,7 @@ namespace Engine
         private void Initialize(Game game)
         {
             this.logic = new LogicCore(game);
+            this.physics = new PhysicsCore(game);
             this.graphics = new GraphicsCore(game);
         }
         #endregion

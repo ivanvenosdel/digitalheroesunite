@@ -28,8 +28,8 @@ namespace Engine.Logic.ClassComponents
 
         public override void Update(GameTime gametime)
         {
-            if (Camera.Instance.OnScreen(new Point((int)Owner.GetPosition().Position.X, (int)Owner.GetPosition().Position.Y)))
-                Owner.GetPosition().Position.Y += GRAVITY;
+            //if (Camera.Instance.OnScreen(new Point((int)Owner.GetPosition().Position.X, (int)Owner.GetPosition().Position.Y)))
+            //    Owner.GetPosition().Position = new Vector2(Owner.GetPosition().Position.X, Owner.GetPosition().Position.Y + GRAVITY);
         }
     }
 }
