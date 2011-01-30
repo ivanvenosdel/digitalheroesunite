@@ -114,7 +114,7 @@ namespace GameStateManagement
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
             
             ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
-            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 1, this.LevelEndHandler, "Platformer");
+            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 4, this.LevelEndHandler, "Platformer");
             CinematicScreen cinematic2 = new CinematicScreen("Intro2");
             CinematicScreen cinematic1 = new CinematicScreen("Intro1", "VirusTheme");
 

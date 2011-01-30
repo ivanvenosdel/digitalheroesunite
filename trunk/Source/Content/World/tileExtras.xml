@@ -70,4 +70,20 @@
       </TileExtra>
     </TileExtras>
   </LevelTileExtras>
+  <LevelTileExtras>
+    <LevelID>4</LevelID>
+    <TileExtras>
+      <TileExtra>
+        <TileID>0</TileID>
+        <CameraDirection>
+          <X>0</X>
+          <Y>0</Y>
+        </CameraDirection>
+        <Position>
+          <X>0</X>
+          <Y>0</Y>
+        </Position>
+      </TileExtra>
+    </TileExtras>
+  </LevelTileExtras>
 </ArrayOfLevelTileExtras>

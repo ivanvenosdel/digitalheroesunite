@@ -259,6 +259,44 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="World\Levels\Boss.xml">
+      <SubType>Designer</SubType>
+      <Name>Boss</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Audio\Music\Platformer.mp3">
+      <Name>Platformer</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Audio\Music\TitleScreen.mp3">
+      <Name>TitleScreen</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Audio\Music\VirusTheme.mp3">
+      <Name>VirusTheme</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="World\Backgrounds\Boss\BossBackground.png">
+      <Name>BossBackground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="World\Backgrounds\Boss\BossBackgroundLayout.png">
+      <Name>BossBackgroundLayout</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Audio\Sound\" />
   </ItemGroup>
   <ItemGroup>
