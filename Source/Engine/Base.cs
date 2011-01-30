@@ -30,7 +30,7 @@ namespace Engine
             DeviceManager.Instance.PreferredBackBufferHeight = 600;
             DeviceManager.Instance.IsFullScreen = false;
 
-            this.IsMouseVisible = true;
+            this.IsMouseVisible = false;
         }
 
         /// <summary>

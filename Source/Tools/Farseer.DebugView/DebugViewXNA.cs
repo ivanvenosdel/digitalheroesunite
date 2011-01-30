@@ -665,8 +665,8 @@ namespace FarseerPhysics.DebugViewXNA
 
         private struct ContactPoint
         {
-            public Vector2 Normal;
-            public Vector2 Position;
+            public Microsoft.Xna.Framework.Vector2 Normal;
+            public Microsoft.Xna.Framework.Vector2 Position;
             public PointState State;
         }
 

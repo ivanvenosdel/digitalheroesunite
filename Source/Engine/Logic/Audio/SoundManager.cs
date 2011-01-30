@@ -107,11 +107,12 @@ namespace Engine.Logic.Audio
             this.content = new ContentManager(DeviceManager.Instance.Content.ServiceProvider, 
                                                 DeviceManager.Instance.Content.RootDirectory + "\\Audio");
 
+
             LoadSound("Sound/Bonus");
             LoadSound("Sound/DoubleRainbow");
             LoadSound("Sound/Jump");
             LoadSound("Sound/PlayerDeath");
-            //LoadSound("Sound/VirusDeath");
+            LoadSound("Sound/Blunt");
         }
 
         /// <summary>
