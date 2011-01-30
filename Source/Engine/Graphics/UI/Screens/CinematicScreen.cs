@@ -27,7 +27,7 @@ namespace GameStateManagement
         #region Fields
 
         ContentManager content;
-        Texture2D cinematic1;
+        Texture2D Intro1;
         string cineTexture;
         int level;
         Engine.World.GameWorld.OnLevelEnd levelEndHandler;
@@ -67,8 +67,8 @@ namespace GameStateManagement
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            string texturePath = String.Format(@"UI\{0}", this.cineTexture);
-            cinematic1 = content.Load<Texture2D>(texturePath);
+            string texturePath = String.Format(@"UI\Intro\{0}", this.cineTexture);
+            Intro1 = content.Load<Texture2D>(texturePath);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace GameStateManagement
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(cinematic1, fullscreen,
+            spriteBatch.Draw(Intro1, fullscreen,
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
 
             spriteBatch.End();
