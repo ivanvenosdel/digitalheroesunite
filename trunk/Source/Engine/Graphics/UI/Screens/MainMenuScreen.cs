@@ -78,7 +78,7 @@ namespace GameStateManagement
                 case 2:
                     //Load lvl 3
                     world.Initialize(level + 1, this.LevelEndHandler);
-                    CinematicScreen cinematic3 = new CinematicScreen("TitleScreen2", "Castle");
+                    CinematicScreen cinematic3 = new CinematicScreen("TitleScreen2", level + 1, this.LevelEndHandler);
                     ScreenManager.AddScreen(cinematic3, PlayerIndex.One);
 
                     //RPG Screen
@@ -140,6 +140,12 @@ namespace GameStateManagement
             ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
             ScreenManager.AddScreen(cinematic1, PlayerIndex.One);
         }
+
+        protected override void OnCancel(PlayerIndex playerIndex)
+        {
+            EventManager.Instance.QueueEvent(new KillSwitchEvent());
+        }
+
 
         #endregion
         
