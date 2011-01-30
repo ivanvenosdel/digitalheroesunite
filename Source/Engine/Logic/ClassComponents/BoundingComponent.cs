@@ -73,7 +73,7 @@ namespace Engine.Logic.ClassComponents
 
                 for (int y = gridPoint.Y - 1; y <= gridPoint.Y + 1; ++y)
                 {
-                    for (int x = gridPoint.X - 1; x <= gridPoint.Y + 1; ++x)
+                    for (int x = gridPoint.X - 1; x <= gridPoint.X + 1; ++x)
                     {
                         if (x < 0 || x >= GameWorld.Instance.width ||
                             y < 0 || y >= GameWorld.Instance.height)
@@ -83,15 +83,20 @@ namespace Engine.Logic.ClassComponents
                        //Collison
                        if (tile.ID != 0 && DoesCollid(tile.Bounding))
                        {
+                           float actorX = Owner.GetPosition().Position.X;
+                           float actorY = Owner.GetPosition().Position.Y;
                            //Push the monster out of the tile
-                           if (x < gridPoint.X)
-                               Owner.GetPosition().Position.X += GravityComponent.GRAVITY + GravityComponent.GRAVITY / 2;
-                           else if (x > gridPoint.X)
-                               Owner.GetPosition().Position.X -= GravityComponent.GRAVITY + GravityComponent.GRAVITY / 2;
-                           if (y < gridPoint.Y)
-                               Owner.GetPosition().Position.Y += GravityComponent.GRAVITY + GravityComponent.GRAVITY / 2;
-                           else if (y > gridPoint.Y)
-                               Owner.GetPosition().Position.Y -= GravityComponent.GRAVITY + GravityComponent.GRAVITY / 2;
+                           if (tile.Position.X < actorX)
+                               Owner.GetPosition().Position.X += GravityComponent.GRAVITY;
+                           else if (tile.Position.X > actorX)
+                               Owner.GetPosition().Position.X -= GravityComponent.GRAVITY;
+                           if (tile.Position.Y < actorY)
+                               Owner.GetPosition().Position.Y -= GravityComponent.GRAVITY;
+                           else if (tile.Position.Y > actorY)
+                               Owner.GetPosition().Position.Y += GravityComponent.GRAVITY;
+
+                           if (Owner is HeroActor)
+                               ((HeroActor)Owner).Jumping = false;
                        }
                     }
                 }
