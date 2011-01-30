@@ -24,8 +24,10 @@ namespace GameStateManagement
     /// </summary>
     class MainMenuScreen : MenuScreen
     {
-       
-       
+        #region Fields
+        private bool viewedRPGCutscene = false;
+        #endregion
+
         #region Initialization
 
         /// <summary>
@@ -84,18 +86,22 @@ namespace GameStateManagement
                     ScreenManager.AddScreen(cinematic3, PlayerIndex.One);
 
                     //RPG Screen
-                    for (int i = 18; i > 8; i--)
+                    if (!viewedRPGCutscene)
                     {
-                        string cineName = string.Format("RPGBackground{0}", i);
-                        CinematicScreen rpgCine = new CinematicScreen(cineName, true);
-                        ScreenManager.AddScreen(rpgCine, PlayerIndex.One);
-                    }
-                    ScreenManager.AddScreen(new CinematicScreen("RPGBackground8", "DoubleRainbow", true), PlayerIndex.One);
-                    for (int i = 7; i > 1; i--)
-                    {
-                        string cineName = string.Format("RPGBackground{0}", i);
-                        CinematicScreen rpgCine = new CinematicScreen(cineName, true);
-                        ScreenManager.AddScreen(rpgCine, PlayerIndex.One);
+                        for (int i = 18; i > 8; i--)
+                        {
+                            string cineName = string.Format("RPGBackground{0}", i);
+                            CinematicScreen rpgCine = new CinematicScreen(cineName, true);
+                            ScreenManager.AddScreen(rpgCine, PlayerIndex.One);
+                        }
+                        ScreenManager.AddScreen(new CinematicScreen("RPGBackground8", "DoubleRainbow", true), PlayerIndex.One);
+                        for (int i = 7; i > 1; i--)
+                        {
+                            string cineName = string.Format("RPGBackground{0}", i);
+                            CinematicScreen rpgCine = new CinematicScreen(cineName, true);
+                            ScreenManager.AddScreen(rpgCine, PlayerIndex.One);
+                        }
+                        viewedRPGCutscene = true;
                     }
                     break;
                 case 3:
