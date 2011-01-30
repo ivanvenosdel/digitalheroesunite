@@ -57,7 +57,7 @@ namespace Engine.Logic.Input
         Keys lastKey;
         private void OnKeyEvent(KeyboardState keyboardState)
         {
-            if (GameWorld.Instance.Hero != null && GameWorld.Instance.Enabled)
+            if (GameWorld.Instance.Hero != null && GameWorld.Instance.Enabled && !DeviceManager.Instance.Paused)
             {
                 float dX = 0;
 

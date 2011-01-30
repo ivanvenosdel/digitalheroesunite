@@ -26,7 +26,7 @@ namespace GameStateManagement
     class CinematicScreen : GameScreen
     {
         #region Fields
-
+        public const int TRANSITION = 3000;
         ContentManager content;
         Texture2D Intro1;
         string cineTexture;
@@ -50,7 +50,6 @@ namespace GameStateManagement
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
             this.levelEndHandler = null;
-
         }
   
         public CinematicScreen(string cineTexture, string songname)
@@ -89,8 +88,9 @@ namespace GameStateManagement
         /// Load Content
         /// </summary>
         public override void LoadContent()
-        {   
-           
+        {
+            timeCount = TRANSITION;
+
             if (content == null)
             { 
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
@@ -124,17 +124,17 @@ namespace GameStateManagement
        /// <param name="input"></param>
         public override void HandleInput(InputState input)
         {
-           if (timeCount % 300 == 0)
-            {
-                if(this.levelEndHandler != null)
-                {
-                  GameWorld.Instance.Initialize(this.level, this.levelEndHandler);
-                  /*SoundManager.Instance.StopSong();
-                  SoundManager.Instance.UnloadContent();*/
-                }
-                
-                ExitScreen();
-            }
+           //if (timeCount % 300 == 0)
+            //{
+            //    if (this.levelEndHandler != null)
+            //    {
+            //        GameWorld.Instance.Initialize(this.level, this.levelEndHandler);
+            //        /*SoundManager.Instance.StopSong();
+            //        SoundManager.Instance.UnloadContent();*/
+            //    }
+
+            //    ExitScreen();
+            //}
         }
         #endregion
 
@@ -157,6 +157,22 @@ namespace GameStateManagement
             {
                 SoundManager.Instance.PlaySong(songpath);
             }
+
+            if (IsActive)
+            {
+                timeCount -= gameTime.ElapsedGameTime.Milliseconds;
+                if (timeCount <= 0)
+                {
+                    if (this.levelEndHandler != null)
+                    {
+                        GameWorld.Instance.Initialize(this.level, this.levelEndHandler);
+                        /*SoundManager.Instance.StopSong();
+                        SoundManager.Instance.UnloadContent();*/
+                    }
+
+                    ExitScreen();
+                }
+            }
         }
 
         /// <summary>
@@ -167,7 +183,7 @@ namespace GameStateManagement
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
             Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
             Rectangle fullscreen = new Rectangle(0, 0, viewport.Width, viewport.Height);
-            timeCount++;
+            //timeCount++;
 
             spriteBatch.Begin();
 
