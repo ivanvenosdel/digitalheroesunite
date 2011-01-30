@@ -65,6 +65,10 @@ namespace GameStateManagement
         {
             switch (level)
             {
+                case 0:
+                    //They lost the first level (what a loser)
+                    world.Initialize(level + 1, this.LevelEndHandler);
+                    break;
                 case 1:
                     //Load lvl 2
                     world.Initialize(level + 1, this.LevelEndHandler);

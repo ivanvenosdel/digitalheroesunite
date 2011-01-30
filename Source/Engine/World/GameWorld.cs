@@ -130,7 +130,12 @@ namespace Engine.World
                 return;
 
             Point heroTile = UtilityWorld.WorldToGrid(this.hero.GetPosition().Position);
-            if (this.end.X == heroTile.X && this.end.Y == heroTile.Y)
+            if (!Camera.Instance.OnScreen(new Point((int)this.hero.GetPosition().Position.X, (int)this.hero.GetPosition().Position.Y)))
+            {
+                //You lose!
+                this.LevelEndHandler(this, this.level - 1);
+            }
+            else if (this.end.X == heroTile.X && this.end.Y == heroTile.Y)
             {
                 //We have reached the end of all things
                 this.LevelEndHandler(this, this.level);
