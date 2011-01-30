@@ -197,7 +197,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\background.png">
+    <Compile Include="UI\Intro\background.png">
       <Name>background</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

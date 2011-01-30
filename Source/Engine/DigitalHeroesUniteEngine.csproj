@@ -118,8 +118,10 @@
     <Compile Include="Graphics\UI\FramesPerSecond.cs" />
     <Compile Include="Graphics\UI\ScreenManager\GameScreen.cs" />
     <Compile Include="Graphics\UI\ScreenManager\InputState.cs" />
+    <Compile Include="Graphics\UI\ScreenManager\PlayerIndexIndex.cs" />
     <Compile Include="Graphics\UI\ScreenManager\ScreenManager.cs" />
     <Compile Include="Graphics\UI\Screens\BackgroundScreen.cs" />
+    <Compile Include="Graphics\UI\Screens\BossScreen.cs" />
     <Compile Include="Graphics\UI\Screens\Credits.cs" />
     <Compile Include="Graphics\UI\Screens\CinematicScreen.cs" />
     <Compile Include="Graphics\UI\Screens\GameplayScreen.cs" />
