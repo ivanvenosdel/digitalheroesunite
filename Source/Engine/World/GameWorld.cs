@@ -30,6 +30,7 @@ namespace Engine.World
         public int width;
         public int height;
         public WorldTile[] layout;
+        public Texture2D background;
         public Point start;
         public Point end;
 
@@ -83,6 +84,20 @@ namespace Engine.World
                 }
             }
 
+            //Load Background
+            if (this.level == 1)
+            {
+                this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\Level1\RunJumpBackground");
+            }
+            else if (this.level == 2)
+            {
+                this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\Level2\RunJumpBackground");
+            }
+            else
+            {
+                this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\level3\ActionBackground");
+            }
+
             //Where should our hero start?
             Vector2 startPoint = UtilityWorld.GridToWorld(this.start);
             this.hero = ActorFactory.Instance.CreateHero(startPoint, new Point(36, 110));
@@ -113,9 +128,44 @@ namespace Engine.World
         {
             if (this.enabled)
             {
+                if (level == 3)
+                {
+                    this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Matrix.Identity);
+                    this.spriteBatch.Draw(this.background, new Vector2(0, 0), Color.White);
+                    this.spriteBatch.End();
+                }
+
                 //Render
                 this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Camera.Instance.View);
 
+                //Draw Background
+                if (level == 1)
+                {
+                    this.spriteBatch.Draw(this.background, new Vector2(0, -475), Color.White);
+                    this.spriteBatch.Draw(this.background, new Vector2(800, -475), Color.White);
+                    this.spriteBatch.Draw(this.background, new Vector2(1600, -475), Color.White);
+                }
+
+                else if (level == 2)
+                {
+                    this.spriteBatch.Draw(this.background, new Vector2(0, -315), Color.White);
+                    this.spriteBatch.Draw(this.background, new Vector2(800, -315), Color.White);
+                    this.spriteBatch.Draw(this.background, new Vector2(1600, -315), Color.White);
+                    this.spriteBatch.Draw(this.background, new Vector2(2400, -315), Color.White);
+                    this.spriteBatch.Draw(this.background, new Vector2(3200, -315), Color.White);
+                }
+
+                //else
+                //{
+                //    this.spriteBatch.Draw(this.background, new Vector2(0, 885), Color.White);
+                //    this.spriteBatch.Draw(this.background, new Vector2(800, 885), Color.White);
+                //    this.spriteBatch.Draw(this.background, new Vector2(1600, 885), Color.White);
+                //    this.spriteBatch.Draw(this.background, new Vector2(2400, 885), Color.White);
+                //    this.spriteBatch.Draw(this.background, new Vector2(800, 85), Color.White);
+                //    this.spriteBatch.Draw(this.background, new Vector2(800, -715), Color.White);
+                //}
+
+                //Draw Tiles
                 for (int y = 0; y < this.height; ++y)
                 {
                     for (int x = 0; x < this.width; ++x)
@@ -126,8 +176,9 @@ namespace Engine.World
                     }
                 }
 
-            if (this.hero != null)
-                this.hero.Draw(gameTime, this.spriteBatch);
+                //Draw the Hero
+                if (this.hero != null)
+                    this.hero.Draw(gameTime, this.spriteBatch);
 
                 this.spriteBatch.End();
             }
