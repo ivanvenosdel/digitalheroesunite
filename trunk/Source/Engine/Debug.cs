@@ -27,7 +27,7 @@ namespace Engine
         /// <summary>
         /// Base
         /// </summary>
-        public static bool RenderFPS = true;
+        public static bool RenderFPS = false;
 
         /// <summary>
         /// Graphics Core
@@ -37,7 +37,7 @@ namespace Engine
         /// <summary>
         /// Logic Core
         /// </summary>
-        public static bool DrawBounding = true;
+        public static bool DrawBounding = false;
         #endregion
 
         #region Public Methods
