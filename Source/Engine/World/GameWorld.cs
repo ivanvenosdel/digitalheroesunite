@@ -95,9 +95,13 @@ namespace Engine.World
             {
                 this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\Level2\RunJumpBackground");
             }
-            else
+            else if (this.level == 3)
             {
                 this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\level3\ActionBackground");
+            }
+            else if(this.level == 4)
+            {
+                this.background = content.Load<Texture2D>(@"Content\World\Backgrounds\Boss\BossBackground");
             }
 
             //Where should our hero start?
@@ -153,7 +157,7 @@ namespace Engine.World
         {
             if (this.enabled)
             {
-                if (level == 3)
+                if (level == 3 || level == 4)
                 {
                     this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Matrix.Identity);
                     this.spriteBatch.Draw(this.background, new Vector2(0, 0), Color.White);
