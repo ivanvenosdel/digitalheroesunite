@@ -42,8 +42,10 @@ namespace Engine.World
         /// <summary>Is the world enabled</summary>
         public bool Enabled { get { return this.enabled; } set { this.enabled = value; } }
 
-        /// <summary>TEMP HERO ACTOR</summary>
+        /// <summary>HERO ACTOR</summary>
         public HeroActor Hero { get { return this.hero; } set { this.hero = value; } }
+
+        public OnLevelEnd LevelEndHandler { get; set; }
         #endregion
 
         #region Constructors
@@ -53,10 +55,15 @@ namespace Engine.World
         }
         #endregion
 
+        #region Delegates
+        public delegate void OnLevelEnd(GameWorld sender, int level);
+        #endregion
+
         #region Public Methods
-        public void Initialize(int level)
+        public void Initialize(int level, OnLevelEnd levelEndHandler)
         {
             this.content = new ContentManager(DeviceManager.Instance.Content.ServiceProvider);
+            this.LevelEndHandler = levelEndHandler;
             
             //Load Level
             LevelMap levelMap = WorldTypes.Levels[level];
@@ -87,32 +94,43 @@ namespace Engine.World
             //Update all actors if enabled and if game isn't paused
             if (!enabled || DeviceManager.Instance.Paused)
                 return;
+
+            int heroTileX = Convert.ToInt32((this.hero.GetPosition().Position.X + WorldTypes.TILE_SIZE / 2) / WorldTypes.TILE_SIZE);
+            int heroTileY = Convert.ToInt32(this.hero.GetPosition().Position.Y / WorldTypes.TILE_SIZE);
+            if (this.end.X == heroTileX && this.end.Y == heroTileY)
+            {
+                //We have reached the end of all things
+                this.LevelEndHandler(this, this.level);
+            }
             
             this.hero.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime)
         {
-            //Render
-            this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Camera.Instance.View);
-
-            for (int y = 0; y < this.height; ++y)
+            if (this.enabled)
             {
-                for (int x = 0; x < this.width; ++x)
+                //Render
+                this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Camera.Instance.View);
+
+                for (int y = 0; y < this.height; ++y)
                 {
-                    WorldTile tile = this.layout[x + y * this.width];
-                    if (Camera.Instance.OnScreen(new Point((int)tile.Position.X, (int)tile.Position.Y)))
-                        tile.Draw(this.spriteBatch, tile.Position);
+                    for (int x = 0; x < this.width; ++x)
+                    {
+                        WorldTile tile = this.layout[x + y * this.width];
+                        if (Camera.Instance.OnScreen(new Point((int)tile.Position.X, (int)tile.Position.Y)))
+                            tile.Draw(this.spriteBatch, tile.Position);
+                    }
                 }
+
+
+
+                //TEMP
+                if (this.hero != null)
+                    this.hero.Draw(gameTime, this.spriteBatch);
+
+                this.spriteBatch.End();
             }
-
-
-
-            //TEMP
-            if (this.hero != null)
-                this.hero.Draw(gameTime, this.spriteBatch);
-
-            this.spriteBatch.End();
         }
         #endregion
 

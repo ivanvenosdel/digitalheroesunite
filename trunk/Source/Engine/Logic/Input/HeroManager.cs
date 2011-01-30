@@ -50,44 +50,47 @@ namespace Engine.Logic.Input
         #region Event Methods
         private void OnKeyEvent(KeyboardState keyboardState)
         {
-            int dX = 0;
+            if (GameWorld.Instance.Hero != null)
+            {
+                int dX = 0;
 
-            //Translate Right
-            if (keyboardState.IsKeyDown(Keys.Right))
-            {
-                //It's ok to move if we are jumping in the same direction or not at all
-                if (!GameWorld.Instance.hero.Jumping || this.jumpDirection == MoveDirection.Right)
+                //Translate Right
+                if (keyboardState.IsKeyDown(Keys.Right))
                 {
-                    dX = 8;
-                    this.walkDirection = MoveDirection.Right;
+                    //It's ok to move if we are jumping in the same direction or not at all
+                    if (!GameWorld.Instance.hero.Jumping || this.jumpDirection == MoveDirection.Right)
+                    {
+                        dX = 8;
+                        this.walkDirection = MoveDirection.Right;
+                    }
                 }
-            }
-            //Translate Left
-            else if (keyboardState.IsKeyDown(Keys.Left))
-            {
-                //It's ok to move if we are jumping in the same direction or not at all
-                if (!GameWorld.Instance.hero.Jumping || this.jumpDirection == MoveDirection.Left)
+                //Translate Left
+                else if (keyboardState.IsKeyDown(Keys.Left))
                 {
-                    dX = -8;
-                    this.walkDirection = MoveDirection.Left;
+                    //It's ok to move if we are jumping in the same direction or not at all
+                    if (!GameWorld.Instance.hero.Jumping || this.jumpDirection == MoveDirection.Left)
+                    {
+                        dX = -8;
+                        this.walkDirection = MoveDirection.Left;
+                    }
                 }
-            }
-            else
-            {
-                this.walkDirection = MoveDirection.None;
-            }
-            
-            //Translate RightControl
-            if (keyboardState.IsKeyDown(Keys.LeftControl))
-            {
-                if (!GameWorld.Instance.hero.Jumping)
+                else
                 {
-                    this.jumpDirection = this.walkDirection;
-                    GameWorld.Instance.hero.BeginJump(WorldTile.TILE_SIZE * 5);
+                    this.walkDirection = MoveDirection.None;
                 }
-            }
 
-            GameWorld.Instance.Hero.Walk(dX);
+                //Translate RightControl
+                if (keyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    if (!GameWorld.Instance.hero.Jumping)
+                    {
+                        this.jumpDirection = this.walkDirection;
+                        GameWorld.Instance.hero.BeginJump(WorldTile.TILE_SIZE * 5);
+                    }
+                }
+
+                GameWorld.Instance.Hero.Walk(dX);
+            }
         }
         #endregion
     }

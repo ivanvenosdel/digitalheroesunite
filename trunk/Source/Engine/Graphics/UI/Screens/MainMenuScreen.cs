@@ -11,6 +11,7 @@
 using Microsoft.Xna.Framework;
 using Engine.Logic.Events;
 using Engine.Logic.Audio;
+using Engine.World;
 using Microsoft.Xna.Framework.Graphics;
 #endregion
 
@@ -28,19 +29,13 @@ namespace GameStateManagement
         /// Constructor fills in the menu contents.
         /// </summary>
         public MainMenuScreen()
-            : base("")
+            : base("Main Menu")
         {
             string start = "Start";
             string exit = "Exit";
            
-
             MenuEntry playGameMenuEntry = new MenuEntry(start);
             MenuEntry exitMenuEntry = new MenuEntry(exit);
-
-           
-          
-        
-            
 
             exitMenuEntry.Position = new Vector2(400, 500);
             // Hook up menu event handlers.
@@ -58,6 +53,17 @@ namespace GameStateManagement
 
         #endregion
 
+        #region Event Methods
+        private void LevelEndHandler(GameWorld world, int level)
+        {
+            level++;
+            //TODO: Destroy World
+
+            this.ScreenManager.AddScreen(new CinematicScreen(level, LevelEndHandler), PlayerIndex.One);
+        }
+        #endregion
+
+
         #region Handle Input
 
 
@@ -70,7 +76,7 @@ namespace GameStateManagement
             foreach (GameScreen screen in ScreenManager.GetScreens())
                 screen.ExitScreen();
 
-            ScreenManager.AddScreen(new CinematicScreen(), PlayerIndex.One);
+            ScreenManager.AddScreen(new CinematicScreen(1, this.LevelEndHandler), PlayerIndex.One);
            // LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
            //                    new GameplayScreen());
             //ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
