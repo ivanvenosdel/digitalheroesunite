@@ -23,6 +23,8 @@ namespace GameStateManagement
     /// </summary>
     class MainMenuScreen : MenuScreen
     {
+       
+       
         #region Initialization
 
         /// <summary>
@@ -51,7 +53,11 @@ namespace GameStateManagement
             SoundManager.Instance.PlaySong("Music/TitleScreen");
         }
 
-
+      /*  public override void UnloadContent()
+        {
+            SoundManager.Instance.StopSong();
+            base.UnloadContent();
+        }*/
         #endregion
 
         #region Event Methods
@@ -87,17 +93,17 @@ namespace GameStateManagement
 
             GameplayScreen gameplayScreen = new GameplayScreen();
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
-            SoundManager.Instance.StopSong();
+            
             ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
             //CinematicScreen cinematic3 = new CinematicScreen("Intro3", 1, this.LevelEndHandler);
             CinematicScreen cinematic2 = new CinematicScreen("Intro2", 1, this.LevelEndHandler);
             CinematicScreen cinematic1 = new CinematicScreen("Intro1");
-
+            
 
             ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
             ScreenManager.AddScreen(cinematic1, PlayerIndex.One);
-
-            SoundManager.Instance.UnloadContent();
+            
+            
         }
 
         #endregion
