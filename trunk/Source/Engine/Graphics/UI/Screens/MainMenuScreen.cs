@@ -11,6 +11,7 @@
 using Microsoft.Xna.Framework;
 using Engine.Logic.Events;
 using Engine.Logic.Audio;
+using Microsoft.Xna.Framework.Graphics;
 #endregion
 
 namespace GameStateManagement
@@ -27,23 +28,28 @@ namespace GameStateManagement
         /// Constructor fills in the menu contents.
         /// </summary>
         public MainMenuScreen()
-            : base("Main Menu")
+            : base("")
         {
-            // Create our menu entries.
-            MenuEntry playGameMenuEntry = new MenuEntry("Start");
-            MenuEntry creditsMenuEntry = new MenuEntry("Credits");
-            MenuEntry exitMenuEntry = new MenuEntry("Exit");
+            string start = "Start";
+            string exit = "Exit";
+           
 
+            MenuEntry playGameMenuEntry = new MenuEntry(start);
+            MenuEntry exitMenuEntry = new MenuEntry(exit);
 
+           
+          
+        
+            
+
+            exitMenuEntry.Position = new Vector2(400, 500);
             // Hook up menu event handlers.
             playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
-            creditsMenuEntry.Selected += CreditsGameMenuEntrySelected;
 
             // Add entries to the menu.
             MenuEntries.Add(playGameMenuEntry);
             MenuEntries.Add(exitMenuEntry);
-            MenuEntries.Add(creditsMenuEntry);
 
             SoundManager.Instance.LoadSong("Music/TitleScreen");
             SoundManager.Instance.PlaySong("Music/TitleScreen");
@@ -73,13 +79,6 @@ namespace GameStateManagement
         }
 
 
-        /// <summary>
-        /// Event Handler for when the credits option is selected
-        /// </summary>
-        void CreditsGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
-       {
-        ScreenManager.AddScreen (new CreditsScreen(), PlayerIndex.One);
-       }
 
 
         /// <summary>
@@ -87,6 +86,7 @@ namespace GameStateManagement
         /// </summary>
         protected override void OnCancel(PlayerIndex playerIndex)
         {
+         
             ScreenManager.Game.Exit();
         }
 

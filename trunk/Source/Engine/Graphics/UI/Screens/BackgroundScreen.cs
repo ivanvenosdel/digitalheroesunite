@@ -55,7 +55,7 @@ namespace GameStateManagement
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            backgroundTexture = content.Load<Texture2D>(@"UI\background");
+            backgroundTexture = content.Load<Texture2D>(@"UI\Title\TitleScreen");
         }
 
 

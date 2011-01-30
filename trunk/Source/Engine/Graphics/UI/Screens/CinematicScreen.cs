@@ -26,7 +26,7 @@ namespace GameStateManagement
         #region Fields
 
         ContentManager content;
-        Texture2D cinematicTexture;
+        Texture2D cinematicTexture[2];
 
         #endregion
 
@@ -51,7 +51,8 @@ namespace GameStateManagement
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            cinematicTexture = content.Load<Texture2D>(@"UI\cinematic1");
+            cinematicTexture[0] = content.Load<Texture2D>(@"UI\cinematic1");
+            cinematicTexture[1] = content.Load<Texture2D>(@"UI\cinematic2");
 
             GameplayScreen gameplayScreen = new GameplayScreen();
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
@@ -109,7 +110,7 @@ namespace GameStateManagement
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(cinematicTexture, fullscreen,
+            spriteBatch.Draw(cinematicTexture[i], fullscreen,
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
 
             spriteBatch.End();
