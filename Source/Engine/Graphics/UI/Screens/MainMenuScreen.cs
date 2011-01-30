@@ -120,8 +120,8 @@ namespace GameStateManagement
             GameplayScreen gameplayScreen = new GameplayScreen();
             ScreenManager.AddScreen(gameplayScreen, PlayerIndex.One);
             
-            ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
-            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 3, this.LevelEndHandler, "Platformer");
+            ScreenManager.AddScreen(new MessageBoxScreen("Run the virus is infecting the level!"), PlayerIndex.One);
+            CinematicScreen cinematic3 = new CinematicScreen("Intro3", 1, this.LevelEndHandler, "Platformer");
             CinematicScreen cinematic2 = new CinematicScreen("Intro2");
             CinematicScreen cinematic1 = new CinematicScreen("Intro1", "VirusTheme");
 

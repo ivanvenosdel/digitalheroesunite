@@ -12,6 +12,8 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+
+using Engine;
 #endregion
 
 namespace GameStateManagement
@@ -45,7 +47,8 @@ namespace GameStateManagement
         /// </summary>
         public MessageBoxScreen(string message)
             : this(message, true)
-        { }
+        {
+        }
 
 
         /// <summary>
@@ -63,6 +66,7 @@ namespace GameStateManagement
 
             IsPopup = true;
 
+            DeviceManager.Instance.Paused = true;
             TransitionOnTime = TimeSpan.FromSeconds(0.2);
             TransitionOffTime = TimeSpan.FromSeconds(0.2);
         }
@@ -93,7 +97,11 @@ namespace GameStateManagement
         public override void HandleInput(InputState input)
         {
             //Popup screen.
-            if (input.IsSpace(ControllingPlayer)) { ExitScreen(); }
+            if (input.IsSpace(ControllingPlayer))
+            {
+                ExitScreen();
+                DeviceManager.Instance.Paused = false;
+            }
 
     /*      // We pass in our ControllingPlayer, which may either be null (to
             // accept input from any player) or a specific index. If we pass a null
