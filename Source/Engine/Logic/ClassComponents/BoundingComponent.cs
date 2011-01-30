@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Engine.Logic.Actors;
 using Engine.Graphics.Cameras;
 using Engine.World;
+using Engine.Utilities;
 #endregion
 
 namespace Engine.Logic.ClassComponents
@@ -64,16 +65,47 @@ namespace Engine.Logic.ClassComponents
         {
             if (Camera.Instance.OnScreen(new Point((int)Owner.GetPosition().Position.X, (int)Owner.GetPosition().Position.Y)))
             {
-                ////Make sure the player isnt' falling through a tile
-                //int leftX = Owner.GetPosition().Position.X / WorldTypes
-                //for (int y = 0; y < GameWorld.Instance.height; ++y)
-                //{
-                //    for (int x = 0; x < GameWorld.Instance.width; ++x)
-                //    {
-                //        //GameWorld.Instance.layout[x + y * GameWorld.Instance.width];
-                //    }
-                //}
+                //Make sure the player isnt' falling through a tile
+                Point gridPoint = UtilityWorld.WorldToGrid(Owner.GetPosition().Position);
+                //Make sure our points are within the world bounds
+                gridPoint.X = Math.Max(Math.Min(gridPoint.X, GameWorld.Instance.width - 1), 0);
+                gridPoint.Y = Math.Max(Math.Min(gridPoint.Y, GameWorld.Instance.height - 1), 0);
+
+                for (int y = gridPoint.Y - 1; y <= gridPoint.Y + 1; ++y)
+                {
+                    for (int x = gridPoint.X - 1; x <= gridPoint.Y + 1; ++x)
+                    {
+                        if (x < 0 || x >= GameWorld.Instance.width ||
+                            y < 0 || y >= GameWorld.Instance.height)
+                            continue;
+
+                       WorldTile tile = GameWorld.Instance.layout[x + y * GameWorld.Instance.width];
+                       //Collison
+                       if (tile.ID != 0 && DoesCollid(tile.Bounding))
+                       {
+                           //Push the monster out of the tile
+                           if (x < gridPoint.X)
+                               Owner.GetPosition().Position.X += GravityComponent.GRAVITY + GravityComponent.GRAVITY / 2;
+                           else if (x > gridPoint.X)
+                               Owner.GetPosition().Position.X -= GravityComponent.GRAVITY + GravityComponent.GRAVITY / 2;
+                           if (y < gridPoint.Y)
+                               Owner.GetPosition().Position.Y += GravityComponent.GRAVITY + GravityComponent.GRAVITY / 2;
+                           else if (y > gridPoint.Y)
+                               Owner.GetPosition().Position.Y -= GravityComponent.GRAVITY + GravityComponent.GRAVITY / 2;
+                       }
+                    }
+                }
             }
+        }
+
+        public bool DoesCollid(BoundingBox box)
+        {
+            //Check collision
+            if (box.Contains(this.box) == ContainmentType.Intersects ||
+                box.Contains(this.box) == ContainmentType.Contains)
+                return true;
+            else
+                return false;
         }
 
         public bool DoesCollid(Vector2 worldPos)

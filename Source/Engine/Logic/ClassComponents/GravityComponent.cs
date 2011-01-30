@@ -12,7 +12,7 @@ namespace Engine.Logic.ClassComponents
 {
     public class GravityComponent : ClassComponent
     {
-        public const float GRAVITY = 0f;
+        public const float GRAVITY = 2f;
 
         #region Constructors
         /// <summary>
