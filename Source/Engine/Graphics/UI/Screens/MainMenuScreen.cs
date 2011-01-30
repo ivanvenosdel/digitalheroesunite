@@ -64,6 +64,8 @@ namespace GameStateManagement
                     world.Initialize(level + 1, this.LevelEndHandler);
                     break;
                 case 2:
+                    //Load lvl 3
+                    world.Initialize(level + 1, this.LevelEndHandler);
                     break;
                 default:
                     break;
