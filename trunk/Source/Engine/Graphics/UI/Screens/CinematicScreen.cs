@@ -88,7 +88,7 @@ namespace GameStateManagement
             if (input.IsSpace(PlayerIndex.One))
             {
                 ExitScreen();
-                GameWorld.Instance.Initialize(2, this.levelEndHandler);
+                GameWorld.Instance.Initialize(1, this.levelEndHandler);
                 ScreenManager.AddScreen(new MessageBoxScreen("Press Space to continue."), PlayerIndex.One);
             }
              }

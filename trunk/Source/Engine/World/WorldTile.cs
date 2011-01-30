@@ -31,17 +31,10 @@ namespace Engine.World
             this.Bounding = new BoundingBox(new Vector3(pos.X, pos.Y, 0), new Vector3(pos.X + WorldTypes.TILE_SIZE, pos.Y + WorldTypes.TILE_SIZE, 0));
         }
 
-        public bool onCollision(Actor actor)
-        {
-
-            return false;
-        }
-
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             if (this.ID == 0)
                 return;
-
 
             Point framePos = (WorldTypes.TileTypes[this.ID]).TextureCoordinate;
             Rectangle frame = new Rectangle(framePos.X * WorldTypes.TILE_SIZE, framePos.Y * WorldTypes.TILE_SIZE,

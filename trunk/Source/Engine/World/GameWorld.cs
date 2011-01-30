@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Logic.Actors;
 using Engine.Graphics.Cameras;
+using Engine.Utilities;
 #endregion
 
 namespace Engine.World
@@ -83,12 +84,11 @@ namespace Engine.World
             }
 
             //Where should our hero start?
-            int xx = (this.start.X * WorldTypes.TILE_SIZE) -WorldTypes.TILE_SIZE / 2;
-            int yy = (this.start.Y * WorldTypes.TILE_SIZE);
-            this.hero = ActorFactory.Instance.CreateHero(new Vector2(xx, yy), new Point(60, 150));
+            Vector2 startPoint = UtilityWorld.GridToWorld(this.start);
+            this.hero = ActorFactory.Instance.CreateHero(startPoint, new Point(60, 150));
 
             //Update camera to center hero
-            Camera.Instance.Jump(xx, yy-175);
+            Camera.Instance.Jump((int)startPoint.X, startPoint.Y - 175);
 
             enabled = true;
         }
@@ -99,9 +99,8 @@ namespace Engine.World
             if (!enabled || DeviceManager.Instance.Paused)
                 return;
 
-            int heroTileX = Convert.ToInt32((this.hero.GetPosition().Position.X + WorldTypes.TILE_SIZE / 2) / WorldTypes.TILE_SIZE);
-            int heroTileY = Convert.ToInt32(this.hero.GetPosition().Position.Y / WorldTypes.TILE_SIZE);
-            if (this.end.X == heroTileX && this.end.Y == heroTileY)
+            Point heroTile = UtilityWorld.WorldToGrid(this.hero.GetPosition().Position);
+            if (this.end.X == heroTile.X && this.end.Y == heroTile.Y)
             {
                 //We have reached the end of all things
                 this.LevelEndHandler(this, this.level);
@@ -127,11 +126,8 @@ namespace Engine.World
                     }
                 }
 
-
-
-                //TEMP
-                if (this.hero != null)
-                    this.hero.Draw(gameTime, this.spriteBatch);
+            if (this.hero != null)
+                this.hero.Draw(gameTime, this.spriteBatch);
 
                 this.spriteBatch.End();
             }

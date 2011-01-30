@@ -23,7 +23,7 @@ namespace Engine.Graphics.Cameras
         private static readonly Camera instance = new Camera();
 
         public const int BUFFER_SPACE = 100;
-        public const int CLIP_BUFFER = 50;
+        public const int CLIP_BUFFER = 150;
 
         private float zoom;
         private Matrix view;
@@ -213,9 +213,8 @@ namespace Engine.Graphics.Cameras
             }
         }
 
-
         /// <summary>Jumps to X/Y</summary>
-        public void Jump(int X, int Y)
+        public void Jump(float X, float Y)
         {
             this.position.X = X;
             this.position.Y = Y;
