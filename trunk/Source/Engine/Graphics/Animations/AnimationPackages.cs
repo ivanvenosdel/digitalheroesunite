@@ -7,10 +7,11 @@ namespace Engine.Graphics.Animations
 {
     public class AnimPackageHero
     {
-        public const int WALK_LEFT = 0;
-        public const int WALK_RIGHT = 1;
-        public const int WALK_UP = 2;
-        public const int WALK_DOWN = 3;
-        public const int IDLE = 4;
+        public const int RUN_RIGHT = 0;
+        public const int RUN_LEFT = 1;
+        public const int JUMP_RIGHT = 2;
+        public const int JUMP_LEFT = 3;
+        public const int STAND = 4;
+        public const int WHIP = 5;
     }
 }

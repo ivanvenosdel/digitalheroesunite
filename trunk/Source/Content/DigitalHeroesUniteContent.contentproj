@@ -67,28 +67,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actors\Tangy\idle.png">
-      <Name>idle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Actors\Tangy\walk_down.png">
-      <Name>walk_down</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Actors\Tangy\walk_left.png">
-      <Name>walk_left</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Actors\Tangy\walk_up.png">
-      <Name>walk_up</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
@@ -205,6 +183,29 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actors\Hero\HeroJump.png">
+      <Name>HeroJump</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Actors\Hero\HeroRun.png">
+      <Name>HeroRun</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Actors\Hero\HeroStanding.png">
+      <Name>HeroStanding</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Actors\Hero\HeroWhip.png">
+      <Name>HeroWhip</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="UI\Intro\Intro1.png">
       <Name>Intro1</Name>

@@ -27,7 +27,6 @@ namespace Engine.Logic.Actors
 
         #region Fields
         private float jumpYPeakHeight;
-        private bool movingUp = true;
         private float jumpYCurrentHeight;
         #endregion
 
@@ -39,39 +38,45 @@ namespace Engine.Logic.Actors
             SetGravity(new GravityComponent(this));
 
             //Order of animations must match the order of the animation package
-            string filepath = @"Actors\Tangy\";
-            string[] animations = { filepath+"walk_left",      //1
-                                    filepath+"walk_left",      //2 right
-                                    filepath+"walk_up",        //3
-                                    filepath+"walk_down",      //4
-                                    filepath+"idle" };         //5
-            Point[] frameSizes = { new Point(100, 152),         //1
-                                   new Point(100, 152),         //2
-                                   new Point(92, 153),          //3
-                                   new Point(90, 152),          //4
-                                   new Point(86, 152) };        //5
-            Vector2[] origins = { new Vector2((frameSizes[0].X - 1) / 2 - 14, frameSizes[0].Y - 1),     //1
-                                  new Vector2((frameSizes[0].X - 1) / 2 + 12, frameSizes[0].Y - 1),     //2
+            string filepath = @"Actors\Hero\";
+            string[] animations = { filepath+"HeroRun",      //1
+                                    filepath+"HeroRun",      //2 left
+                                    filepath+"HeroJump",        //3
+                                    filepath+"HeroJump",        //4 left
+                                    filepath+"HeroStanding",      //5
+                                    filepath+"HeroWhip" };         //6
+            Point[] frameSizes = { new Point(160, 144),         //1
+                                   new Point(160, 144),         //2
+                                   new Point(160, 144),          //3
+                                   new Point(160, 144),          //4
+                                   new Point(160, 144),          //4
+                                   new Point(160, 144) };        //5
+            Vector2[] origins = { new Vector2((frameSizes[0].X - 1) / 2, frameSizes[0].Y - 1),     //1
+                                  new Vector2((frameSizes[0].X - 1) / 2, frameSizes[0].Y - 1),     //2
                                   new Vector2((frameSizes[1].X - 1) / 2, frameSizes[1].Y - 1),          //3
                                   new Vector2((frameSizes[2].X - 1) / 2, frameSizes[2].Y - 1),          //4
-                                  new Vector2((frameSizes[3].X - 1) / 2, frameSizes[3].Y - 1) };        //5
+                                  new Vector2((frameSizes[2].X - 1) / 2, frameSizes[2].Y - 1),          //5
+                                  new Vector2((frameSizes[3].X - 1) / 2, frameSizes[3].Y - 1) };        //6
             AnimStyle[] styles = { AnimStyle.FORWARD,           //1
                                    AnimStyle.FORWARD,           //2
                                    AnimStyle.FORWARD,           //3
                                    AnimStyle.FORWARD,           //4
-                                   AnimStyle.FORWARD };         //5
-            int[] frames = { 31,            //1
-                             31,            //2
-                             31,            //3
-                             31,            //4
-                             20 };          //5
+                                   AnimStyle.FORWARD,           //5
+                                   AnimStyle.FORWARD };         //6
+            int[] frames = { 3,            //1
+                             3,            //2
+                             1,            //3
+                             1,            //4
+                             2,            //5
+                             3 };          //6
             SpriteEffects[] effects = { SpriteEffects.None,             //1
                                         SpriteEffects.FlipHorizontally, //2
                                         SpriteEffects.None,             //3
-                                        SpriteEffects.None,             //4
-                                        SpriteEffects.None };           //5
-            SetSprite(new SpriteComponent(this, animations, origins, frameSizes, styles, frames, effects, 1000.0f / 30.0f)); //20 fps
-            PlayAnimation(AnimPackageHero.IDLE, true);
+                                        SpriteEffects.FlipHorizontally, //4
+                                        SpriteEffects.None,             //5
+                                        SpriteEffects.None };           //6
+            SetSprite(new SpriteComponent(this, animations, origins, frameSizes, styles, frames, effects, 1000.0f / 6.0f)); //2 fps
+            PlayAnimation(AnimPackageHero.STAND, true);
         }
 
         public override void AddToWorld()
@@ -149,7 +154,10 @@ namespace Engine.Logic.Actors
             this.jumpYPeakHeight = height;
             //Go into jump mode
             this.Jumping = true;
-            this.movingUp = true;
+            if (GetSprite().CurrentAnimation == AnimPackageHero.RUN_LEFT)
+                PlayAnimation(AnimPackageHero.JUMP_LEFT, true);
+            else
+                PlayAnimation(AnimPackageHero.JUMP_RIGHT, true);
         }
 
         /// <summary>

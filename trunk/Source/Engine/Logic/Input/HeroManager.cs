@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+
+using Engine.Graphics.Animations;
 using Engine.World;
 #endregion
 
@@ -62,20 +64,36 @@ namespace Engine.Logic.Input
                 if (keyboardState.IsKeyDown(Keys.Right))
                 {
                     if (GameWorld.Instance.hero.Jumping)
+                    {
                         dX = SLOW_FALL_RATE;
+                        GameWorld.Instance.hero.PlayAnimation(AnimPackageHero.JUMP_RIGHT, true);
+                    }
                     else
+                    {
                         dX = WALK_RATE;
+                        if (GameWorld.Instance.hero.GetSprite().CurrentAnimation != AnimPackageHero.RUN_RIGHT)
+                            GameWorld.Instance.hero.PlayAnimation(AnimPackageHero.RUN_RIGHT, true);
+                    }
                 }
                 //Translate Left
                 else if (keyboardState.IsKeyDown(Keys.Left))
                 {
                     if (GameWorld.Instance.hero.Jumping)
+                    {
                         dX = -SLOW_FALL_RATE;
+                        GameWorld.Instance.hero.PlayAnimation(AnimPackageHero.JUMP_LEFT, true);
+                    }
                     else
+                    {
                         dX = -WALK_RATE;
+                        if (GameWorld.Instance.hero.GetSprite().CurrentAnimation != AnimPackageHero.RUN_LEFT)
+                            GameWorld.Instance.hero.PlayAnimation(AnimPackageHero.RUN_LEFT, true);
+                    }
                 }
                 else
                 {
+                    if (GameWorld.Instance.hero.GetSprite().CurrentAnimation != AnimPackageHero.STAND)
+                        GameWorld.Instance.hero.PlayAnimation(AnimPackageHero.STAND, true);
                     this.walkDirection = MoveDirection.None;
                 }
 
