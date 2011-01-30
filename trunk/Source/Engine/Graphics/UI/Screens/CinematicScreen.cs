@@ -33,7 +33,7 @@ namespace GameStateManagement
         int level;
         int timeCount = 0;
         Engine.World.GameWorld.OnLevelEnd levelEndHandler;
-
+        private string songname;
         #endregion
 
 
@@ -43,17 +43,24 @@ namespace GameStateManagement
         /// Constructor
         /// </summary>
         /// 
-
-  
         public CinematicScreen(string cineTexture)
+            : base()
+        {
+            this.cineTexture = cineTexture;
+            TransitionOnTime = TimeSpan.FromSeconds(0.5);
+            TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            this.levelEndHandler = null;
+
+        }
+  
+        public CinematicScreen(string cineTexture, string songname)
             : base()
             {
             this.cineTexture = cineTexture;
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
             this.levelEndHandler = null;
-            SoundManager.Instance.LoadSong("Music/VirusTheme");
-            SoundManager.Instance.PlaySong("Music/VirusTheme");
+            this.songname = songname;
 
             }
 
@@ -67,6 +74,17 @@ namespace GameStateManagement
            
         }
 
+
+        public CinematicScreen(string cineTexture, int level, Engine.World.GameWorld.OnLevelEnd levelEndHandler, string songname)
+        {
+            this.cineTexture = cineTexture;
+            TransitionOnTime = TimeSpan.FromSeconds(0.5);
+            TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            this.level = level;
+            this.levelEndHandler = levelEndHandler;
+            this.songname = songname;
+        }
+
         /// <summary>
         /// Load Content
         /// </summary>
@@ -77,9 +95,15 @@ namespace GameStateManagement
             { 
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
             }
-
+            
             string texturePath = String.Format(@"UI\Intro\{0}", this.cineTexture);
             Intro1 = content.Load<Texture2D>(texturePath);
+
+            if (!String.IsNullOrEmpty(songname))
+            {
+                string songpath = String.Format("Music/{0}", songname);
+                SoundManager.Instance.LoadSong(songpath);
+            }
         }
        
 
@@ -127,6 +151,12 @@ namespace GameStateManagement
                                                        bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, false);
+
+            string songpath = String.Format("Music/{0}", songname);
+            if (!otherScreenHasFocus && !String.IsNullOrEmpty(songname) && SoundManager.Instance.CurrentSong != songpath)
+            {
+                SoundManager.Instance.PlaySong(songpath);
+            }
         }
 
         /// <summary>
