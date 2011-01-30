@@ -57,7 +57,6 @@ namespace GameStateManagement
             get { return spriteBatch; }
         }
 
-
         /// <summary>
         /// A default font shared by all the screens. This saves
         /// each screen having to bother loading their own local copy.

@@ -66,7 +66,6 @@ namespace GameStateManagement
 
             IsPopup = true;
 
-            DeviceManager.Instance.Paused = true;
             TransitionOnTime = TimeSpan.FromSeconds(0.2);
             TransitionOffTime = TimeSpan.FromSeconds(0.2);
         }
@@ -99,7 +98,8 @@ namespace GameStateManagement
             //Popup screen.
             if (input.IsSpace(ControllingPlayer))
             {
-                ExitScreen();
+                //ExitScreen();
+                this.ScreenManager.RemoveScreen(this);
                 DeviceManager.Instance.Paused = false;
             }
 
@@ -137,6 +137,7 @@ namespace GameStateManagement
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
+            DeviceManager.Instance.Paused = true;
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
             SpriteFont font = ScreenManager.Font;
 

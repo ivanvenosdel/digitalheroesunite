@@ -56,9 +56,7 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="World\Audio\Sound\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="UI\Fonts\debugfont.spritefont">
       <Name>debugfont</Name>
