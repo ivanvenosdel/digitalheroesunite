@@ -73,20 +73,26 @@ namespace GameStateManagement
                     break;
                 case 1:
                     //Load lvl 2
-                    CinematicScreen cinematic2 = new CinematicScreen("TitleScreen1", level + 1, this.LevelEndHandler);
-                    ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
+                    world.Initialize(level + 1, this.LevelEndHandler);
+                    //CinematicScreen cinematic2 = new CinematicScreen("TitleScreen1", level + 1, this.LevelEndHandler);
+                    //ScreenManager.AddScreen(cinematic2, PlayerIndex.One);
                     break;
                 case 2:
                     //Load lvl 3
-                    CinematicScreen cinematic3 = new CinematicScreen("TitleScreen2", level + 1, this.LevelEndHandler);
-                    ScreenManager.AddScreen(cinematic3, PlayerIndex.One);
+                    world.Initialize(level + 1, this.LevelEndHandler);
+                    //CinematicScreen cinematic3 = new CinematicScreen("TitleScreen2", level + 1, this.LevelEndHandler);
+                    //ScreenManager.AddScreen(cinematic3, PlayerIndex.One);
                     break;
                 case 3:
                     //Load lvl 4
-                    CinematicScreen cinematic4 = new CinematicScreen("TitleScreen3", level + 1, this.LevelEndHandler);
-                    ScreenManager.AddScreen(cinematic4, PlayerIndex.One);
+                    world.Initialize(level + 1, this.LevelEndHandler);
+                    //CinematicScreen cinematic4 = new CinematicScreen("TitleScreen3", level + 1, this.LevelEndHandler);
+                    //ScreenManager.AddScreen(cinematic4, PlayerIndex.One);
                     break;
                 case 4:
+                    world.Initialize(level + 1, this.LevelEndHandler);
+                    break;
+                case 5:
                     //Show end credits
                     CreditsScreen credits = new CreditsScreen();
                     ScreenManager.AddScreen(credits, PlayerIndex.One);
